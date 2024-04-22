@@ -14,28 +14,29 @@ import org.junit.Assert;
 
 public class CreateProject {
 	private ProjectSystemApp projectSystemApp;
-	private Project testProject;
+	private Project testProject, testProject2, testProject3, testProject4;
+
 	private ErrorMessageHolder errorMessage;
 
-	public CreateProject() {
+	public CreateProject() throws Exception {
 		projectSystemApp = new ProjectSystemApp();
 		errorMessage = new ErrorMessageHolder();
 	}
 
 	@Given("the employee attempts to create a new project")
-	public void the_employee_attempts_to_create_a_new_project() {
-		assertTrue(true);
+	public void the_employee_attempts_to_create_a_new_project() throws Exception {
+		testProject = new Project("testProject");
 	}
 
 	@When("there is no existing project")
 	public void there_is_no_existing_project() {
-		assertFalse(projectSystemApp.projectList.contains(testProject));
+		assertFalse(projectSystemApp.hasProjectWithName(testProject));
 	}
 
 	@Then("the project is successfully added to the system")
-	public void the_project_is_successfully_added_to_the_system() {
-		projectSystemApp.projectList.add(testProject);
-		assertTrue(projectSystemApp.projectList.contains(testProject));
+	public void the_project_is_successfully_added_to_the_system() throws Exception {
+		projectSystemApp.addProject(testProject);
+		assertTrue(projectSystemApp.hasProjectWithName(testProject));
 	}
 
 	@Given("the employee is logged into the system")
@@ -47,15 +48,32 @@ public class CreateProject {
 	@When("the employee attempts to create a new project without specifying a name")
 	public void the_employee_attempts_to_create_a_new_project_without_specifying_a_name() throws Exception {
 		try {
-			testProject = new Project("");
+			testProject2 = new Project("");
 		} catch (Exception e) {
 			errorMessage.setErrorMessage(e.getMessage());
 		}
-
 	}
 
-	@Then("an error message is given")
-	public void an_error_message_is_given() {
-		assertEquals(errorMessage.getErrorMessage(), "Give name");
+	@When("the employee attempts to create a new project with the name {string}")
+	public void theEmployeeAttemptsToCreateANewProjectWithTheName(String string) {
+		assertTrue(true);
+	}
+
+	@When("a project already exists in the system")
+	public void aProjectAlreadyExistsInTheSystem()  {
+		try {
+			testProject3 = new Project("name");
+			testProject4 = new Project("name");
+
+			projectSystemApp.addProject(testProject3);
+			projectSystemApp.addProject(testProject4);
+		} catch (Exception e) {
+			errorMessage.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@Then("an error message {string} is given")
+	public void anErrorMessageStringIsGiven(String errorMessage) {
+		assertEquals(errorMessage, this.errorMessage.getErrorMessage());
 	}
 }

@@ -15,4 +15,8 @@ public class Project {
 
         this.projectID = 1;
     }
+
+    public String getName() {
+        return name;
+    }
 }
