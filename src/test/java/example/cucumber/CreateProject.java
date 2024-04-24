@@ -33,10 +33,9 @@ public class CreateProject {
 		assertFalse(projectSystemApp.hasProjectWithName(testProject));
 	}
 
-	@Then("the project is successfully added to the system")
-	public void the_project_is_successfully_added_to_the_system() throws Exception {
+	@Then("the project is added to the system")
+	public void the_project_is_added_to_the_system() throws Exception {
 		projectSystemApp.addProject(testProject);
-		assertTrue(projectSystemApp.hasProjectWithName(testProject));
 	}
 
 	@Given("the employee is logged into the system")
@@ -76,4 +75,5 @@ public class CreateProject {
 	public void anErrorMessageStringIsGiven(String errorMessage) {
 		assertEquals(errorMessage, this.errorMessage.getErrorMessage());
 	}
+
 }

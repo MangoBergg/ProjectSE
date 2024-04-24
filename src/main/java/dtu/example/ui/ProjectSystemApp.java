@@ -7,10 +7,12 @@ import java.util.Objects;
 public class ProjectSystemApp {
 
     public List<Project> projectList;
+    public List<Activity> activityList;
     private boolean isLoggedIn = false;
 
     public ProjectSystemApp() {
         projectList = new ArrayList<>();
+        activityList = new ArrayList<>();
     }
 
     public boolean isLoggedIn() {
@@ -45,4 +47,33 @@ public class ProjectSystemApp {
         }
         return false;
     }
+
+
+
+    public void addActivity(Activity activityToAdd) throws Exception {
+        boolean canAppend = true;
+
+        for (Activity activity : activityList) {
+            if (Objects.equals(activityToAdd.getName(), activity.getName())) {
+                canAppend = false;
+            }
+        }
+
+        if (canAppend) {
+            activityList.add(activityToAdd);
+        } else {
+            throw new Exception("Activity with that name exists");
+        }
+    }
+
+    public boolean hasActivityWithName(Activity testActivity) {
+        for (Activity activity : activityList) {
+            if (Objects.equals(testActivity.getName(), activity.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

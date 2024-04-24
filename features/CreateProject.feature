@@ -5,7 +5,7 @@ Feature: Create a new project
 	Scenario: Creating a project as an employee:
 		Given the employee attempts to create a new project
 		When there is no existing project
-		Then the project is successfully added to the system
+		Then the project is added to the system
 
 	Scenario: Attempting to create a project without specifying a name
 		Given the employee is logged into the system
