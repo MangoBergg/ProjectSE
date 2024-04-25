@@ -22,6 +22,8 @@ public class ProjectManagementApp {
         isLoggedIn = true;
     }
 
+
+
     // The following code is reused from Hubert's video
     public void createProject(String string) throws Exception {
         if (containsProject(string)){
@@ -44,7 +46,7 @@ public class ProjectManagementApp {
     }
 
     public boolean containsActivity(String activityName) {
-        return activityList.stream().anyMatch(p -> p.getName().equals(activityName));
+        return activityList.stream().anyMatch(a -> a.getName().equals(activityName));
     }
 
 
