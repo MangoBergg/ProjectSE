@@ -6,7 +6,19 @@ public class Project {
     private String name;
     private int projectID;
 
-    public Project(String name) throws Exception {
+    public Project(String string){
+        this.name = string;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+
+
+
+
+            /*throws Exception {
         if (!Objects.equals(name, "")) {
             this.name = name;
         } else {
@@ -18,5 +30,5 @@ public class Project {
 
     public String getName() {
         return name;
-    }
+    }*/
 }
