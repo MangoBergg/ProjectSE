@@ -5,6 +5,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class CreateAcvitity {
 
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
@@ -13,21 +16,38 @@ public class CreateAcvitity {
     private String errorMessage;
 
     @Given("the employee selects a project named {string} from the list of projects")
-    public void theEmployeeSelectsAProjectNamedFromTheListOfProjects(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void theEmployeeSelectsAProjectNamedFromTheListOfProjects(String string) throws Exception {
+        projectName = string;
+        projectManagementApp.createProject(string);
+        assertTrue(projectManagementApp.containsProject(projectName));
     }
 
     @When("a new activity named {string} is created")
-    public void aNewActivityNamedIsCreated(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void aNewActivityNamedIsCreated(String string){
+        activityName = string;
+            try {
+            projectManagementApp.createActivity(string);
+        } catch (Exception e) {
+            errorMessage = e.getMessage();
+    }
     }
 
     @Then("the activity is added to the list of activity")
     public void theActivityIsAddedToTheListOfActivity() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertTrue(projectManagementApp.containsActivity(activityName));
     }
+
+
+    @Given("the activity named {string} already exists in the list of activities for a project")
+    public void theActivityNamedAlreadyExistsInTheListOfActivitiesForAProject(String string) throws Exception {
+        projectManagementApp.createActivity(string);
+    }
+
+    @Then("an error message {string}")
+    public void anErrorMessage(String string) {
+        assertEquals(string, errorMessage);
+    }
+
+
 
 }

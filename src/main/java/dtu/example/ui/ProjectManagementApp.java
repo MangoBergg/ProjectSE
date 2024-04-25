@@ -36,7 +36,16 @@ public class ProjectManagementApp {
     }
 
 
-    
+    public void createActivity(String string) throws Exception {
+        if (containsActivity(string)){
+            throw new Exception("An activity named ’Activity’ already exists in this project");
+        }
+        activityList.add(new Activity(string));
+    }
+
+    public boolean containsActivity(String activityName) {
+        return activityList.stream().anyMatch(p -> p.getName().equals(activityName));
+    }
 
 
 
