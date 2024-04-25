@@ -1,13 +1,11 @@
-#Feature: Create an activity in a project
-#  Description: Enables an employee to add a new activity to an existing project, ensuring activity names are unique within the project.
-#  Actor: Employee
+Feature: Create an activity in a project
+  Description: Enables an employee to add a new activity to an existing project, ensuring activity names are unique within the project.
+  Actor: Employee
 
-#  Scenario: Creating a new activity in a project
-#    Given the employee is logged into the system
-#    When the employee selects a project named "Project"
-#    And the employee attempts to create a new activity named "Activity"
-#    And no activity named "Activity" exists in the project
-#    Then the activity added to the project
+  Scenario: Creating a new activity in a project
+    Given the employee selects a project named "Project" from the list of projects
+    When a new activity named "Activity" is created
+    Then the activity is added to the list of activity
 
 #  Scenario: Attempting to create a new activity with a duplicate name in a project
 #    Given the employee attempts to create a new activity named "Activity"
