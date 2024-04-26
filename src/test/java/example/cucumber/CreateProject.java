@@ -12,7 +12,12 @@ public class CreateProject {
 
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
     private String projectName;
-    private String errorMessage;
+    private ErrorMessageHolder errorMessage;
+
+    public CreateProject(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
+        this.projectManagementApp = projectManagementApp;
+        this.errorMessage = errorMessage;
+    }
 
     // The following code is reused from Hubert's video
     @When("a new project named {string} is created")
@@ -21,7 +26,7 @@ public class CreateProject {
         try {
             projectManagementApp.createProject(string);
         } catch (Exception e) {
-            errorMessage = e.getMessage();
+            errorMessage.setErrorMessage(e.getMessage());
         }
     }
 
@@ -40,7 +45,7 @@ public class CreateProject {
     // The following code is reused from Hubert's video
     @Then("an error message {string} is given")
     public void anErrorMessageIsGiven(String string) {
-        assertEquals(string, errorMessage);
+        assertEquals(string, errorMessage.getErrorMessage());
     }
 
 

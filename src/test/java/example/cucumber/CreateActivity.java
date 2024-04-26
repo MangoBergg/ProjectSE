@@ -12,12 +12,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreateActivity {
 
-    ProjectManagementApp projectManagementApp = new ProjectManagementApp();
+    private ProjectManagementApp projectManagementApp;
     private String projectName;
     private String activityName;
-    private String errorMessage;
+    private ErrorMessageHolder errorMessage;
     private Project testProject;
 
+    public CreateActivity(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
+        this.projectManagementApp = projectManagementApp;
+        this.errorMessage = errorMessage;
+    }
 
 
     @Given("the employee selects a project named {string} from the list of projects")
@@ -33,7 +37,7 @@ public class CreateActivity {
         try {
             projectManagementApp.createActivity(string, testProject);
         } catch (Exception e) {
-            errorMessage = e.getMessage();
+            errorMessage.setErrorMessage(e.getMessage());
         }
     }
 
@@ -53,14 +57,11 @@ public class CreateActivity {
         try {
             projectManagementApp.createActivity(string, testProject);
         } catch (Exception e) {
-            errorMessage = e.getMessage();
+            errorMessage.setErrorMessage(e.getMessage());
         }
     }
 
-    @Then("an error message {string} is given")
-    public void anErrorMessage(String string) {
-        assertEquals(string, errorMessage);
-    }
+
 
 
 
