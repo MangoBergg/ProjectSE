@@ -11,7 +11,7 @@ public class ProjectManagementApp {
 
     public ProjectManagementApp() {
         projectList = new ArrayList<>();
-        activityList = new ArrayList<>();
+
     }
 
     public boolean isLoggedIn() {
@@ -25,11 +25,17 @@ public class ProjectManagementApp {
 
 
     // The following code is reused from Hubert's video
-    public void createProject(String string) throws Exception {
+    public Project createProject(String string) throws Exception {
         if (containsProject(string)){
             throw new Exception("Project with that name already exists");
         }
-        projectList.add(new Project(string));
+        Project project = new Project(string);
+        addProject(project);
+        return project;
+    }
+
+    public void addProject(Project project) {
+        projectList.add(project);
     }
 
     // The following code is reused from Hubert's video
@@ -38,15 +44,12 @@ public class ProjectManagementApp {
     }
 
 
-    public void createActivity(String string) throws Exception {
-        if (containsActivity(string)){
+    public void createActivity(String string, Project project) throws Exception {
+        if (project.containsActivity(string)){
             throw new Exception("An activity named ’Activity’ already exists in this project");
         }
-        activityList.add(new Activity(string));
-    }
-
-    public boolean containsActivity(String activityName) {
-        return activityList.stream().anyMatch(a -> a.getName().equals(activityName));
+        Activity activity = new Activity(string);
+        project.addActivity(activity);
     }
 
 

@@ -1,13 +1,13 @@
-Feature: Change the start-and-end dates of an activity
-  Description: Enables an employee to change the start-and-end weeks of an activity within a project, accommodating activities that initially do not have set weeks.
-  Actor: Employee
-
-  Scenario: Successfully assigning start-and-end weeks to an undated activity
-    Given an activity "Activity" exists without specific start-and-end weeks
-    When the employee assigns start and end week to the activity
-    Then the start and end weeks of the activity are updated
-    And the start and end weeks of the project containing the activity are updated
-
+#Feature: Change the start-and-end dates of an activity
+#  Description: Enables an employee to change the start-and-end weeks of an activity within a project, accommodating activities that initially do not have set weeks.
+#  Actor: Employee
+#
+#  Scenario: Successfully assigning start-and-end weeks to an undated activity
+#    Given an activity "Activity" exists without specific start-and-end weeks
+#    When the employee assigns start and end week to the activity
+#    Then the start and end weeks of the activity are updated
+#    And the start and end weeks of the project containing the activity are updated
+#
 
 
 

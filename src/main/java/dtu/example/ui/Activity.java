@@ -5,6 +5,9 @@ import java.util.Objects;
 public class Activity {
 
     private String name;
+    private int[] startEndWeeks  = new int[2];
+    private Project parentProject;
+
 
     public Activity(String string){
         this.name = string;

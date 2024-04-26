@@ -7,7 +7,6 @@ Feature: Create a new project
 		Then the project is added to the list of projects
 
 
-
 	Scenario: Fail to create a project with a name that already exists
 		Given the project named "Project" already exists in the list of projects
 		When a new project named "Project" is created
