@@ -57,12 +57,15 @@ public class ProjectManagementApp {
     }
 
 
-    public void createActivity(String string, Project project) throws Exception {
+    public Activity createActivity(String string, Project project) throws Exception {
         if (project.containsActivity(string)){
             throw new Exception("An activity named ’Activity’ already exists in this project");
         }
+
         Activity activity = new Activity(string);
         project.addActivity(activity);
+        activity.parentProject = project;
+        return activity;
     }
 
 
