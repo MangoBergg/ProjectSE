@@ -17,10 +17,14 @@ public class Activity {
         return name;
     }
 
-    public void updateStartEndWeeks(int weekStart, int weekEnd) {
-        startEndWeeks[0] = weekStart;
-        startEndWeeks[1] = weekEnd;
-        parentProject.updateStartEndWeeks(weekStart, weekEnd);
+    public void updateStartEndWeeks(int weekStart, int weekEnd) throws Exception {
+        if (weekEnd < weekStart) {
+            throw new Exception("End week cannot be before start week");
+        } else {
+            startEndWeeks[0] = weekStart;
+            startEndWeeks[1] = weekEnd;
+            parentProject.updateStartEndWeeks(weekStart, weekEnd);
+        }
     }
 
     public int[] getStartEndWeeks() {
