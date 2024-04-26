@@ -10,14 +10,22 @@ public class Project {
     private List<Activity> activityList = new ArrayList<>();
 
 
-    public Project(String string){
+    public Project(String string, int projectID){
         this.name = string;
+        this.projectID = projectID;
     }
 
     public String getName() {
         return name;
     }
 
+    public int getProjectID(){
+        return projectID;
+    }
+
+    public List<Activity> getActivityList(){
+        return activityList;
+    }
     public void addActivity(Activity activity) {
         activityList.add(activity);
     }
