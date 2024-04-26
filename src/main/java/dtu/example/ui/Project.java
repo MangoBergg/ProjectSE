@@ -8,7 +8,9 @@ public class Project {
     private String name;
     private int projectID;
     private List<Activity> activityList = new ArrayList<>();
+    private int[] startEndWeeks = new int[2];
 
+    private Project parentProject;
 
     public Project(String string){
         this.name = string;
@@ -22,22 +24,24 @@ public class Project {
         activityList.add(activity);
     }
 
-
     public boolean containsActivity(String activityName) {
         return activityList.stream().anyMatch(a -> a.getName().equals(activityName));
     }
 
-            /*throws Exception {
-        if (!Objects.equals(name, "")) {
-            this.name = name;
-        } else {
-            throw new Exception("Give name");
-        }
+    public void updateStartEndWeeks(int weekStart, int weekEnd) {
 
-        this.projectID = 1;
+        for (Activity activity : activityList) {
+            if (startEndWeeks[0] == 0 || startEndWeeks[0] > weekStart) {
+                startEndWeeks[0] = weekStart;
+            }
+
+            if (startEndWeeks[1] < weekEnd) {
+                startEndWeeks[1] = weekEnd;
+            }
+        }
     }
 
-    public String getName() {
-        return name;
-    }*/
+    public int[] getStartEndWeeks() {
+        return startEndWeeks;
+    }
 }

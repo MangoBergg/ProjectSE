@@ -43,7 +43,6 @@ public class CreateActivity {
 
     @Then("the activity is added to the list of activity")
     public void theActivityIsAddedToTheListOfActivity() {
-        System.out.println(testProject.getName());
         assertTrue(testProject.containsActivity(activityName));
     }
 
