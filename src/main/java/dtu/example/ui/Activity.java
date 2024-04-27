@@ -10,8 +10,9 @@ public class Activity {
     public  Project parentProject;
 
 
-    public Activity(String string){
+    public Activity(String string, Project parentProject){
         this.name = string;
+        this.parentProject = parentProject;
     }
 
     public String getName() {
@@ -47,6 +48,7 @@ public class Activity {
         public double getBudgetTime () {
             return budgetTime;
         }
+
     }
 
 
