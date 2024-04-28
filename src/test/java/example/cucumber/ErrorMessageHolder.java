@@ -1,5 +1,7 @@
 package example.cucumber;
 
+// The following code is reused from the Library App exercises
+
 public class ErrorMessageHolder {
 
     private String errorMessage = "";

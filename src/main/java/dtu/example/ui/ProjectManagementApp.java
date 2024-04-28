@@ -12,6 +12,7 @@ public class ProjectManagementApp {
 
     public List<Project> projectList;
     public List<Activity> activityList;
+    public List<Employee> employeeList;
     private boolean isLoggedIn = false;
     private boolean cancelProgram = false;
     State currentState = State.MAIN_MENU;
@@ -38,10 +39,13 @@ public class ProjectManagementApp {
 
 
 
-    // The following code is reused from Hubert's video
+    // The following code about the project is reused from Hubert's video
     public Project createProject(String string) throws Exception {
         if (containsProject(string)){
             throw new Exception("Project with that name already exists");
+        }
+        if (string.equals("")) {
+            throw new Exception("Give name");
         }
         Project project = new Project(string, generateProjectNumber());
         addProject(project);
@@ -78,57 +82,7 @@ public class ProjectManagementApp {
 
 
 
-   /* public void addProject(Project projectToAdd) throws Exception {
-        boolean canAppend = true;
-
-        for (Project project : projectList) {
-            if (Objects.equals(projectToAdd.getName(), project.getName())) {
-                canAppend = false;
-            }
-        }
-
-        if (canAppend) {
-            projectList.add(projectToAdd);
-        } else {
-            throw new Exception("Project with that name exists");
-        }
-    }
-
-    public boolean hasProjectWithName(Project testProject) {
-        for (Project project : projectList) {
-            if (Objects.equals(testProject.getName(), project.getName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-
-    public void addActivity(Activity activityToAdd) throws Exception {
-        boolean canAppend = true;
-
-        for (Activity activity : activityList) {
-            if (Objects.equals(activityToAdd.getName(), activity.getName())) {
-                canAppend = false;
-            }
-        }
-
-        if (canAppend) {
-            activityList.add(activityToAdd);
-        } else {
-            throw new Exception("Activity with that name exists");
-        }
-    }
-
-    public boolean hasActivityWithName(Activity testActivity) {
-        for (Activity activity : activityList) {
-            if (Objects.equals(testActivity.getName(), activity.getName())) {
-                return true;
-            }
-        }
-        return false;
-    }*/
+    // The following code is for the UI
 
     public void launch(){
         while (!cancelProgram) {
