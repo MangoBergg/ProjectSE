@@ -2,8 +2,6 @@ package dtu.example.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
 
 
 public class Activity {
@@ -12,6 +10,7 @@ public class Activity {
     private int[] startEndWeeks = new int[2];
     private double budgetTime = 0.0;
     public Project parentProject;
+    public Activity parentActivity;
     private List<Employee> employeeList = new ArrayList<>();
 
 
@@ -55,13 +54,12 @@ public class Activity {
     }
 
 
-    public Employee assignEmployee(String string) throws Exception {
+    public void assignEmployee(String string) throws Exception {
         if (containsEmployee(string)) {
             throw new Exception("The employee is already assigned to the activity ’Activity’");
         }
         Employee employee = new Employee(string);
         addEmployee(employee);
-        return employee;
     }
 
     public void addEmployee(Employee employee) {

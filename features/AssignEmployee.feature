@@ -3,8 +3,8 @@ Feature: Assigning an employee to an activity
   Actor: Employee
 
   Scenario: Successfully assigning an employee to an activity
-    Given the employee attempts to assign an employee "employee ID" from the list "Employees" of employees to the activity "Activity"
-    When the employee "employee ID" is not already assigned to the activity "Activity"
+    Given the employee attempts to assign an employee "employee ID" to the activity
+    When the employee "employee ID" is not already assigned to the activity
     Then the employee "employee ID" is assigned to the activity "Activity"
 
   #Scenario: Fail to assign an employee who is already assigned to the activity
