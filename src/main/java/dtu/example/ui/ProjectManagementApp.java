@@ -13,7 +13,7 @@ public class ProjectManagementApp {
     public List<Project> projectList;
     public List<Activity> activityList;
     public List<Employee> employeeList;
-    private boolean isLoggedIn = false;
+    private boolean isLoggedIn = true;
     private boolean cancelProgram = false;
     State currentState = State.MAIN_MENU;
     private Scanner inputScanner;
@@ -23,6 +23,7 @@ public class ProjectManagementApp {
     private int serialNumber = 1;
 
     public ProjectManagementApp() {
+        employeeList = new ArrayList<>();
         projectList = new ArrayList<>();
         inputScanner = new Scanner(System.in);
         calendar = Calendar.getInstance();
@@ -34,7 +35,7 @@ public class ProjectManagementApp {
     }
 
     public void login() {
-        isLoggedIn = true;
+        isLoggedIn = isLoggedIn;
     }
 
 
@@ -72,6 +73,70 @@ public class ProjectManagementApp {
         activity.parentProject = project;
         return activity;
     }
+
+
+    public Employee createEmployee(String string) {//throws Exception {
+        //if (containsEmployee(string)) {
+        //    throw new Exception("The employee already exists");
+        //}
+        Employee employee = new Employee(string);
+        addEmployee(employee);
+        return employee;
+    }
+
+    public void addEmployee(Employee employee) {
+        employeeList.add(employee);
+    }
+
+
+    public boolean containsEmployee(String employee) {
+        return employeeList.stream().anyMatch(e -> e.getEmployeeID().equals(employee));
+    }
+
+//    public void assignEmployee(String employeeID {
+//
+//        for (Employee employee : employeeList) {
+//            if (employeeID != employeeID) {
+//                throw new Exception("The employee is already assigned to the activity ’Activity’");
+//            } else {
+//                parentActivity.updateAssignedEmployees(employeeID);
+//            }
+//        }
+//    }
+
+
+
+
+//
+//    public Employee assignEmployee(String string) throws Exception {
+//        if (containsEmployee(string)) {
+//            throw new Exception("The employee is already assigned to the activity ’Activity’");
+//        }
+//        Employee employee = new Employee(string);
+//        addEmployee(employee);
+//    }
+//
+//
+//
+//    public Activity createActivity(String string, Project project) throws Exception {
+//        if (project.containsActivity(string)){
+//            throw new Exception("An activity named ’Activity’ already exists in this project");
+//        }
+//
+//        Activity activity = new Activity(string, project);
+//        project.addActivity(activity);
+//        activity.parentProject = project;
+//        return activity;
+//    }
+
+//    public void assignEmployee(String string) throws Exception {
+//        if (containsEmployee(string)) {
+//            throw new Exception("The employee is already assigned to the activity ’Activity’");
+//        }
+//        Employee employee = new Employee(string);
+//        addEmployee(employee);
+//    }
+
 
 
 

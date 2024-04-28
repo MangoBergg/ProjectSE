@@ -10,13 +10,17 @@ public class Activity {
     private int[] startEndWeeks = new int[2];
     private double budgetTime = 0.0;
     public Project parentProject;
-    public Activity parentActivity;
+    //private Activity parentActivity;
+    //public Employee employee;
     private List<Employee> employeeList = new ArrayList<>();
+    public List<Employee> assignedEmployeesList = new ArrayList<>();
 
 
     public Activity(String string, Project parentProject) {
         this.name = string;
         this.parentProject = parentProject;
+        //this.parentActivity = parentActivity;
+        //this.employee = employee;
     }
 
     public String getName() {
@@ -33,9 +37,7 @@ public class Activity {
         }
     }
 
-    public int[] getStartEndWeeks() {
-        return startEndWeeks;
-    }
+    public int[] getStartEndWeeks() { return startEndWeeks; }
 
 
     public void updateBudgetedTime(double budgetTime) throws Exception {
@@ -48,26 +50,55 @@ public class Activity {
         this.budgetTime = budgetTime;
     }
 
-
     public double getBudgetTime() {
         return budgetTime;
     }
 
 
+
     public void assignEmployee(String string) throws Exception {
-        if (containsEmployee(string)) {
+        if (containsAssignedEmployee(string)) {
             throw new Exception("The employee is already assigned to the activity ’Activity’");
         }
         Employee employee = new Employee(string);
-        addEmployee(employee);
+        addAssignedEmployee(employee);
     }
 
-    public void addEmployee(Employee employee) {
-        employeeList.add(employee);
+    public void addAssignedEmployee(Employee employee) {
+        assignedEmployeesList.add(employee);
     }
 
-    public boolean containsEmployee(String employeeID) {
-        return employeeList.stream().anyMatch(e -> e.getEmployeeID().equals(employeeID));
+    public boolean containsAssignedEmployee(String employeeID) {
+        return assignedEmployeesList.stream().anyMatch(e -> e.getEmployeeID().equals(employeeID));
     }
+
+
+
+
+
+
+
+//    public void assignEmployee(String string) throws Exception {
+//        if (containsEmployee(string)) {
+//            throw new Exception("The employee is already assigned to the activity ’Activity’");
+//        }
+//        Employee employee = new Employee(string);
+//        addEmployee(employee);
+//    }
+
+
+
+//    public void updateAssignedEmployees(String employeeID) throws Exception {
+//        if (employeeID != employeeID) {
+//            throw new Exception("The employee is already assigned to the activity ’Activity’");
+//        } else {
+//            parentActivity.updateAssignedEmployees(employeeID);
+//        }
+//    }
+
+
+
+
+
 
 }

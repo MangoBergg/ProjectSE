@@ -3,11 +3,10 @@ Feature: Assigning an employee to an activity
   Actor: Employee
 
   Scenario: Successfully assigning an employee to an activity
-    Given the employee attempts to assign an employee "employee ID" to the activity
-    When the employee "employee ID" is not already assigned to the activity
-    Then the employee "employee ID" is assigned to the activity "Activity"
+    Given the employee attempts to assign an employee "employee ID" to the activity "Activity" in the project "Project"
+    Then the employee is assigned to the activity
 
-  #Scenario: Fail to assign an employee who is already assigned to the activity
-  #  Given the employee attempts to assign an employee "employee ID" from the list "Employees" to of employees the activity "Activity"
-  #  And the employee "employee ID" is already assigned to the activity "activity"
-  #  Then an error message "The employee is already assigned to the activity ’Activity’" is given
+  Scenario: Fail to assign an employee who is already assigned to the activity
+    Given the employee attempts to assign an employee "employee ID" to the activity "Activity" in the project "Project"
+    When the employee "employee ID" is already assigned to the activity "Activity"
+    Then an error message "The employee is already assigned to the activity ’Activity’" is given

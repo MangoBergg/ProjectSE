@@ -10,7 +10,7 @@ public class Project {
     private List<Activity> activityList = new ArrayList<>();
     private int[] startEndWeeks = new int[2];
 
-    private Project parentProject;
+    //private Project parentProject;
 
     public Project(String string, int projectID){
         this.name = string;
