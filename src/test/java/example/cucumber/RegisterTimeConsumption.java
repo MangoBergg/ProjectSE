@@ -6,7 +6,9 @@ import dtu.example.ui.ProjectManagementApp;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
 
+import static org.junit.Assert.assertTrue;
 
 
 public class RegisterTimeConsumption {
@@ -34,17 +36,34 @@ public class RegisterTimeConsumption {
         testProject = projectManagementApp.createProject(projectName);
         testActivity = projectManagementApp.createActivity(activityName, testProject);
         testActivity.assignEmployee(employeeID);
+        assertTrue(testActivity.containsAssignedEmployee(employeeID));
     }
 
-    @When("the employee registers consumed time as {double} hours on the activity")
-    public void theEmployeeRegistersConsumedTimeAsHoursOnTheActivity(Double double1) {
+
+    @When("the employee registers consumed time as {double} hours on the activity {string}")
+    public void theEmployeeRegistersConsumedTimeAsHoursOnTheActivity(Double double1, String string) throws Exception {
+        testProject = projectManagementApp.createProject("projectName");
+        testActivity = projectManagementApp.createActivity(string, testProject);
+        try {
+            testActivity.registerConsumedTime(double1);
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @Then("the consumed time on the activity is updated")
+    public void theConsumedTimeOnTheActivityIsUpdated() {
+        testActivity.getTotalConsumedTime();
+    }
+
+
+    @Given("the employee {string} is not assigned to the activity {string} in the project {string}")
+    public void theEmployeeIsNotAssignedToTheActivityInTheProject(String string, String string2, String string3) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
 
-    @Then("the consumed time on the activity is updated by adding {double} hours")
-    public void theConsumedTimeOnTheActivityIsUpdatedByAddingHours(Double double1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
+
+
+
 }

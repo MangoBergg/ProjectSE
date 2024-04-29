@@ -71,7 +71,7 @@ public class ProjectManagementApp {
         if (!containsEmployee(string)) {
             employeeList.add(new Employee(string));
         }
-        System.out.println(Printer.BLUE+"The employee "+string+" is logged in");
+        //System.out.println(Printer.BLUE+"The employee "+string+" is logged in");
         Printer.clearScreen();
         setState(State.MAIN_MENU);
     }
@@ -82,64 +82,13 @@ public class ProjectManagementApp {
         if (containsProject(string)){
             throw new Exception("Project with that name already exists");
         }
-        if (string.equals("")) {
+        if (string.isEmpty()) {
             throw new Exception("Give name");
         }
         Project project = new Project(string, generateProjectNumber());
         addProject(project);
         return project;
     }
-
-
-
-//    public void assignEmployee(String employeeID {
-//
-//        for (Employee employee : employeeList) {
-//            if (employeeID != employeeID) {
-//                throw new Exception("The employee is already assigned to the activity ’Activity’");
-//            } else {
-//                parentActivity.updateAssignedEmployees(employeeID);
-//            }
-//        }
-//    }
-
-
-
-
-//
-//    public Employee assignEmployee(String string) throws Exception {
-//        if (containsEmployee(string)) {
-//            throw new Exception("The employee is already assigned to the activity ’Activity’");
-//        }
-//        Employee employee = new Employee(string);
-//        addEmployee(employee);
-//    }
-//
-//
-//
-//    public Activity createActivity(String string, Project project) throws Exception {
-//        if (project.containsActivity(string)){
-//            throw new Exception("An activity named ’Activity’ already exists in this project");
-//        }
-//
-//        Activity activity = new Activity(string, project);
-//        project.addActivity(activity);
-//        activity.parentProject = project;
-//        return activity;
-//    }
-
-//    public void assignEmployee(String string) throws Exception {
-//        if (containsEmployee(string)) {
-//            throw new Exception("The employee is already assigned to the activity ’Activity’");
-//        }
-//        Employee employee = new Employee(string);
-//        addEmployee(employee);
-//    }
-
-
-
-
-
 
 
 

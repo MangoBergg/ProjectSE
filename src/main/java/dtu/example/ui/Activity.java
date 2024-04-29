@@ -9,18 +9,17 @@ public class Activity {
     private String name;
     private int[] startEndWeeks = new int[2];
     private double budgetTime = 0.0;
+    private double consumedTime = 0.0;
+    private double currentConsumedTime;
+    private double totalConsumedTime;
     public Project parentProject;
-    //private Activity parentActivity;
-    //public Employee employee;
-    private List<Employee> employeeList = new ArrayList<>();
+    //private List<Employee> employeeList = new ArrayList<>();
     public List<Employee> assignedEmployeesList = new ArrayList<>();
 
 
     public Activity(String string, Project parentProject) {
         this.name = string;
         this.parentProject = parentProject;
-        //this.parentActivity = parentActivity;
-        //this.employee = employee;
     }
 
     public String getName() {
@@ -74,27 +73,20 @@ public class Activity {
 
 
 
+    public void registerConsumedTime(double consumedTime) throws Exception {
+        if (consumedTime <= 0.0) {
+            throw new Exception("The time consumed on the activity must be greater than 0.5 hours");
+        }
+        if (consumedTime % 0.5 != 0) {
+            throw new Exception("Invalid input. Please ensure your time is in increments of 0.5");
+        }
+        this.totalConsumedTime += consumedTime;
+    }
+
+    public double getTotalConsumedTime() { return totalConsumedTime; }
 
 
 
-
-//    public void assignEmployee(String string) throws Exception {
-//        if (containsEmployee(string)) {
-//            throw new Exception("The employee is already assigned to the activity ’Activity’");
-//        }
-//        Employee employee = new Employee(string);
-//        addEmployee(employee);
-//    }
-
-
-
-//    public void updateAssignedEmployees(String employeeID) throws Exception {
-//        if (employeeID != employeeID) {
-//            throw new Exception("The employee is already assigned to the activity ’Activity’");
-//        } else {
-//            parentActivity.updateAssignedEmployees(employeeID);
-//        }
-//    }
 
 
 
