@@ -8,5 +8,5 @@ Feature: Assigning an employee to an activity
 
   Scenario: Fail to assign an employee who is already assigned to the activity
     Given the employee attempts to assign an employee "employee ID" to the activity "Activity" in the project "Project"
-    When the employee "employee ID" is already assigned to the activity "Activity"
+    When the employee "employee ID" is already assigned to the activity
     Then an error message "The employee is already assigned to the activity ’Activity’" is given

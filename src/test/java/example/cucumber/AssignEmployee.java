@@ -48,11 +48,14 @@ public class AssignEmployee {
     }
 
 
-   /* @When("the employee {string} is already assigned to the activity {string}")
-    public void the_employee_is_already_assigned_to_the_activity(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }*/
+    @When("the employee {string} is already assigned to the activity")
+    public void the_employee_is_already_assigned_to_the_activity(String string) {
+        try {
+            testActivity.assignEmployee(employeeID);
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
+    }
 
 }
 

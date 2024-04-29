@@ -68,8 +68,8 @@ public class Activity {
         assignedEmployeesList.add(employee);
     }
 
-    public boolean containsAssignedEmployee(String employeeID) {
-        return assignedEmployeesList.stream().anyMatch(e -> e.getEmployeeID().equals(employeeID));
+    public boolean containsAssignedEmployee(String employee) {
+        return assignedEmployeesList.stream().anyMatch(e -> e.getEmployeeID().equals(employee));
     }
 
 
