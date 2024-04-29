@@ -13,6 +13,6 @@ Feature: Register time consumption
     Then an error message "Invalid input. Please ensure your time is in increments of 0.5" is given
 
   Scenario: Successfully registering time consumed on an activity which an employee is not assigned to
-    Given the employee "huba" is not assigned to the activity "Activity" in the project "Project"
+    Given the employee "huba" is not assigned to the activity "Activity"
     When the employee registers consumed time as 5.0 hours on the activity "Activity"
     Then the consumed time on the activity is updated

@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
@@ -57,12 +58,16 @@ public class RegisterTimeConsumption {
     }
 
 
-    @Given("the employee {string} is not assigned to the activity {string} in the project {string}")
-    public void theEmployeeIsNotAssignedToTheActivityInTheProject(String string, String string2, String string3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
 
+
+    @Given("the employee {string} is not assigned to the activity {string}")
+    public void the_employee_is_not_assigned_to_the_activity(String string, String string2) throws Exception {
+        employeeID = string;
+        activityName = string2;
+        testProject = projectManagementApp.createProject("project");
+        testActivity = projectManagementApp.createActivity(activityName, testProject);
+        assertFalse(testActivity.containsAssignedEmployee(employeeID));
+    }
 
 
 
