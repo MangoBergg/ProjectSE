@@ -64,7 +64,7 @@ public class RegisterTimeConsumption {
     public void the_employee_is_not_assigned_to_the_activity(String string, String string2) throws Exception {
         employeeID = string;
         activityName = string2;
-        testProject = projectManagementApp.createProject("projectName");
+        testProject = projectManagementApp.createProject("project");
         testActivity = projectManagementApp.createActivity(activityName, testProject);
         assertFalse(testActivity.containsAssignedEmployee(employeeID));
     }
