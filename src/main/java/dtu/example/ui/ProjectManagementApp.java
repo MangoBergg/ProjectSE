@@ -372,48 +372,60 @@ public class ProjectManagementApp {
     public void handleAssignEmployee() {
         boolean activityFound = false;
         boolean employeeFound = false;
+        boolean validInput = false;
         System.out.println(Printer.BLUE + "Type activity name followed by a , and then the employee ID to be assigned to the activity." + Printer.RESET);
         inputScanner.nextLine();
         String temp = inputScanner.nextLine();
         String[] input = temp.split(",");
-
-
-        for (Activity activity : openProject.getActivityList()) {
-            if (String.valueOf(activity.getName()).equals(input[0])) {
-                openActivity = activity;
-                activityFound = true;
-                break;
+        System.out.println(temp+"HELLO");
+        try{
+            if (input[0].matches("^[a-zA-Z0-9]{4,16}$")) { //Consists of 4 to 16 "normal"-characters
+                if(input[1].matches("^[a-z]{4}$")){
+                    System.out.println("IVRK");
+                    validInput = true;
+                }
+            }
+        }catch(Exception e){
+            System.out.println(Printer.BLUE + "Invalid input" + Printer.RESET);
+            return;
+        }
+        if(validInput) {
+            for (Activity activity : openProject.getActivityList()) {
+                if (String.valueOf(activity.getName()).equals(input[0])) {
+                    openActivity = activity;
+                    activityFound = true;
+                    break;
+                }
+            }
+            if (containsEmployee(input[1])) {
+                employeeFound = true;
+            }
+            if (!activityFound) {
+                Printer.clearScreen();
+                System.out.println(Printer.RED + "No activity was found with that name.");
+            }
+            if (!employeeFound) {
+                Printer.clearScreen();
+                System.out.println(Printer.RED + "No employee was found with that ID.");
+            }
+            if (!activityFound || !employeeFound) {
+                displayActivityOverview(openProject);
+                System.out.println(Printer.RED + "Try again (or type 'back' to go back)." + Printer.RESET);
+                if (inputScanner.nextLine().equalsIgnoreCase("back")) {
+                    setState(State.OPEN_PROJECT);
+                    return;
+                }
+            }
+            if (activityFound && employeeFound) {
+                try {
+                    openActivity.assignEmployee(input[1]);
+                    System.out.println(Printer.BLUE + "Employee with ID " + input[1] + " has been assigned to activity " + input[0] + Printer.RESET);
+                    setState(State.OPEN_PROJECT);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
-        if (containsEmployee(input[1])) {
-            employeeFound = true;
-        }
-        if (!activityFound) {
-            Printer.clearScreen();
-            System.out.println(Printer.RED + "No activity was found with that name.");
-        }
-        if (!employeeFound) {
-            Printer.clearScreen();
-            System.out.println(Printer.RED + "No employee was found with that ID.");
-        }
-        if (!activityFound || !employeeFound) {
-            displayActivityOverview(openProject);
-            System.out.println(Printer.RED + "Try again (or type 'back' to go back)." + Printer.RESET);
-            if (inputScanner.nextLine().equalsIgnoreCase("back")) {
-                setState(State.OPEN_PROJECT);
-                return;
-            }
-        }
-        if(activityFound && employeeFound) {
-            try {
-                openActivity.assignEmployee(input[1]);
-                System.out.println(Printer.BLUE + "Employee with ID "+input[1]+ " has been assigned to activity "+input[0] + Printer.RESET);
-                setState(State.OPEN_PROJECT);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-
     }
 
 
