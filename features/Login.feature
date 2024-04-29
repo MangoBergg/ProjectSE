@@ -3,10 +3,10 @@ Feature: Log in as employee
   Actor: Employee
 
   Scenario: Successfully creating an employee in the system
-    Given the employee "employee ID" logs into the system for the first time
-    When the employee "employee ID" is created
-    Then the list of employees contains "employee ID"
+    Given the employee "huba" logs into the system for the first time
+    When the employee "huba" is created
+    Then the list of employees contains "huba"
 
   Scenario: Successfully logging in
-    Given the list of employees contains "employee ID"
+    Given the list of employees contains "huba"
     Then the employee logs into the system
