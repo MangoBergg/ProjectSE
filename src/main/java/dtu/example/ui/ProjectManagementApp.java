@@ -360,6 +360,7 @@ public class ProjectManagementApp {
                 setState(State.OPENING_ACTIVITY);
                 break;
             case 3: // Assign employee to activity
+                inputScanner.nextLine();
                 displayActivityOverview(openProject);
                 setState(State.ASSIGN_EMPLOYEE);
                 break;
@@ -374,14 +375,11 @@ public class ProjectManagementApp {
         boolean employeeFound = false;
         boolean validInput = false;
         System.out.println(Printer.BLUE + "Type activity name followed by a , and then the employee ID to be assigned to the activity." + Printer.RESET);
-        inputScanner.nextLine();
         String temp = inputScanner.nextLine();
         String[] input = temp.split(",");
-        System.out.println(temp+"HELLO");
         try{
             if (input[0].matches("^[a-zA-Z0-9]{4,16}$")) { //Consists of 4 to 16 "normal"-characters
                 if(input[1].matches("^[a-z]{4}$")){
-                    System.out.println("IVRK");
                     validInput = true;
                 }
             }
