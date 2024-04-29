@@ -19,8 +19,12 @@ public class Project {
         this.projectID = projectID;
     }
 
-    public void setProjectLeader(Employee employee) {
-        this.projectLeader = employee;
+    public void setProjectLeader(Employee employee) throws Exception {
+        if (projectLeader == null) {
+            this.projectLeader = employee;
+        } else {
+            throw new Exception("The employee 'abcd' is project manager for the project 'Project'");
+        }
     }
 
     public Employee getProjectLeader() {
