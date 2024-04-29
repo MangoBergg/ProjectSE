@@ -389,6 +389,7 @@ public class ProjectManagementApp {
             System.out.println(Printer.BLUE + "Invalid input" + Printer.RESET);
             return;
         }
+
         if(validInput) {
             for (Activity activity : openProject.getActivityList()) {
                 if (String.valueOf(activity.getName()).equals(input[0])) {
