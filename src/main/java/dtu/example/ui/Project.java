@@ -10,11 +10,21 @@ public class Project {
     private List<Activity> activityList = new ArrayList<>();
     private int[] startEndWeeks = new int[2];
 
+    private Employee projectLeader;
+
     //private Project parentProject;
 
     public Project(String string, int projectID){
         this.name = string;
         this.projectID = projectID;
+    }
+
+    public void setProjectLeader(Employee employee) {
+        this.projectLeader = employee;
+    }
+
+    public Employee getProjectLeader() {
+        return projectLeader;
     }
 
     public String getName() {
