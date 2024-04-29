@@ -23,7 +23,7 @@ public class Login {
     }
 
     @When("the employee's {string} is created")
-    public void the_employee_s_is_created(String string) {
+    public void the_employee_s_is_created(String string) throws Exception {
         projectManagementApp.createEmployee(string);
     }
 

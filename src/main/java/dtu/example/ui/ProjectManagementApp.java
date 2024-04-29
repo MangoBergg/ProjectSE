@@ -15,7 +15,7 @@ public class ProjectManagementApp {
     public List<Employee> employeeList;
     private boolean isLoggedIn = true;
     private boolean cancelProgram = false;
-    State currentState = State.MAIN_MENU;
+    State currentState = State.LOGIN_MENU;
     private Scanner inputScanner;
     private Calendar calendar;
     private Project openProject;
@@ -40,18 +40,6 @@ public class ProjectManagementApp {
 
 
 
-    // The following code about the project is reused from Hubert's video
-    public Project createProject(String string) throws Exception {
-        if (containsProject(string)){
-            throw new Exception("Project with that name already exists");
-        }
-        if (string.equals("")) {
-            throw new Exception("Give name");
-        }
-        Project project = new Project(string, generateProjectNumber());
-        addProject(project);
-        return project;
-    }
 
     public void addProject(Project project) {
         projectList.add(project);
@@ -62,6 +50,10 @@ public class ProjectManagementApp {
         return projectList.stream().anyMatch(p -> p.getName().equals(projectName));
     }
 
+    public boolean containsEmployee(String string) {
+        return employeeList.stream().anyMatch(e -> e.getEmployeeID().equals(string));
+
+    }
 
     public Activity createActivity(String string, Project project) throws Exception {
         if (project.containsActivity(string)){
@@ -75,23 +67,30 @@ public class ProjectManagementApp {
     }
 
 
-    public Employee createEmployee(String string) {//throws Exception {
-        //if (containsEmployee(string)) {
-        //    throw new Exception("The employee already exists");
-        //}
-        Employee employee = new Employee(string);
-        addEmployee(employee);
-        return employee;
-    }
-
-    public void addEmployee(Employee employee) {
-        employeeList.add(employee);
+    public void createEmployee(String string) {
+        if (!containsEmployee(string)) {
+            employeeList.add(new Employee(string));
+        }
+        System.out.println(Printer.BLUE+"The employee "+string+" is logged in");
+        Printer.clearScreen();
+        setState(State.MAIN_MENU);
     }
 
 
-    public boolean containsEmployee(String employee) {
-        return employeeList.stream().anyMatch(e -> e.getEmployeeID().equals(employee));
+    // The following code about the project is reused from Hubert's video
+    public Project createProject(String string) throws Exception {
+        if (containsProject(string)){
+            throw new Exception("Project with that name already exists");
+        }
+        if (string.equals("")) {
+            throw new Exception("Give name");
+        }
+        Project project = new Project(string, generateProjectNumber());
+        addProject(project);
+        return project;
     }
+
+
 
 //    public void assignEmployee(String employeeID {
 //
@@ -154,6 +153,9 @@ public class ProjectManagementApp {
             Printer.clearScreen();
             switch (currentState) {
                 // Depth 0:
+                case LOGIN_MENU:
+                    handleLoginMenu();
+                    break;
                 case MAIN_MENU:
                     handleMainMenu();
                     break;
@@ -175,6 +177,10 @@ public class ProjectManagementApp {
                     handleOpeningProject();
                     break;
 
+                case ASSIGN_EMPLOYEE:
+                    handleAssignEmployee();
+                    break;
+
                 // Depth 2: (Project)
                 case OPEN_PROJECT:
                     handleOpenProject();
@@ -193,6 +199,9 @@ public class ProjectManagementApp {
         }
 
     }
+
+
+
     private int getInput(int numOptions) {
         int input = 0;
         do {
@@ -210,11 +219,13 @@ public class ProjectManagementApp {
         } while (true);
     }
     public enum State {
+        LOGIN_MENU ,
         MAIN_MENU,
         PROJECT_SYSTEM,
         TIME_SYSTEM,
         VIEW_CHANGE_LOG,
         OPENING_PROJECT,
+        ASSIGN_EMPLOYEE,
         OPEN_PROJECT,
         OPENING_ACTIVITY,
         OPEN_ACTIVITY
@@ -223,6 +234,30 @@ public class ProjectManagementApp {
         this.currentState = state;
     }
 
+    public void handleLoginMenu()  {
+
+        while(true) {
+            System.out.println(Printer.BLUE + "Login with your ID:" + Printer.RESET);
+            String employeeID = inputScanner.nextLine();
+
+            if(employeeID.matches("^[a-z]{4}$")) {
+                //Printer.printAndWait(1500, Printer.GREEN + "Welcome employee " + employeeID + Printer.RESET);
+                Printer.clearScreen();
+                try {
+                    createEmployee(employeeID);
+                    login();
+                    break;
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                System.out.println(Printer.RED + "Invalid identification" + Printer.RESET);
+                continue;
+            }
+        }
+
+    }
     public void handleMainMenu() {
         System.out.println(Printer.BLUE + "Project Management System for Softwarehuset A/S - Version ");
         System.out.println(
@@ -245,7 +280,8 @@ public class ProjectManagementApp {
 //                projectManagementSystem.setState(ProjectManagementSystem.State.VIEW_CHANGE_LOG);
                 break;
             case 4:
-                cancelProgram = true;
+                setState(State.LOGIN_MENU);
+                isLoggedIn = false;
                 break;
         }
     }
@@ -310,10 +346,11 @@ public class ProjectManagementApp {
         System.out.println(
                 Printer.GREEN + "(1) " + Printer.YELLOW + "Create a new activity" + Printer.RESET + "\n" +
                         Printer.GREEN + "(2) " + Printer.YELLOW + "Open activity" + Printer.RESET + "\n" +
-                        Printer.GREEN + "(3) " + Printer.YELLOW + "Back" + Printer.RESET
+                        Printer.GREEN + "(3) " + Printer.YELLOW + "Assign employee to activity" + Printer.RESET + "\n" +
+                        Printer.GREEN + "(4) " + Printer.YELLOW + "Back" + Printer.RESET
         );
 
-        switch (getInput(3)) {
+        switch (getInput(4)) {
             case 1: // Create Activity
                 Printer.clearScreen();
                 createActivity(openProject, inputScanner);
@@ -322,12 +359,71 @@ public class ProjectManagementApp {
                 // Open activity
                 setState(State.OPENING_ACTIVITY);
                 break;
-            case 3: // Back
+            case 3: // Assign employee to activity
+                displayActivityOverview(openProject);
+                setState(State.ASSIGN_EMPLOYEE);
+                break;
+            case 4: // Back
                 openProject = null;
                 setState(State.PROJECT_SYSTEM);
                 break;
         }
     }
+    public void handleAssignEmployee() {
+        boolean activityFound = false;
+        boolean employeeFound = false;
+        System.out.println(Printer.BLUE + "Type activity name followed by a , and then the employee ID to be assigned to the activity." + Printer.RESET);
+        inputScanner.nextLine();
+        String temp = inputScanner.nextLine();
+        String[] input = temp.split(",");
+
+
+        for (Activity activity : openProject.getActivityList()) {
+            if (String.valueOf(activity.getName()).equals(input[0])) {
+                openActivity = activity;
+                activityFound = true;
+                break;
+            }
+        }
+        if (containsEmployee(input[1])) {
+            employeeFound = true;
+        }
+        if (!activityFound) {
+            Printer.clearScreen();
+            System.out.println(Printer.RED + "No activity was found with that name.");
+        }
+        if (!employeeFound) {
+            Printer.clearScreen();
+            System.out.println(Printer.RED + "No employee was found with that ID.");
+        }
+        if (!activityFound || !employeeFound) {
+            displayActivityOverview(openProject);
+            System.out.println(Printer.RED + "Try again (or type 'back' to go back)." + Printer.RESET);
+            if (inputScanner.nextLine().equalsIgnoreCase("back")) {
+                setState(State.OPEN_PROJECT);
+                return;
+            }
+        }
+        if(activityFound && employeeFound) {
+            try {
+                openActivity.assignEmployee(input[1]);
+                System.out.println(Printer.BLUE + "Employee with ID "+input[1]+ " has been assigned to activity "+input[0] + Printer.RESET);
+                setState(State.OPEN_PROJECT);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+
+
+
+
+
+
+
+
+
     public void handleOpeningActivity() {
         System.out.println(Printer.BLUE + "Project Sub-system" + Printer.RESET);
 

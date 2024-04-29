@@ -8,6 +8,7 @@ public class Main {
     private static Scanner inputScanner = new Scanner(System.in);
     
     public static void main(String[] args) {
+
         ProjectManagementApp projectManagementApp = new ProjectManagementApp();
         projectManagementApp.launch();
 
