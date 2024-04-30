@@ -82,7 +82,9 @@ public class Activity {
         this.totalConsumedTime += consumedTime;
     }
 
-    public double getTotalConsumedTime() { return totalConsumedTime; }
+    public double getTotalConsumedTime() { 
+        return totalConsumedTime; 
+    }
 
 
 

@@ -4,7 +4,6 @@ Feature: Get status report
 
   Scenario: An employee follows up on the time consumption on a project.
     Given the employee selects a project named "Project" from the list of projects
-    And the project contains a list of activities
     When a status report for the project is created
     And the status report for the project contains the budgeted time for each activity
     And the status report for the project contains the time consumption for each activity
