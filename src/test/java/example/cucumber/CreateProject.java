@@ -30,6 +30,7 @@ public class CreateProject {
         }
     }
 
+    
     // The following code is reused from Hubert's video
     @Then("the project is added to the list of projects")
     public void theProjectIsAddedToTheListOfProjects() {
@@ -40,6 +41,15 @@ public class CreateProject {
     @Given("the project named {string} already exists in the list of projects")
     public void theProjectNamedAlreadyExistsInTheListOfProjects(String string) throws Exception {
         projectManagementApp.createProject(string);
+    }
+
+    @When("the employee attempts to create a new project without specifying a name")
+    public void theEmployeeAttemptsToCreateANewProjectWithoutSpecifyingAName() throws Exception {
+        try {
+            projectManagementApp.createProject("");
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
     }
 
     // The following code is reused from Hubert's video
