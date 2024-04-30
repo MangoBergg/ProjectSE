@@ -23,7 +23,7 @@ public class Project {
         if (projectLeader == null) {
             this.projectLeader = employee;
         } else {
-            throw new Exception("The employee 'abcd' is project manager for the project 'Project'");
+            throw new Exception("The project already has a project manager");
         }
     }
 
