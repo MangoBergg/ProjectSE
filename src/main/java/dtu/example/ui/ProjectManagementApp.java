@@ -7,6 +7,8 @@ import java.util.Calendar;
 public class ProjectManagementApp {
 
     public List<Project> projectList;
+    public List<Activity> activityList;
+
     public List<Employee> employeeList;
     private Calendar calendar;
     private int serialNumber = 1;
@@ -69,6 +71,21 @@ public class ProjectManagementApp {
 
         throw new Exception("That project doesn't exist in the system");
     }
+
+    public Activity createActivity(String string, Project project) throws Exception {
+        if (project.containsActivity(string)){
+            throw new Exception("An activity named ’Activity’ already exists in this project");
+        }
+        if (string.isEmpty()) {
+            throw new Exception("Give name for the activity");
+        }
+
+        Activity activity = new Activity(string, project);
+        project.addActivity(activity);
+        activity.setParentProject(project);
+        return activity;
+    }
+
 
     public void displayEmployeeOverview() {
         String contained = "";

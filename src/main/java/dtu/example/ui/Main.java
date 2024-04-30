@@ -50,6 +50,21 @@ public class Main {
                         errorMessage.setErrorMessage(e.getMessage());
                     }
                     break;
+
+                case 3:
+                case 4:
+                try {
+                    System.out.println("What project do you want to add an activity?: ");
+                    project = projectManagementApp.getProjectFromName(inputScanner.nextLine());
+                    Printer.clearScreen();
+                    project.displayActivityOverview();
+                    System.out.println("What do you want to name the activity to be added to: '" + project.getName() + "'?");
+                    projectManagementApp.createActivity(inputScanner.nextLine(), project);
+                } catch (Exception e) {
+                    errorMessage.setErrorMessage(e.getMessage());
+                }
+                break;
+
                 default:
                     System.out.println("Not a valid choice");
             }
@@ -58,7 +73,8 @@ public class Main {
 
     private static void displayChoices() {
         System.out.println(Printer.RESET +
-                        "1 - Add Project. 2 - Assign Project Manager."
+                        "1 - Add Project. 2 - Assign Project Manager. 3 - Get Status Report \n" +
+                        "4 - Create Activity."
         );
     }
 
