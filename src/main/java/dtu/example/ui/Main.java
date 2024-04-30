@@ -10,7 +10,11 @@ public class Main {
         Employee user = loginService();
     
         Project project;
+        Activity activity;
         Employee employee;
+
+        int int1;
+        int int2;
 
         ProjectManagementApp projectManagementApp = new ProjectManagementApp();
         projectManagementApp.employeeList.add(user);
@@ -65,6 +69,22 @@ public class Main {
                 }
                 break;
 
+                case 5:
+                try {
+                    System.out.println("What activity do you want to update the weeks?: ");
+                    activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                    System.out.println("Current start end weeks is: " + activity.getStartEndWeeks()[0] + ", " + activity.getStartEndWeeks()[1]);
+                    System.out.println("What should the start week be?");
+                    int1 = Integer.parseInt(inputScanner.nextLine());
+                    System.out.println("What should the end week be?");
+                    int2 = Integer.parseInt(inputScanner.nextLine());
+                    activity.updateStartEndWeeks(int1, int2);
+                } catch (Exception e) {
+                    errorMessage.setErrorMessage(e.getMessage());
+                }
+                break;
+
+
                 default:
                     System.out.println("Not a valid choice");
             }
@@ -74,7 +94,7 @@ public class Main {
     private static void displayChoices() {
         System.out.println(Printer.RESET +
                         "1 - Add Project. 2 - Assign Project Manager. 3 - Get Status Report \n" +
-                        "4 - Create Activity."
+                        "4 - Create Activity. 5 - Change Start and End Weeks"
         );
     }
 

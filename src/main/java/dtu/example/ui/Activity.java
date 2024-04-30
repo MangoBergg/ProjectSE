@@ -8,7 +8,7 @@ public class Activity {
 
     private String name;
     private Project parentProject;
-
+    private int[] startEndWeeks = new int[2];
 
     public Activity(String string, Project parentProject) {
         this.name = string;
@@ -29,5 +29,19 @@ public class Activity {
 
     public Project getParentProject() {
         return parentProject;
+    }
+
+    public void updateStartEndWeeks(int weekStart, int weekEnd) throws Exception {
+        if (weekEnd < weekStart) {
+            throw new Exception("End week cannot be before start week");
+        } else {
+            startEndWeeks[0] = weekStart;
+            startEndWeeks[1] = weekEnd;
+            parentProject.updateStartEndWeeks(weekStart, weekEnd);
+        }
+    }
+
+    public int[] getStartEndWeeks() { 
+        return startEndWeeks; 
     }
 }

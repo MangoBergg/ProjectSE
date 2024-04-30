@@ -8,13 +8,13 @@ public class ProjectManagementApp {
 
     public List<Project> projectList;
     public List<Activity> activityList;
-
     public List<Employee> employeeList;
     private Calendar calendar;
     private int serialNumber = 1;
 
     public ProjectManagementApp() {
         projectList = new ArrayList<>();
+        activityList = new ArrayList<>();
         employeeList = new ArrayList<>();
         calendar = Calendar.getInstance();
     }
@@ -72,6 +72,27 @@ public class ProjectManagementApp {
         throw new Exception("That project doesn't exist in the system");
     }
 
+    public Activity getActivityFromName(String activityToFind) throws Exception {
+        for (Activity activity : activityList) {
+            if (activity.getName().equals(activityToFind)) {
+                return activity;
+            }
+        }
+
+        throw new Exception("That activity doesn't exist in the system");
+    }
+
+    public Employee getEmployeeFromName(String employeeToFind) throws Exception {
+        for (Employee employee : employeeList) {
+            if (employee.getEmployeeID().equals(employeeToFind)) {
+                return employee;
+            }
+        }
+
+        throw new Exception("That employee doesn't exist in the system");
+    }
+
+
     public Activity createActivity(String string, Project project) throws Exception {
         if (project.containsActivity(string)){
             throw new Exception("An activity named ’Activity’ already exists in this project");
@@ -81,6 +102,7 @@ public class ProjectManagementApp {
         }
 
         Activity activity = new Activity(string, project);
+        activityList.add(activity);
         project.addActivity(activity);
         activity.setParentProject(project);
         return activity;
@@ -105,15 +127,4 @@ public class ProjectManagementApp {
             System.out.println(Printer.BLUE + "There are no employees in the system");
         }
     }
-
-    public Employee getEmployeeFromName(String employeeToFind) throws Exception {
-        for (Employee employee : employeeList) {
-            if (employee.getEmployeeID().equals(employeeToFind)) {
-                return employee;
-            }
-        }
-
-        throw new Exception("That employee doesn't exist in the system");
-    }
-
 }

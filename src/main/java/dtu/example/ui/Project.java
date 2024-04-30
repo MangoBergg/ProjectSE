@@ -8,6 +8,7 @@ public class Project {
     private int projectID;
     private Employee projectManager;
     private List<Activity> activityList = new ArrayList<>();
+    private int[] startEndWeeks = new int[2];
 
     public Project(String string, int projectID){
         this.name = string;
@@ -54,5 +55,22 @@ public class Project {
         else {
             System.out.println(Printer.BLUE + "There are no activites in the project: " + name);
         }
+    }
+
+    public void updateStartEndWeeks(int weekStart, int weekEnd) {
+
+        for (Activity activity : activityList) {
+            if (startEndWeeks[0] == 0 || startEndWeeks[0] > weekStart) {
+                startEndWeeks[0] = weekStart;
+            } 
+
+            if (startEndWeeks[1] < weekEnd) {
+                startEndWeeks[1] = weekEnd;
+            }
+        }
+    }
+
+    public int[] getStartEndWeeks() {
+        return startEndWeeks;
     }
 }
