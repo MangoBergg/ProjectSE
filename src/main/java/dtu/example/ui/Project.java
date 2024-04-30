@@ -54,11 +54,27 @@ public class Project {
     }
 
 
-    public void createStatusReport(){
+    // The following code is partly made with help from chatGPT
+    public String createStatusReport(){
+
+        StringBuilder report = new StringBuilder();
+        report.append("Status Report:\n");
+        report.append("---------------------------------------------------------\n");
+
+
         for (Activity activity : activityList) {
+            double budgetTime = activity.getBudgetTime();
+            double totalConsumedTime = activity.getTotalConsumedTime();
 
+            double percentageConsumedTime = (totalConsumedTime / budgetTime) * 100;
+
+            report.append(String.format("Activity: %s\n", activity.getName()));
+            report.append(String.format("Budgeted time: %.2f hours\n", budgetTime));
+            report.append(String.format("Time consumed: %.2f hours\n", totalConsumedTime));
+            report.append(String.format("Percentage of time consumption wrt. budgeted time: %.2f%%\n\n", percentageConsumedTime));
         }
-    }
+        return report.toString();
 
+    }
 
 }

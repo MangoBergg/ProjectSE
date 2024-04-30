@@ -10,7 +10,6 @@ public class Activity {
     private int[] startEndWeeks = new int[2];
     private double budgetTime = 0.0;
     private double consumedTime = 0.0;
-    private double currentConsumedTime;
     private double totalConsumedTime;
     public Project parentProject;
     //private List<Employee> employeeList = new ArrayList<>();
