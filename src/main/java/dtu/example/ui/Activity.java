@@ -73,7 +73,7 @@ public class Activity {
 
 
 
-    public void registerConsumedTime(double consumedTime) throws Exception {
+    public void updateConsumedTime(double consumedTime) throws Exception {
         if (consumedTime <= 0.0) {
             throw new Exception("The time consumed on the activity must be greater than 0.5 hours");
         }

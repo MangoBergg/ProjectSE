@@ -6,7 +6,6 @@ import dtu.example.ui.ProjectManagementApp;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.Assertions;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -46,7 +45,7 @@ public class RegisterTimeConsumption {
         testProject = projectManagementApp.createProject("projectName");
         testActivity = projectManagementApp.createActivity(string, testProject);
         try {
-            testActivity.registerConsumedTime(double1);
+            testActivity.updateConsumedTime(double1);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }

@@ -1,20 +1,26 @@
 package example.cucumber;
 
+import dtu.example.ui.Project;
+import dtu.example.ui.ProjectManagementApp;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class StatusReport {
 
-    @When("the employee prompts a status report for the project {string}")
-    public void the_employee_prompts_a_status_report_for_the_project(String string) {
-        // UI something eller hvad?
-        throw new io.cucumber.java.PendingException();
+    private Project testProject;
+    private ProjectManagementApp projectManagementApp;
+    private String activityName;
+    private ErrorMessageHolder errorMessage;
+
+    public StatusReport(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
+        this.projectManagementApp = projectManagementApp;
+        this.errorMessage = errorMessage;
     }
 
-    @Then("a status report for the project is created")
-    public void a_status_report_for_the_project_is_created() {
-        // Create status report
-        throw new io.cucumber.java.PendingException();
+
+    @When("a status report for the project {string} is created")
+    public void a_status_report_for_the_project_is_created(String string) throws Exception {
+        //testProject = projectManagementApp.createProject(string);
     }
 
     @Then("the status report for the project contains the budgeted time for each activity")
@@ -26,6 +32,12 @@ public class StatusReport {
     @Then("the status report for the project contains the time consumption for each activity")
     public void the_status_report_for_the_project_contains_the_time_consumption_for_each_activity() {
         // Loop through activities and consumed time
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("the status report is given")
+    public void the_status_report_is_given() {
+        // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
 }
