@@ -108,12 +108,28 @@ public class ProjectManagementApp {
         return activity;
     }
 
+    public void displayActivityOverview() {
+        String contained = "";
+
+        for (Activity activity : activityList) {
+            contained += (Printer.GREEN + activity.getName() + Printer.RESET + "\n");
+        }
+
+        if(!contained.isBlank()) {
+            System.out.println(Printer.BLUE + "Following activites exist in the system:");
+            Printer.printLine();
+            System.out.println(contained);
+            Printer.printLine();
+        }
+        else {
+            System.out.println(Printer.BLUE + "There are no activities in the system");
+        }
+    }
 
     public void displayEmployeeOverview() {
         String contained = "";
 
         for (Employee employee : employeeList) {
-            contained += ("\n");
             contained += (Printer.GREEN + employee.getEmployeeID() + Printer.RESET + "\n");
         }
 

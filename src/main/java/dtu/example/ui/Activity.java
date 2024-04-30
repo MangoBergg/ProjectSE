@@ -9,6 +9,7 @@ public class Activity {
     private String name;
     private Project parentProject;
     private int[] startEndWeeks = new int[2];
+    private double budgetTime = 0.0;
 
     public Activity(String string, Project parentProject) {
         this.name = string;
@@ -43,5 +44,19 @@ public class Activity {
 
     public int[] getStartEndWeeks() { 
         return startEndWeeks; 
+    }
+
+    public void updateBudgetedTime(double budgetTime) throws Exception {
+        if (budgetTime <= 0.0) {
+            throw new Exception("Budgeted time must be greater than 0.5 hours");
+        }
+        if (budgetTime % 0.5 != 0) {
+            throw new Exception("Invalid input. Please ensure your number is in increments of 0.5");
+        }
+        this.budgetTime = budgetTime;
+    }
+
+    public double getBudgetedTime() {
+        return budgetTime;
     }
 }

@@ -16,6 +16,8 @@ public class Main {
         int int1;
         int int2;
 
+        double double1;
+
         ProjectManagementApp projectManagementApp = new ProjectManagementApp();
         projectManagementApp.employeeList.add(user);
 
@@ -71,6 +73,8 @@ public class Main {
 
                 case 5:
                 try {
+                    Printer.clearScreen();
+                    projectManagementApp.displayActivityOverview();
                     System.out.println("What activity do you want to update the weeks?: ");
                     activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
                     System.out.println("Current start end weeks is: " + activity.getStartEndWeeks()[0] + ", " + activity.getStartEndWeeks()[1]);
@@ -79,6 +83,21 @@ public class Main {
                     System.out.println("What should the end week be?");
                     int2 = Integer.parseInt(inputScanner.nextLine());
                     activity.updateStartEndWeeks(int1, int2);
+                } catch (Exception e) {
+                    errorMessage.setErrorMessage(e.getMessage());
+                }
+                break;
+
+                case 6:
+                try {
+                    Printer.clearScreen();
+                    projectManagementApp.displayActivityOverview();
+                    System.out.println("What activity do you want to update the budgeted time?: ");
+                    activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                    System.out.println("Current budgeted time is: " + activity.getBudgetedTime());
+                    System.out.println("What should the budgeted time be?");
+                    double1 = Double.parseDouble(inputScanner.nextLine());
+                    activity.updateBudgetedTime(double1);
                 } catch (Exception e) {
                     errorMessage.setErrorMessage(e.getMessage());
                 }
