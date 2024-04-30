@@ -3,7 +3,8 @@ Feature: Get status report
   Actor: Employee
 
   Scenario: An employee follows up on the time consumption on a project.
-    Given the employee "huba" prompts a status report for the project "Project"
-    When the status report for the project is returned
-    Then the status report contains the budgeted for each activity
-    And the status report contains the time consumed on each activity
+    Given the employee selects a project named "Project" from the list of projects
+    When the employee prompts a status report for the project "Project"
+    Then a status report for the project is created
+    And the status report for the project contains the budgeted time for each activity
+    And the status report for the project contains the time consumption for each activity
