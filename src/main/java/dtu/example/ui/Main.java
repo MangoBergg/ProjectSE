@@ -103,6 +103,21 @@ public class Main {
                 }
                 break;
 
+                case 7:
+                try {
+                    Printer.clearScreen();
+                    projectManagementApp.displayActivityOverview();
+                    System.out.println("What activity do you want to assign an employee?: ");
+                    activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                    Printer.clearScreen();
+                    projectManagementApp.displayEmployeeOverview();
+                    System.out.println("What employee should be added?");
+                    employee = projectManagementApp.getEmployeeFromName(inputScanner.nextLine());
+                    activity.assignEmployee(employee);
+                } catch (Exception e) {
+                    errorMessage.setErrorMessage(e.getMessage());
+                }
+                break;
 
                 default:
                     System.out.println("Not a valid choice");
@@ -113,7 +128,8 @@ public class Main {
     private static void displayChoices() {
         System.out.println(Printer.RESET +
                         "1 - Add Project. 2 - Assign Project Manager. 3 - Get Status Report \n" +
-                        "4 - Create Activity. 5 - Change Start and End Weeks"
+                        "4 - Create Activity. 5 - Change Start and End Weeks. 6 - Change Budgeted Time \n" + 
+                        "7 - Assign Employee to Activity."
         );
     }
 

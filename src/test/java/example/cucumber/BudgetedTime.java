@@ -5,7 +5,6 @@ import dtu.example.ui.Project;
 import dtu.example.ui.ProjectManagementApp;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 import static org.junit.Assert.assertTrue;
 
@@ -31,7 +30,6 @@ public class BudgetedTime {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
-
 
     @Then("the budgeted time for the activity is updated to {double} hours")
     public void the_budgeted_time_for_the_activity_is_updated_to_hours(Double double1) {
