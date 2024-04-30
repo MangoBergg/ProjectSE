@@ -7,12 +7,13 @@ public class Main {
     
     public static void main(String[] args) {
         ErrorMessageHolder errorMessage = new ErrorMessageHolder();
-        //Employee user = loginService();
-
-        String projectName;
+        Employee user = loginService();
+    
+        Project project;
+        Employee employee;
 
         ProjectManagementApp projectManagementApp = new ProjectManagementApp();
-
+        projectManagementApp.employeeList.add(user);
 
         while(true) {
             Printer.clearScreen();
@@ -30,13 +31,25 @@ public class Main {
                 case 1:
                     try {
                         System.out.println("Give a title for the project: ");
-                        projectName = inputScanner.nextLine();
-                        projectManagementApp.createProject(projectName);
+                        projectManagementApp.createProject(inputScanner.nextLine());
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
                     }
                     break;   
-
+                
+                case 2:
+                    try {
+                        System.out.println("What project do you want to update the project manager?: ");
+                        project = projectManagementApp.getProjectFromName(inputScanner.nextLine());
+                        Printer.clearScreen();
+                        projectManagementApp.displayEmployeeOverview();
+                        System.out.println("What employee should be the project manager for the project: '" + project.getName() + "'?");
+                        employee = projectManagementApp.getEmployeeFromName(inputScanner.nextLine());
+                        project.setProjectManager(employee);
+                    } catch (Exception e) {
+                        errorMessage.setErrorMessage(e.getMessage());
+                    }
+                    break;
                 default:
                     System.out.println("Not a valid choice");
             }
@@ -45,11 +58,11 @@ public class Main {
 
     private static void displayChoices() {
         System.out.println(Printer.RESET +
-                        "1 - Add Project"
+                        "1 - Add Project. 2 - Assign Project Manager."
         );
     }
 
-    /*private static Employee loginService() {
+    private static Employee loginService() {
 
         while (true) {
             System.out.println(Printer.BLUE + "Login with your ID:" + Printer.RESET);
@@ -64,5 +77,5 @@ public class Main {
                 continue;
             }
         }
-    }*/
+    }
 }
