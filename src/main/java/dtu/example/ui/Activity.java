@@ -10,6 +10,7 @@ public class Activity {
     private Project parentProject;
     private int[] startEndWeeks = new int[2];
     private double budgetTime = 0.0;
+    private double consumedTime = 0.0;
     private List<Employee> assignedEmployeesList = new ArrayList<>();
 
     public Activity(String string, Project parentProject) {
@@ -59,6 +60,14 @@ public class Activity {
 
     public double getBudgetedTime() {
         return budgetTime;
+    }
+
+    public double getConsumedTime() {
+        return consumedTime;
+    }
+
+    public void updateConsumedTime(double double1) {
+        consumedTime += double1;
     }
 
     public void assignEmployee(Employee employee) throws Exception {
