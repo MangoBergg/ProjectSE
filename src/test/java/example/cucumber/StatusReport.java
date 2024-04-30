@@ -24,13 +24,13 @@ public class StatusReport {
         this.errorMessage = errorMessage;
     }
 
-    @Given("the project contains a list of activities")
-    public void the_project_contains_a_list_of_activities() {
-        List<Activity> activities = Arrays.asList(
-                new Activity("Coding", 2.0, 1.5),
-                new Activity("Testing", 3.0, 2.5)
-        );
-    }
+//    @Given("the project contains a list of activities")
+//    public void the_project_contains_a_list_of_activities() {
+//        List<Activity> activities = Arrays.asList(
+//                new Activity("Coding", 2.0, 1.5),
+//                new Activity("Testing", 3.0, 2.5)
+//        );
+//    }
 
     @When("a status report for the project is created")
     public void a_status_report_for_the_project_is_created() throws Exception {
