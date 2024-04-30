@@ -14,7 +14,7 @@ public class AssignEmployee {
 
     private Activity testActivity;
     private Project testProject;
-    private String employeeID;
+    private Employee employee;
     private String projectName;
     private String activityName;
     private ErrorMessageHolder errorMessage;
@@ -28,13 +28,13 @@ public class AssignEmployee {
 
     @Given("the employee attempts to assign an employee {string} to the activity {string} in the project {string}")
     public void the_employee_attempts_to_assign_an_employee_to_the_activity_in_the_project(String string, String string2, String string3) throws Exception {
-        employeeID = string;
+        employee = new Employee(string);
         activityName = string2;
         projectName = string3;
         testProject = projectManagementApp.createProject(projectName);
         testActivity = projectManagementApp.createActivity(activityName, testProject);
         try {
-            testActivity.assignEmployee(employeeID);
+            testActivity.assignEmployee(employee);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
@@ -44,18 +44,17 @@ public class AssignEmployee {
 
     @Then("the employee is assigned to the activity")
     public void the_employee_is_assigned_to_the_activity() {
-        assertTrue(testActivity.containsAssignedEmployee(employeeID));
+        assertTrue(testActivity.containsAssignedEmployee(employee.getEmployeeID()));
     }
 
 
     @When("the employee {string} is already assigned to the activity")
     public void the_employee_is_already_assigned_to_the_activity(String string) {
         try {
-            testActivity.assignEmployee(employeeID);
+            testActivity.assignEmployee(employee);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
 
 }
-

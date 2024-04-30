@@ -12,7 +12,6 @@ public class Activity {
     private double consumedTime = 0.0;
     private double totalConsumedTime;
     public Project parentProject;
-    //private List<Employee> employeeList = new ArrayList<>();
     public List<Employee> assignedEmployeesList = new ArrayList<>();
 
 
@@ -52,13 +51,10 @@ public class Activity {
         return budgetTime;
     }
 
-
-
-    public void assignEmployee(String string) throws Exception {
-        if (containsAssignedEmployee(string)) {
+    public void assignEmployee(Employee employee) throws Exception {
+        if (containsAssignedEmployee(employee.getEmployeeID())) {
             throw new Exception("The employee is already assigned to the activity ’Activity’");
         }
-        Employee employee = new Employee(string);
         addAssignedEmployee(employee);
     }
 
@@ -66,32 +62,7 @@ public class Activity {
         assignedEmployeesList.add(employee);
     }
 
-    public boolean containsAssignedEmployee(String employee) {
-        return assignedEmployeesList.stream().anyMatch(e -> e.getEmployeeID().equals(employee));
+    public boolean containsAssignedEmployee(String employeeID) {
+        return assignedEmployeesList.stream().anyMatch(e -> e.getEmployeeID().equals(employeeID));
     }
-
-
-
-    public void updateConsumedTime(double consumedTime) throws Exception {
-        if (consumedTime <= 0.0) {
-            throw new Exception("The time consumed on the activity must be greater than 0.5 hours");
-        }
-        if (consumedTime % 0.5 != 0) {
-            throw new Exception("Invalid input. Please ensure your time is in increments of 0.5");
-        }
-        this.totalConsumedTime += consumedTime;
-    }
-
-    public double getTotalConsumedTime() { 
-        return totalConsumedTime; 
-    }
-
-
-
-
-
-
-
-
-
 }

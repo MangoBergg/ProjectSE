@@ -7,7 +7,6 @@ Feature: Register time consumption
     When the employee registers consumed time as 5.0 hours on the activity "Activity"
     Then the consumed time on the activity is updated
 
-
   Scenario: Fail to register the time consumed on an activity in increments of 0.5 hours
     When the employee registers consumed time as 4.7 hours on the activity "Activity"
     Then an error message "Invalid input. Please ensure your time is in increments of 0.5" is given

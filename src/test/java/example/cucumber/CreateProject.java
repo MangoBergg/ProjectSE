@@ -47,7 +47,4 @@ public class CreateProject {
     public void anErrorMessageIsGiven(String string) {
         assertEquals(string, errorMessage.getErrorMessage());
     }
-
-
-
 }

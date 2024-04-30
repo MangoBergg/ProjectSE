@@ -2,14 +2,13 @@ package dtu.example.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Project {
     private String name;
     private int projectID;
     private List<Activity> activityList = new ArrayList<>();
     private int[] startEndWeeks = new int[2];
-    private StatusReport statusReport;
+    private Employee projectManager;
 
     public Project(String string, int projectID){
         this.name = string;
@@ -27,6 +26,7 @@ public class Project {
     public List<Activity> getActivityList(){
         return activityList;
     }
+
     public void addActivity(Activity activity) {
         activityList.add(activity);
     }
@@ -52,15 +52,15 @@ public class Project {
         return startEndWeeks;
     }
 
-    public void updateStatusReport() {
-        this.statusReport = new StatusReport(this);
+    public Employee getProjectManager() {
+        return projectManager;
     }
 
-    public StatusReport getStatusReport() {
-        return statusReport;
-    }
-
-    public void printStatusReport() {
-        System.out.println(statusReport);
+    public void setProjectManager(Employee employee) throws Exception {
+        if (getProjectManager().equals(null)) {
+            throw new Exception("There's already a Project Manager assigned to that project");
+        } else {
+            projectManager = employee;
+        }
     }
 }
