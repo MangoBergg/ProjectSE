@@ -26,11 +26,11 @@ public class AssignProjectManager {
     @When("the user registers a project manager")
     public void theUserRegistersAProjectManager() throws Exception {
         testProject = projectManagementApp.getProjectFromName("Project");
-        testProject.setProjectManager(new Employee("juba"));
+        testProject.setProjectManager(new Employee("huba"));
     }
 
     @Then("the project manager is updated")
     public void theProjectManagerIsUpdated() {
-        assertTrue(testProject.getProjectManager().getEmployeeID().equals("juba"));
+        assertTrue(testProject.getProjectManager().getEmployeeID().equals("huba"));
     }
 }
