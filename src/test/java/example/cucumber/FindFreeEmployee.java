@@ -38,7 +38,11 @@ public class FindFreeEmployee {
 
     @When("{string} prompts a list of free employees for the activity {string}")
     public void promptsAListOfFreeEmployeesForTheActivity(String string, String string2) throws Exception {
-        projectManagementApp.findFreeEmployees(testActivity);
+        try {
+            projectManagementApp.findFreeEmployees(testActivity);
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
     }
 
     @Then("a list is returned containing employees who are not absent in week {int} to {int}. Not assigned to {string}")

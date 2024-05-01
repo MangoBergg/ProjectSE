@@ -13,11 +13,9 @@ public class RegisterAbsence {
 
     private Employee employee;
     private ErrorMessageHolder errorMessage;
-    private ProjectManagementApp projectManagementApp;
 
 
     public RegisterAbsence(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
-        this.projectManagementApp = projectManagementApp;
         this.errorMessage = errorMessage;
     }
 
