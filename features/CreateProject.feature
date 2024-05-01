@@ -12,8 +12,6 @@ Feature: Create a new project
 		When a new project named "Project" is created
 		Then an error message "Project with that name already exists" is given
 
-
-
-	#Scenario: Attempting to create a project without specifying a name
-	#	When the employee attempts to create a new project without specifying a name
-	#	Then an error message "Give name" is given
+	Scenario: Attempting to create a project without specifying a name
+		When the employee attempts to create a new project without specifying a name
+		Then an error message "Give name" is given

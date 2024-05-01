@@ -1,12 +1,9 @@
 package example.cucumber;
 
-import dtu.example.ui.Activity;
-import dtu.example.ui.Project;
-import dtu.example.ui.ProjectManagementApp;
+import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
 
 import static org.junit.Assert.*;
 
@@ -40,7 +37,7 @@ public class ChangeStartAndEndWeeks {
 
     @Then("the start and end weeks of the project containing the activity are updated to {int} and {int}")
     public void the_start_and_end_weeks_of_the_project_containing_the_activity_are_updated_to_and(Integer int1, Integer int2) {
-        assertTrue(testActivity.parentProject.getStartEndWeeks()[0] == int1 && testActivity.parentProject.getStartEndWeeks()[1] == int2);
+        assertTrue(testActivity.getParentProject().getStartEndWeeks()[0] == int1 && testActivity.getParentProject().getStartEndWeeks()[1] == int2);
     }
 
     @Given("an activity exists with start week {int} and end week {int}")

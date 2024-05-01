@@ -1,13 +1,8 @@
-Feature: Assigning a project manager
-  Description: An employee can assign a project manager to a project
-  Actor: Employee
+Feature: Create a new project
+	Description: Allows an employee to set a project manager in a project
+	Actor: Employee
 
-  Scenario: Successfully assigning oneself as the project manager when there is no project manager for the project "Project"
-    Given there is no project manager for the project "Project"
-    When an employee attempts to assign an employee with name "huba" as project manager for the project
-    Then the employee "huba" is the project manager for the project "Project"
-
-  Scenario: Attempting to assign oneself as project manager when another project manager already exists.
-    Given there is a project manager "abcd" for the project "Project"
-    When an employee attempts to assign an employee with name "huba" as project manager for the project
-    Then an error message "The project already has a project manager" is given
+	Scenario: Successfully assigning a project manager
+        Given the project named "Project" already exists in the list of projects
+		When the user registers a project manager
+		Then the project manager is updated

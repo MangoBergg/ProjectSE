@@ -3,7 +3,7 @@ package example.cucumber;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtu.example.ui.ProjectManagementApp;
+import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -30,6 +30,7 @@ public class CreateProject {
         }
     }
 
+    
     // The following code is reused from Hubert's video
     @Then("the project is added to the list of projects")
     public void theProjectIsAddedToTheListOfProjects() {
@@ -42,12 +43,18 @@ public class CreateProject {
         projectManagementApp.createProject(string);
     }
 
+    @When("the employee attempts to create a new project without specifying a name")
+    public void theEmployeeAttemptsToCreateANewProjectWithoutSpecifyingAName() throws Exception {
+        try {
+            projectManagementApp.createProject("");
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
+    }
+
     // The following code is reused from Hubert's video
     @Then("an error message {string} is given")
     public void anErrorMessageIsGiven(String string) {
         assertEquals(string, errorMessage.getErrorMessage());
     }
-
-
-
 }
