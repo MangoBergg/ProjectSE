@@ -1,24 +1,454 @@
 package dtu.example.ui;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Calendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class ProjectManagementApp {
 
     public List<Project> projectList;
     public List<Activity> activityList;
     public List<Employee> employeeList;
+    private boolean isLoggedIn = true;
+    private boolean cancelProgram = false;
+    State currentState = State.MAIN_MENU;
+    private Scanner inputScanner;
     private Calendar calendar;
+    private Project openProject;
+    private Activity openActivity;
     private int serialNumber = 1;
 
     public ProjectManagementApp() {
-        projectList = new ArrayList<>();
-        activityList = new ArrayList<>();
         employeeList = new ArrayList<>();
+        projectList = new ArrayList<>();
+        inputScanner = new Scanner(System.in);
         calendar = Calendar.getInstance();
+
     }
 
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void login() {
+        isLoggedIn = isLoggedIn;
+    }
+
+
+
+    // The following code about the project is reused from Hubert's video
+    public Project createProject(String string) throws Exception {
+        if (containsProject(string)){
+            throw new Exception("Project with that name already exists");
+        }
+        if (string.equals("")) {
+            throw new Exception("Give name");
+        }
+        Project project = new Project(string, generateProjectNumber());
+        addProject(project);
+        return project;
+    }
+
+    public void addProject(Project project) {
+        projectList.add(project);
+    }
+
+    // The following code is reused from Hubert's video
+    public boolean containsProject(String projectName) {
+        return projectList.stream().anyMatch(p -> p.getName().equals(projectName));
+    }
+
+
+    public Activity createActivity(String string, Project project) throws Exception {
+        if (project.containsActivity(string)){
+            throw new Exception("An activity named ’Activity’ already exists in this project");
+        }
+
+        Activity activity = new Activity(string, project);
+        project.addActivity(activity);
+        activity.parentProject = project;
+        return activity;
+    }
+
+
+    public Employee createEmployee(String string) {//throws Exception {
+        //if (containsEmployee(string)) {
+        //    throw new Exception("The employee already exists");
+        //}
+        Employee employee = new Employee(string);
+        addEmployee(employee);
+        return employee;
+    }
+
+    public void addEmployee(Employee employee) {
+        employeeList.add(employee);
+    }
+
+
+    public boolean containsEmployee(String employee) {
+        return employeeList.stream().anyMatch(e -> e.getEmployeeID().equals(employee));
+    }
+
+//    public void assignEmployee(String employeeID {
+//
+//        for (Employee employee : employeeList) {
+//            if (employeeID != employeeID) {
+//                throw new Exception("The employee is already assigned to the activity ’Activity’");
+//            } else {
+//                parentActivity.updateAssignedEmployees(employeeID);
+//            }
+//        }
+//    }
+
+
+
+
+//
+//    public Employee assignEmployee(String string) throws Exception {
+//        if (containsEmployee(string)) {
+//            throw new Exception("The employee is already assigned to the activity ’Activity’");
+//        }
+//        Employee employee = new Employee(string);
+//        addEmployee(employee);
+//    }
+//
+//
+//
+//    public Activity createActivity(String string, Project project) throws Exception {
+//        if (project.containsActivity(string)){
+//            throw new Exception("An activity named ’Activity’ already exists in this project");
+//        }
+//
+//        Activity activity = new Activity(string, project);
+//        project.addActivity(activity);
+//        activity.parentProject = project;
+//        return activity;
+//    }
+
+//    public void assignEmployee(String string) throws Exception {
+//        if (containsEmployee(string)) {
+//            throw new Exception("The employee is already assigned to the activity ’Activity’");
+//        }
+//        Employee employee = new Employee(string);
+//        addEmployee(employee);
+//    }
+
+
+
+
+
+
+
+
+
+
+
+    // The following code is for the UI
+
+    public void launch(){
+        while (!cancelProgram) {
+            Printer.clearScreen();
+            switch (currentState) {
+                // Depth 0:
+                case MAIN_MENU:
+                    handleMainMenu();
+                    break;
+
+                // Depth 1:
+                case PROJECT_SYSTEM:
+                    handleProjectSystem();
+                    break;
+
+                case TIME_SYSTEM:
+                    //projectManagementSystemHelper.handleTimeSystem();
+                    break;
+
+                case VIEW_CHANGE_LOG:
+                    //projectManagementSystemHelper.handleViewChangeLog();
+                    break;
+
+                case OPENING_PROJECT:
+                    handleOpeningProject();
+                    break;
+
+                // Depth 2: (Project)
+                case OPEN_PROJECT:
+                    handleOpenProject();
+                    break;
+
+                case OPENING_ACTIVITY:
+                    handleOpeningActivity();
+                    break;
+
+                // Depth 3: (ProjectActivity)
+                case OPEN_ACTIVITY:
+                    handleOpenActivity();
+
+                    //Depth 2: (Time)
+            }
+        }
+
+    }
+    private int getInput(int numOptions) {
+        int input = 0;
+        do {
+            try {
+                input = inputScanner.nextInt();
+                if (input >= 1 && input <= numOptions) {
+                    return input;
+                } else {
+                    System.out.println("Invalid option. Please enter a number between 1 and " + numOptions + ".");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a number.");
+                inputScanner.next(); // Clear buffer
+            }
+        } while (true);
+    }
+    public enum State {
+        MAIN_MENU,
+        PROJECT_SYSTEM,
+        TIME_SYSTEM,
+        VIEW_CHANGE_LOG,
+        OPENING_PROJECT,
+        OPEN_PROJECT,
+        OPENING_ACTIVITY,
+        OPEN_ACTIVITY
+    }
+    public void setState(State state) {
+        this.currentState = state;
+    }
+
+    public void handleMainMenu() {
+        System.out.println(Printer.BLUE + "Project Management System for Softwarehuset A/S - Version ");
+        System.out.println(
+                Printer.GREEN + "(1)" + Printer.YELLOW + " Open Project System \n" +
+                        Printer.GREEN + "(2)" + Printer.YELLOW + " Open Time System \n" +
+                        Printer.GREEN + "(3)" + Printer.YELLOW + " View maintenance log\n" +
+                        Printer.GREEN + "(4)" + Printer.YELLOW + " Close System" +
+                        Printer.RESET
+        );
+
+
+        switch (getInput(4)) { //getInput(number of cases) to validate that input is legal.
+            case 1:
+                setState(State.PROJECT_SYSTEM);
+                break;
+            case 2:
+//                projectManagementSystem.setState(ProjectManagementSystem.State.TIME_SYSTEM);
+                break;
+            case 3:
+//                projectManagementSystem.setState(ProjectManagementSystem.State.VIEW_CHANGE_LOG);
+                break;
+            case 4:
+                cancelProgram = true;
+                break;
+        }
+    }
+    public void handleProjectSystem() {
+        System.out.println(Printer.BLUE + "Project Sub-system" + Printer.RESET);
+        System.out.println(
+            Printer.GREEN + "(1) " + Printer.YELLOW + "Create a new project." + Printer.RESET + "\n" +
+            Printer.GREEN + "(2) " + Printer.YELLOW + "Open project" + Printer.RESET + "\n" +
+            Printer.GREEN + "(3) " + Printer.YELLOW + "Back" + Printer.RESET
+        );
+
+        switch(getInput(3)) { //getInput(number of cases) to validate that input is legal.
+            case 1:
+                Printer.clearScreen();
+                createProject(inputScanner);
+                break;
+            case 2:
+                setState(State.OPENING_PROJECT);
+                break;
+            case 3:
+                setState(State.MAIN_MENU);
+                break;
+        }
+    }
+    public void handleOpeningProject() {
+        System.out.println(Printer.BLUE + "Project Sub-system" + Printer.RESET);
+
+        //Take input to open the correct project:
+        String projectNumber;
+        boolean projectFound = false;
+        inputScanner.nextLine();
+
+        while (!projectFound) {
+            displayProjectOverview();
+            System.out.println(Printer.BLUE + "Provide the ID of the project you want to open (or type 'back' to go back):" + Printer.RESET);
+            projectNumber = inputScanner.nextLine();
+
+            if (projectNumber.equalsIgnoreCase("back")) {
+                setState(State.PROJECT_SYSTEM);
+                return;
+            }
+
+            for (Project project : projectList) {
+                if (String.valueOf(project.getProjectID()).equals(projectNumber)) {
+                    openProject = project;
+                    projectFound = true;
+                    break;
+                }
+            }
+
+            if (!projectFound) {
+                Printer.clearScreen();
+                System.out.println(Printer.RED + "No project was found with that ID. Try again (or type 'back' to go back):" + Printer.RESET);
+            }
+        }
+        setState(openProject == null ? State.PROJECT_SYSTEM : State.OPEN_PROJECT);
+
+    }
+    public void handleOpenProject() {
+        displayProjectDetails(openProject);
+        displayActivityOverview(openProject);
+        System.out.println(
+                Printer.GREEN + "(1) " + Printer.YELLOW + "Create a new activity" + Printer.RESET + "\n" +
+                        Printer.GREEN + "(2) " + Printer.YELLOW + "Open activity" + Printer.RESET + "\n" +
+                        Printer.GREEN + "(3) " + Printer.YELLOW + "Back" + Printer.RESET
+        );
+
+        switch (getInput(3)) {
+            case 1: // Create Activity
+                Printer.clearScreen();
+                createActivity(openProject, inputScanner);
+                break;
+            case 2:
+                // Open activity
+                setState(State.OPENING_ACTIVITY);
+                break;
+            case 3: // Back
+                openProject = null;
+                setState(State.PROJECT_SYSTEM);
+                break;
+        }
+    }
+    public void handleOpeningActivity() {
+        System.out.println(Printer.BLUE + "Project Sub-system" + Printer.RESET);
+
+        //Take input to open the correct project:
+        String activityName;
+        boolean activityFound = false;
+        inputScanner.nextLine();
+
+        while (!activityFound) {
+            displayActivityOverview(openProject);
+            System.out.println(Printer.BLUE + "Provide the name of the activity you want to open (or type 'back' to go back):" + Printer.RESET);
+            activityName = inputScanner.nextLine();
+
+            if (activityName.equalsIgnoreCase("back")) {
+                setState(State.OPEN_PROJECT);
+                return;
+            }
+
+            for (Activity activity : openProject.getActivityList()) {
+                if (String.valueOf(activity.getName()).equals(activityName)) {
+                    openActivity = activity;
+                    activityFound = true;
+                    break;
+                }
+            }
+
+            if (!activityFound) {
+                Printer.clearScreen();
+                System.out.println(Printer.RED + "No activity was found with that name. Try again (or type 'back' to go back):" + Printer.RESET);
+            }
+        }
+        setState(openProject == null ? State.OPEN_PROJECT : State.OPEN_ACTIVITY);
+    }
+    public void handleOpenActivity() {
+        displayActivityDetails(openActivity);
+        displayActivityOverview(openProject);
+        System.out.println(
+                Printer.GREEN + "(1) " + Printer.YELLOW + "Change start and end weeks" + Printer.RESET + "\n" +
+                        Printer.GREEN + "(2) " + Printer.YELLOW + "Change budgeted time" + Printer.RESET + "\n" +
+                        Printer.GREEN + "(3) " + Printer.YELLOW + "Back" + Printer.RESET
+        );
+
+        switch (getInput(3)) {
+            case 1:
+                Printer.clearScreen();
+                changeStartEndWeeks(openActivity, inputScanner);
+                break;
+            case 2:
+                Printer.clearScreen();
+                changeBudgetTime(openActivity, inputScanner);
+                break;
+            case 3: // Back
+                openActivity = null;
+                setState(State.OPEN_PROJECT);
+                break;
+        }
+    }
+    public void createActivity(Project openProject, Scanner inputScanner) {
+        String nameOfActivity = "";
+        inputScanner.nextLine();
+        boolean uniqueName;
+
+        do {
+            uniqueName = true;
+            System.out.println(Printer.BLUE + "Provide a name for the new activity" + Printer.RESET);
+            nameOfActivity = inputScanner.nextLine();
+
+            if (nameOfActivity.isBlank()) {
+                Printer.clearScreen();
+                System.out.println(Printer.RED + "You need to specify a name for the activity - ");
+                uniqueName = false;
+            }
+
+            for (Activity activity : openProject.getActivityList()) {
+                if (activity.getName().equals(nameOfActivity)) {
+                    Printer.clearScreen();
+                    System.out.println(Printer.RED + "An activity named '" + nameOfActivity + "' already exists in the system - ");
+                    uniqueName = false;
+                    break;
+                }
+            }
+        } while(!uniqueName);
+
+        openProject.addActivity(new Activity(nameOfActivity, openProject));
+    }
+
+    public void createProject(Scanner inputScanner) {
+        String nameOfProject = "";
+        inputScanner.nextLine();
+        boolean uniqueName;
+
+        do {
+            uniqueName = true;
+            System.out.println(Printer.BLUE + "Provide a name for the new project" + Printer.RESET);
+            nameOfProject = inputScanner.nextLine();
+
+            if (nameOfProject.isBlank()) {
+                Printer.clearScreen();
+                System.out.println(Printer.RED + "You need to specify a name for the project - ");
+                uniqueName = false;
+            }
+
+            if (!nameOfProject.matches("^[a-zA-Z0-9]{4,16}$")) { //Consists of 4 to 16 "normal"-characters
+                Printer.clearScreen();
+                System.out.println(Printer.RED + "Invalid name for the project - Project names should be 4-16 characters long without special characters.");
+                uniqueName = false;
+            }
+
+            for (Project project : projectList) {
+                if (project.getName().equals(nameOfProject)) {
+                    Printer.clearScreen();
+                    System.out.println(Printer.RED + "A project named '" + nameOfProject + "' already exists in the system - ");
+                    uniqueName = false;
+                    break;
+                }
+            }
+        } while (!uniqueName);
+        System.out.println(Printer.RED + "Project with name "+ nameOfProject + " is added to the system." + Printer.RESET);
+        projectList.add(new Project(nameOfProject, generateProjectNumber()));
+
+    }
     public int generateProjectNumber() {
         //If serialNumber = 1 and year is 2024 then this method returns 24001.
         int lastTwoYearDigits = calendar.get(Calendar.YEAR) % 100;
@@ -27,14 +457,76 @@ public class ProjectManagementApp {
         serialNumber++;
         return Integer.parseInt(formatYear + formatSerial);
     }
+    public void changeStartEndWeeks(Activity openActivity, Scanner inputScanner) {
+        inputScanner.nextLine();
+
+        while (true) {
+            System.out.println(Printer.BLUE + "Please input start and end weeks separated by a comma");
+            String[] input = inputScanner.nextLine().split(",");
+
+            if (input.length != 2) {
+                System.out.println(Printer.RED + "Invalid input. Input should be two numbers separated by a comma.");
+                continue;
+            }
+
+            try {
+                int start = Integer.parseInt(input[0].trim());
+                int end = Integer.parseInt(input[1].trim());
+
+                if (start > end) {
+                    System.out.println(Printer.RED + "Invalid input. The start week should be before the end week.");
+                    continue;
+                }
+
+                openActivity.updateStartEndWeeks(start, end);
+
+                openActivity.parentProject.updateStartEndWeeks(start, end);
+
+                break;
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println(Printer.RED + "Please enter valid integers separated by a comma. Give new input." + Printer.RESET);
+                continue;
+            }
+        }
+    }
+    public void changeBudgetTime(Activity openActivity, Scanner inputScanner) {
+
+        inputScanner.nextLine();
+
+        while (true) {
+            System.out.println(Printer.BLUE + "Please input budgeted time in increments of 0.5 separated by a '.'");
+            String input = inputScanner.nextLine();
+
+            // Matches our format.
+            if (input.matches("\\d+\\.0|\\d+\\.5")) { // REGEX FROM CHATGPT FROM PROMPT:
+                // ^^
+                //PROMPT: Write me regex to match "number1.number2" where number2 = 5 and number1 is any number.
+
+                double budgetedTime = Double.parseDouble(input);
+                try {
+                    openActivity.updateBudgetedTime(budgetedTime);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("Budgeted time set to: " + budgetedTime);
+                break;
+            } else {
+                System.out.println("Invalid input. Please ensure your number is in increments of 0.5");
+            }
+        }
+    }
 
     public void displayProjectOverview() {
+        int i = 1;
+        int j = 1;
         String contained = "";
-
+        String notContained = "";
         for (Project project : projectList) {
-            contained += (Printer.PURPLE + "[" +  project.getProjectID() + "] " + Printer.GREEN + project.getName() + Printer.RESET + "\n");
-        }
-
+            contained += ("\n");
+            contained += (Printer.PURPLE + "[" +  project.getProjectID() + "] " + Printer.GREEN + project.getName() + Printer.RESET + "   ");
+            i++;
+            }
         if(!contained.isBlank()) {
             System.out.println(Printer.BLUE + "Following projects exist in the system:");
             Printer.printLine();
@@ -45,150 +537,33 @@ public class ProjectManagementApp {
             System.out.println(Printer.BLUE + "There are no projects in the system");
         }
     }
-
-    public Project createProject(String string) throws Exception {
-        if (containsProject(string)){
-            throw new Exception("Project with that name already exists");
-        }
-        if (string.isEmpty()) {
-            throw new Exception("Give name");
-        }
-        Project project = new Project(string, generateProjectNumber());
-        projectList.add(project);
-        return project;
+    public void displayProjectDetails(Project project) {
+        System.out.println(Printer.BLUE + "Project '" + Printer.PURPLE + project.getName() + Printer.BLUE + "': \n" +
+                Printer.BLUE + "    Scheduled Weeks: " + Printer.PURPLE + "[" + project.getStartEndWeeks()[0] + " - " + project.getStartEndWeeks()[1] + "]\n"
+        );
     }
-
-    public boolean containsProject(String projectName) {
-        return projectList.stream().anyMatch(p -> p.getName().equals(projectName));
-    }
-
-    public Project getProjectFromName(String projectToFind) throws Exception {
-        for (Project project : projectList) {
-            if (project.getName().equals(projectToFind)) {
-                return project;
-            }
-        }
-
-        throw new Exception("That project doesn't exist in the system");
-    }
-
-    public Activity getActivityFromName(String activityToFind) throws Exception {
-        for (Activity activity : activityList) {
-            if (activity.getName().equals(activityToFind)) {
-                return activity;
-            }
-        }
-
-        throw new Exception("That activity doesn't exist in the system");
-    }
-
-    public Employee getEmployeeFromName(String employeeToFind) throws Exception {
-        for (Employee employee : employeeList) {
-            if (employee.getEmployeeID().equals(employeeToFind)) {
-                return employee;
-            }
-        }
-
-        throw new Exception("That employee doesn't exist in the system");
-    }
-
-
-    public Activity createActivity(String string, Project project) throws Exception {
-        if (project.containsActivity(string)){
-            throw new Exception("An activity named ’Activity’ already exists in this project");
-        }
-        if (string.isEmpty()) {
-            throw new Exception("Give name for the activity");
-        }
-
-        Activity activity = new Activity(string, project);
-        activityList.add(activity);
-        project.addActivity(activity);
-        activity.setParentProject(project);
-        return activity;
-    }
-
-    public void displayActivityOverview() {
+    public void displayActivityOverview(Project project) {
+        int i = 1;
+        int j = 1;
         String contained = "";
+        String notContained = "";
 
-        for (Activity activity : activityList) {
-            contained += (Printer.GREEN + activity.getName() + Printer.RESET + "\n");
-        }
-
-        if(!contained.isBlank()) {
-            System.out.println(Printer.BLUE + "Following activites exist in the system:");
-            Printer.printLine();
-            System.out.println(contained);
-            Printer.printLine();
-        }
-        else {
-            System.out.println(Printer.BLUE + "There are no activities in the system");
-        }
-    }
-
-    public void displayEmployeeOverview() {
-        String contained = "";
-
-        for (Employee employee : employeeList) {
-            contained += (Printer.GREEN + employee.getEmployeeID() + Printer.RESET + "\n");
-        }
-
-        if(!contained.isBlank()) {
-            System.out.println(Printer.BLUE + "Following employees exist in the system:");
-            Printer.printLine();
-            System.out.println(contained);
-            Printer.printLine();
-        }
-        else {
-            System.out.println(Printer.BLUE + "There are no employees in the system");
-        }
-    }
-
-    public void displayEmployeeOverviewList(List<Employee> freeEmployeeList) {
-        String contained = "";
-
-        for (Employee employee : freeEmployeeList) {
-            contained += (Printer.GREEN + employee.getEmployeeID() + Printer.RESET + "\n");
-        }
-
-        if(!contained.isBlank()) {
-            System.out.println(Printer.BLUE + "Following employees are available:");
-            Printer.printLine();
-            System.out.println(contained);
-            Printer.printLine();
-        }
-        else {
-            System.out.println(Printer.BLUE + "There are no employees available");
-        }
-    }
-
-
-    public List<Employee> findFreeEmployees(Activity activity) throws Exception {
-        List<Employee> returnList = new ArrayList<>();
-        int[] startEndWeeks = activity.getStartEndWeeks();
-        int startWeek = startEndWeeks[0];
-        int endWeek = startEndWeeks[1]; // Employee absence shouldn't overlap these weeks
-    
-        for (Employee employee : employeeList) {
-            if (!activity.containsAssignedEmployee(employee)) {
-                boolean isFree = true;
-                for (Absence absence : employee.getAbsence()) {
-                    int absenceStart = absence.absenceWeeks[0];
-                    int absenceEnd = absence.absenceWeeks[1];
-        
-                    if (!(absenceEnd < startWeek || absenceStart > endWeek)) {
-                        isFree = false;
-                        break;
-                    }
-                }
-                if (isFree) {
-                    returnList.add(employee);
-                }
+        for (Activity activity : project.getActivityList()) {
+            contained += (Printer.PURPLE + "[" +  activity.getName() + "]\n");
+            i++;
             }
-        }
-        if (returnList.isEmpty()) {
-            throw new Exception("No employee was found for that activity");
-        }
-        return returnList;
+            if(!contained.isBlank()){
+                System.out.println(Printer.BLUE + "Following activities exist in the project:");
+                System.out.print(contained);
+            }else{
+                System.out.println(Printer.BLUE + "There are no activities in the project " + project.getName());
+            }
     }
+    public void displayActivityDetails(Activity openActivity) {
+        System.out.println(Printer.BLUE + "Activity '" + Printer.PURPLE + openActivity.getName() + Printer.BLUE + "': \n" +
+                Printer.BLUE + "    Scheduled Weeks: " + Printer.PURPLE + "[" + openActivity.getStartEndWeeks()[0]+ " - " + openActivity.getStartEndWeeks()[1] + "]\n" +
+                Printer.BLUE + "    Budget time: " + Printer.PURPLE + openActivity.getBudgetTime()
+        );
+    }
+
 }

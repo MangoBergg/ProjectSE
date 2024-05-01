@@ -3,10 +3,10 @@ Feature: Assigning an employee to an activity
   Actor: Employee
 
   Scenario: Successfully assigning an employee to an activity
-    Given the employee attempts to assign an employee "huba" to the activity "Activity" in the project "Project"
+    Given the employee attempts to assign an employee "employee ID" to the activity "Activity" in the project "Project"
     Then the employee is assigned to the activity
 
   Scenario: Fail to assign an employee who is already assigned to the activity
-    Given the employee attempts to assign an employee "huba" to the activity "Activity" in the project "Project"
-    When the employee "huba" is already assigned to the activity
-    Then an error message "The employee is already assigned to the activity" is given
+    Given the employee attempts to assign an employee "employee ID" to the activity "Activity" in the project "Project"
+    When the employee "employee ID" is already assigned to the activity
+    Then an error message "The employee is already assigned to the activity ’Activity’" is given

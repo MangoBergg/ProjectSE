@@ -1,5 +1,4 @@
-package dtu.example.ui;
-
+package example.cucumber;
 
 // The following code is reused from the Library App exercises
 
