@@ -59,65 +59,96 @@ public class Main {
 
                 case 3:
                 case 4:
-                try {
-                    System.out.println("What project do you want to add an activity?: ");
-                    project = projectManagementApp.getProjectFromName(inputScanner.nextLine());
-                    Printer.clearScreen();
-                    project.displayActivityOverview();
-                    System.out.println("What do you want to name the activity to be added to: '" + project.getName() + "'?");
-                    projectManagementApp.createActivity(inputScanner.nextLine(), project);
-                } catch (Exception e) {
-                    errorMessage.setErrorMessage(e.getMessage());
-                }
-                break;
+                    try {
+                        System.out.println("What project do you want to add an activity?: ");
+                        project = projectManagementApp.getProjectFromName(inputScanner.nextLine());
+                        Printer.clearScreen();
+                        project.displayActivityOverview();
+                        System.out.println("What do you want to name the activity to be added to: '" + project.getName() + "'?");
+                        projectManagementApp.createActivity(inputScanner.nextLine(), project);
+                    } catch (Exception e) {
+                        errorMessage.setErrorMessage(e.getMessage());
+                    }
+                    break;
 
                 case 5:
-                try {
-                    Printer.clearScreen();
-                    projectManagementApp.displayActivityOverview();
-                    System.out.println("What activity do you want to update the weeks?: ");
-                    activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
-                    System.out.println("Current start end weeks is: " + activity.getStartEndWeeks()[0] + ", " + activity.getStartEndWeeks()[1]);
-                    System.out.println("What should the start week be?");
-                    int1 = Integer.parseInt(inputScanner.nextLine());
-                    System.out.println("What should the end week be?");
-                    int2 = Integer.parseInt(inputScanner.nextLine());
-                    activity.updateStartEndWeeks(int1, int2);
-                } catch (Exception e) {
-                    errorMessage.setErrorMessage(e.getMessage());
-                }
-                break;
+                    try {
+                        Printer.clearScreen();
+                        projectManagementApp.displayActivityOverview();
+                        System.out.println("What activity do you want to update the weeks?: ");
+                        activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                        System.out.println("Current start end weeks is: " + activity.getStartEndWeeks()[0] + ", " + activity.getStartEndWeeks()[1]);
+                        System.out.println("What should the start week be?");
+                        int1 = Integer.parseInt(inputScanner.nextLine());
+                        System.out.println("What should the end week be?");
+                        int2 = Integer.parseInt(inputScanner.nextLine());
+                        activity.updateStartEndWeeks(int1, int2);
+                    } catch (Exception e) {
+                        errorMessage.setErrorMessage(e.getMessage());
+                    }
+                    break;
 
                 case 6:
-                try {
-                    Printer.clearScreen();
-                    projectManagementApp.displayActivityOverview();
-                    System.out.println("What activity do you want to update the budgeted time?: ");
-                    activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
-                    System.out.println("Current budgeted time is: " + activity.getBudgetedTime());
-                    System.out.println("What should the budgeted time be?");
-                    double1 = Double.parseDouble(inputScanner.nextLine());
-                    activity.updateBudgetedTime(double1);
-                } catch (Exception e) {
-                    errorMessage.setErrorMessage(e.getMessage());
-                }
-                break;
+                    try {
+                        Printer.clearScreen();
+                        projectManagementApp.displayActivityOverview();
+                        System.out.println("What activity do you want to update the budgeted time?: ");
+                        activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                        System.out.println("Current budgeted time is: " + activity.getBudgetedTime());
+                        System.out.println("What should the budgeted time be?");
+                        double1 = Double.parseDouble(inputScanner.nextLine());
+                        activity.updateBudgetedTime(double1);
+                    } catch (Exception e) {
+                        errorMessage.setErrorMessage(e.getMessage());
+                    }
+                    break;
 
                 case 7:
-                try {
-                    Printer.clearScreen();
-                    projectManagementApp.displayActivityOverview();
-                    System.out.println("What activity do you want to assign an employee?: ");
-                    activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
-                    Printer.clearScreen();
-                    projectManagementApp.displayEmployeeOverview();
-                    System.out.println("What employee should be added?");
-                    employee = projectManagementApp.getEmployeeFromName(inputScanner.nextLine());
-                    activity.assignEmployee(employee);
-                } catch (Exception e) {
-                    errorMessage.setErrorMessage(e.getMessage());
-                }
-                break;
+                    try {
+                        Printer.clearScreen();
+                        projectManagementApp.displayActivityOverview();
+                        System.out.println("What activity do you want to assign an employee?: ");
+                        activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                        Printer.clearScreen();
+                        projectManagementApp.displayEmployeeOverview();
+                        System.out.println("What employee should be added?");
+                        employee = projectManagementApp.getEmployeeFromName(inputScanner.nextLine());
+                        activity.assignEmployee(employee);
+                    } catch (Exception e) {
+                        errorMessage.setErrorMessage(e.getMessage());
+                    }
+                    break;
+
+                case 8:
+                    break;
+                case 9:
+                    try {
+                        Printer.clearScreen();
+                        projectManagementApp.displayActivityOverview();
+                        System.out.println("What activity do you want to register time to?: ");
+                        activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                        Printer.clearScreen();
+                        System.out.println("How much time do you want to register?: ");
+                        user.updateConsumedTime(Double.parseDouble(inputScanner.nextLine()), activity);
+                    } catch (Exception e) {
+                        errorMessage.setErrorMessage(e.getMessage());
+                    }
+                    break;
+
+                case 10:
+                    try {
+                        Printer.clearScreen();
+                        System.out.println("What's the reason for your absence?: ");
+                        String reason = inputScanner.nextLine();
+                        System.out.println("What is the starting week of your absence?: ");
+                        int1 = Integer.parseInt(inputScanner.nextLine());
+                        System.out.println("What is the end week of your absence?: ");
+                        int2 = Integer.parseInt(inputScanner.nextLine());
+                        user.registerAbsence(reason, int1, int2);
+                    } catch (Exception e) {
+                        errorMessage.setErrorMessage(e.getMessage());
+                    }
+                    break;
 
                 default:
                     System.out.println("Not a valid choice");
@@ -129,7 +160,8 @@ public class Main {
         System.out.println(Printer.RESET +
                         "1 - Add Project. 2 - Assign Project Manager. 3 - Get Status Report \n" +
                         "4 - Create Activity. 5 - Change Start and End Weeks. 6 - Change Budgeted Time \n" + 
-                        "7 - Assign Employee to Activity."
+                        "7 - Assign Employee to Activity. 8 - Find Free Employee \n" + 
+                        "9 - Register Consumed Time. 10 - Register Absence"
         );
     }
 
