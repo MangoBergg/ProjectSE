@@ -143,4 +143,52 @@ public class ProjectManagementApp {
             System.out.println(Printer.BLUE + "There are no employees in the system");
         }
     }
+
+    public void displayEmployeeOverviewList(List<Employee> freeEmployeeList) {
+        String contained = "";
+
+        for (Employee employee : freeEmployeeList) {
+            contained += (Printer.GREEN + employee.getEmployeeID() + Printer.RESET + "\n");
+        }
+
+        if(!contained.isBlank()) {
+            System.out.println(Printer.BLUE + "Following employees are available:");
+            Printer.printLine();
+            System.out.println(contained);
+            Printer.printLine();
+        }
+        else {
+            System.out.println(Printer.BLUE + "There are no employees available");
+        }
+    }
+
+
+    public List<Employee> findFreeEmployees(Activity activity) throws Exception {
+        List<Employee> returnList = new ArrayList<>();
+        int[] startEndWeeks = activity.getStartEndWeeks();
+        int startWeek = startEndWeeks[0];
+        int endWeek = startEndWeeks[1]; // Employee absence shouldn't overlap these weeks
+    
+        for (Employee employee : employeeList) {
+            if (!activity.containsAssignedEmployee(employee)) {
+                boolean isFree = true;
+                for (Absence absence : employee.getAbsence()) {
+                    int absenceStart = absence.absenceWeeks[0];
+                    int absenceEnd = absence.absenceWeeks[1];
+        
+                    if (!(absenceEnd < startWeek || absenceStart > endWeek)) {
+                        isFree = false;
+                        break;
+                    }
+                }
+                if (isFree) {
+                    returnList.add(employee);
+                }
+            }
+        }
+        if (returnList.isEmpty()) {
+            throw new Exception("No employee was found for that activity");
+        }
+        return returnList;
+    }
 }

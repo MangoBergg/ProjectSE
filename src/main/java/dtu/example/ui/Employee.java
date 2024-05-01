@@ -6,13 +6,11 @@ import java.util.List;
 public class Employee {
 
     private String employeeID;
-    private List<ConsumedTime> consumedTimeList;
-    private List<Absence> absenceList;
+    private List<ConsumedTime> consumedTimeList = new ArrayList<>();
+    private List<Absence> absenceList = new ArrayList<>();
 
     public Employee(String string){
         this.employeeID = string;
-        consumedTimeList = new ArrayList<>();
-        absenceList = new ArrayList<>();
     }
 
     public String getEmployeeID() {

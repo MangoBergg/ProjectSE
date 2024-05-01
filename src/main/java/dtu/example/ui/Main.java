@@ -1,4 +1,5 @@
 package dtu.example.ui;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -120,6 +121,18 @@ public class Main {
                     break;
 
                 case 8:
+                    try {
+                        Printer.clearScreen();
+                        projectManagementApp.displayActivityOverview();
+                        System.out.println("What activity do you want to find an employee for?: ");
+                        activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                        Printer.clearScreen();
+                        projectManagementApp.displayEmployeeOverviewList(projectManagementApp.findFreeEmployees(activity));
+                        System.out.println("Write any number to go back:");
+                        inputScanner.nextLine();
+                    } catch (Exception e) {
+                        errorMessage.setErrorMessage(e.getMessage());
+                    }
                     break;
                 case 9:
                     try {
