@@ -53,7 +53,7 @@ public class Main {
                 choice = Integer.parseInt(inputScanner.nextLine());
                 if (choice < 1 || choice > 10) {throw new Exception("Input not valid choice");}
             } catch (Exception e) {
-                errorMessage.setErrorMessage("Input Exception: " + e.getMessage());
+            errorMessage.setErrorMessage("Input Exception: " + e.getMessage());
                 continue;
             }
 

@@ -8,6 +8,7 @@ public class Employee {
     private String employeeID;
     private List<ConsumedTime> consumedTimeList = new ArrayList<>();
     private List<Absence> absenceList = new ArrayList<>();
+    private List<StatusReport> statusReportList = new ArrayList<>();
 
     public Employee(String string){
         this.employeeID = string;
@@ -19,6 +20,10 @@ public class Employee {
 
     public List<Absence> getAbsence() {
         return absenceList;
+    }
+
+    public List<StatusReport> getStatusReports() {
+        return statusReportList;
     }
 
     public void updateConsumedTime(Double double1, Activity activity) throws Exception {
@@ -52,4 +57,7 @@ public class Employee {
         absenceList.add(new Absence(reason, weekStart, weekEnd));
     }
 
+    public void addStatusReport(StatusReport statusReport) {
+        statusReportList.add(statusReport);
+    }
 }
