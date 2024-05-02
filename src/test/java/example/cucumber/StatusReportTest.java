@@ -13,7 +13,6 @@ import io.cucumber.java.en.When;
 
 public class StatusReportTest {
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
-    private ErrorMessageHolder errorMessage;
     
     private Project testProject;
     private Activity testActivity;
@@ -21,7 +20,6 @@ public class StatusReportTest {
 
     public StatusReportTest(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
-        this.errorMessage = errorMessage;
     }
 
     @When("the employee {string} prompts a status report for the project {string}")
