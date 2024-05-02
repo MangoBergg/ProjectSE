@@ -32,8 +32,8 @@ public class RegisterTimeConsumption {
         employee = new Employee(string);
         testProject = projectManagementApp.createProject(string3);
         testActivity = projectManagementApp.createActivity(string2, testProject);
-        testActivity.assignEmployee(employee);
-        assertTrue(testActivity.containsAssignedEmployee(employee));
+        projectManagementApp.assignEmployee(employee, testActivity);
+        assertTrue(projectManagementApp.containsAssignedEmployee(employee, testActivity));
     }
 
     @Given("the employee {string} is not assigned to the activity {string}")
@@ -41,7 +41,7 @@ public class RegisterTimeConsumption {
         employee = new Employee(string);
         testProject = projectManagementApp.createProject("Project");
         testActivity = projectManagementApp.createActivity(string2, testProject);
-        assertFalse(testActivity.containsAssignedEmployee(employee));
+        assertFalse(projectManagementApp.containsAssignedEmployee(employee, testActivity));
     }
 
     @When("the employee registers consumed time as {double} hours on the activity {string}")

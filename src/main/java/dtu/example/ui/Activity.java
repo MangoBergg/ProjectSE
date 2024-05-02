@@ -70,14 +70,7 @@ public class Activity {
         consumedTime += double1;
     }
 
-    public void assignEmployee(Employee employee) throws Exception {
-        if (containsAssignedEmployee(employee)) {
-            throw new Exception("The employee is already assigned to the activity");
-        }
-        assignedEmployeesList.add(employee);
-    }
-
-    public boolean containsAssignedEmployee(Employee employee) {
-        return assignedEmployeesList.stream().anyMatch(e -> e.getEmployeeID().equals(employee.getEmployeeID()));
+    public List<Employee> getAssignedEmployees() {
+        return assignedEmployeesList;
     }
 }

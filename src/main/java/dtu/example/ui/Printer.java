@@ -1,4 +1,7 @@
 package dtu.example.ui;
+
+import java.util.List;
+
 public class Printer {
     public static final String RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";
@@ -37,4 +40,58 @@ public class Printer {
         System.out.println(BLACK + "_______________________________________________________________________" + RESET);
     }
 
+
+    public static void displayProjectOverview(List<Project> projectList) {
+        String contained = "";
+
+        for (Project project : projectList) {
+            contained += (Printer.PURPLE + "[" +  project.getProjectID() + "] " + Printer.GREEN + project.getName() + Printer.RESET + "\n");
+        }
+
+        if(!contained.isBlank()) {
+            System.out.println(Printer.BLUE + "Following projects exist in the system:");
+            Printer.printLine();
+            System.out.println(contained);
+            Printer.printLine();
+        }
+        else {
+            System.out.println(Printer.BLUE + "There are no projects in the system");
+        }
+    }
+
+    public static void displayActivityOverview(List<Activity> activityList) {
+        String contained = "";
+
+        for (Activity activity : activityList) {
+            contained += (Printer.GREEN + activity.getName() + Printer.RESET + "\n");
+        }
+
+        if(!contained.isBlank()) {
+            System.out.println(Printer.BLUE + "Following activites exist in the system:");
+            Printer.printLine();
+            System.out.println(contained);
+            Printer.printLine();
+        }
+        else {
+            System.out.println(Printer.BLUE + "There are no activities in the system");
+        }
+    }
+
+    public static void displayEmployeeOverview(List<Employee> employeeList) {
+        String contained = "";
+
+        for (Employee employee : employeeList) {
+            contained += (Printer.GREEN + employee.getEmployeeID() + Printer.RESET + "\n");
+        }
+
+        if(!contained.isBlank()) {
+            System.out.println(Printer.BLUE + "Following employees exist in the system:");
+            Printer.printLine();
+            System.out.println(contained);
+            Printer.printLine();
+        }
+        else {
+            System.out.println(Printer.BLUE + "There are no employees in the system");
+        }
+    }
 }
