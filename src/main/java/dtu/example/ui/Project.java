@@ -14,6 +14,9 @@ public class Project {
         this.name = string;
         this.projectID = projectID;
     }
+    public List<Activity> getActivityList() {
+        return activityList;
+    }
 
     public String getName() {
         return name;
