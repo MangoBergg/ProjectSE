@@ -29,10 +29,7 @@ public class Project {
     public Employee getProjectManager() {
         return projectManager;
     }
-
-    public List<Activity> getActivityList() {
-        return activityList;
-    }
+    
 
     public int[] getStartEndWeeks() {
         return startEndWeeks;
