@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin="summary"
-        ,features={"features_whitebox"}
+        ,features={"featuresWhitebox"}
         ,snippets = SnippetType.CAMELCASE
         ,publish= false
 )
