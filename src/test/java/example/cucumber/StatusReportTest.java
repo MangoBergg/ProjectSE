@@ -1,9 +1,8 @@
 package example.cucumber;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertFalse;
 
 import dtu.example.ui.Activity;
-import dtu.example.ui.Employee;
 import dtu.example.ui.ErrorMessageHolder;
 import dtu.example.ui.Project;
 import dtu.example.ui.ProjectManagementApp;
@@ -16,25 +15,23 @@ public class StatusReportTest {
     
     private Project testProject;
     private Activity testActivity;
-    private Employee testEmployee;
+    private StatusReport testStatusReport;
 
     public StatusReportTest(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
     }
 
-    @When("the employee {string} prompts a status report for the project {string}")
-    public void theEmployeePromptsAStatusReportForTheProject(String string, String string2) throws Exception {
+    @When("an employee prompts a status report for the project {string}")
+    public void theEmployeePromptsAStatusReportForTheProject(String string2) throws Exception {
         testProject = projectManagementApp.createProject(string2);
         testActivity = projectManagementApp.createActivity("testActivity", testProject);
-        testEmployee = new Employee(string);
         testActivity.updateBudgetedTime(20);
         testActivity.updateConsumedTime(15);
-        testEmployee.addStatusReport(new StatusReport(testProject));
+        testStatusReport = new StatusReport(testProject);
     }
 
-    @Then("a status report for the project {string} is returned to the employee {string} with valuable information.")
-    public void aStatusReportForTheProjectIsReturnedToTheEmployeeWithValuableInformation(String string, String string2) {
-        StatusReport statusReport = testEmployee.getStatusReports().get(0);
-        assertNotNull(statusReport);
+    @Then("a status report for the project is returned to the employee with valuable information.")
+    public void aStatusReportForTheProjectIsReturnedToTheEmployeeWithValuableInformation() {
+        assertFalse(testStatusReport.report.isEmpty());
     }
 }

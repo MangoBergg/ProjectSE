@@ -21,12 +21,12 @@ public class Main {
         ProjectManagementApp projectManagementApp = new ProjectManagementApp();
         projectManagementApp.employeeList.add(user);
 
-        projectManagementApp.employeeList.add(new Employee("juba"));
-        projectManagementApp.employeeList.add(new Employee("nuba"));
-        projectManagementApp.employeeList.add(new Employee("kuba"));
-        projectManagementApp.employeeList.add(new Employee("puba"));
-        projectManagementApp.employeeList.add(new Employee("duba"));
         try {
+            projectManagementApp.employeeList.add(new Employee("juba"));
+            projectManagementApp.employeeList.add(new Employee("nuba"));
+            projectManagementApp.employeeList.add(new Employee("kuba"));
+            projectManagementApp.employeeList.add(new Employee("puba"));
+            projectManagementApp.employeeList.add(new Employee("duba"));
             projectManagementApp.createActivity("testActivity1", projectManagementApp.createProject("Project1"));
             projectManagementApp.createActivity("testActivity2", projectManagementApp.createProject("Project2"));
             projectManagementApp.createActivity("testActivity3", projectManagementApp.createProject("Project3"));
@@ -82,6 +82,18 @@ public class Main {
                     break;
 
                 case 3:
+                    try {
+                        System.out.println("Which project do you want to generate a status report for? : ");
+                        project = projectManagementApp.getProjectFromName(inputScanner.nextLine());
+                        Printer.clearScreen();
+                        System.out.println(new StatusReport(project).report);
+                        System.out.println("Type anything to go back: ");
+                        inputScanner.nextLine();
+                    } catch (Exception e) {
+                        errorMessage.setErrorMessage(e.getMessage());
+                    }    
+                    break;
+
                 case 4:
                     try {
                         System.out.println("What project do you want to add an activity?: ");
