@@ -40,7 +40,7 @@ public class ProjectManagementApp {
 
     public Activity createActivity(String string, Project project) throws Exception {
         if (project.containsActivity(string)){
-            throw new Exception("An activity named ’Activity’ already exists in this project");
+            throw new Exception("An activity " + string + " already exists in this project");
         }
         if (string.isEmpty()) {
             throw new Exception("Give name for the activity");
@@ -64,10 +64,21 @@ public class ProjectManagementApp {
     }
 
     public Activity getActivityFromName(String activityToFind) throws Exception {
+        List<Activity> foundActivities = new ArrayList<>();
+
         for (Activity activity : activityList) {
             if (activity.getName().equals(activityToFind)) {
-                return activity;
+                foundActivities.add(activity);
             }
+        }
+
+        if (foundActivities.size() > 1) {
+            System.out.println("Which activity: " + activityToFind + " do you mean?");
+            Printer.displayActivityOverview(foundActivities);
+            
+
+        } else if (foundActivities.size() == 1) {
+            return foundActivities.get(0);
         }
 
         throw new Exception("That activity doesn't exist in the system");

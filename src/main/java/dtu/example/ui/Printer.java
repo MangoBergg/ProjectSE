@@ -66,10 +66,13 @@ public class Printer {
     public static void displayActivityOverview(List<Activity> activityList) {
         String contained = "";
         int i = 0;
+
         for (Activity activity : activityList) {
             i++;
-            contained += (i + Printer.GREEN + activity.getName() + Printer.RESET);
-            contained += ("  (" + activity.getParentProject().getName() + ")" + "\n");
+            contained += ("(" + i + ") " + Printer.GREEN + activity.getName() + Printer.RESET);
+            double progress = activity.getBudgetedTime() == 0 ? 0 : activity.getConsumedTime() / activity.getBudgetedTime() * 100;
+            contained += " Progress: " + (int) Math.round(progress) +  "%";
+            contained += ("  (" + activity.getParentProject().getName() + ") \n");
         }
 
         if(!contained.isBlank()) {
@@ -85,9 +88,11 @@ public class Printer {
 
     public static void displayEmployeeOverview(List<Employee> employeeList) {
         String contained = "";
-
+        int i = 0;
+        
         for (Employee employee : employeeList) {
-            contained += (Printer.GREEN + employee.getEmployeeID() + Printer.RESET + "\n");
+            i++;
+            contained += (i + " " + Printer.GREEN + employee.getEmployeeID() + Printer.RESET + "\n");
         }
 
         if(!contained.isBlank()) {
