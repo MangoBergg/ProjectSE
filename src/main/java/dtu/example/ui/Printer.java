@@ -64,7 +64,8 @@ public class Printer {
         String contained = "";
 
         for (Activity activity : activityList) {
-            contained += (Printer.GREEN + activity.getName() + Printer.RESET + "\n");
+            contained += (Printer.GREEN + activity.getName() + Printer.RESET);
+            contained += ("  (" + activity.getParentProject().getName() + ")" + "\n");
         }
 
         if(!contained.isBlank()) {
