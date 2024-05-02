@@ -27,6 +27,10 @@ public class Project {
         return projectManager;
     }
 
+    public int[] getStartEndWeeks() {
+        return startEndWeeks;
+    }
+    
     public void setProjectManager(Employee newProjectmanager) {
         projectManager = newProjectmanager;
     }
@@ -64,9 +68,5 @@ public class Project {
         if (startEndWeeks[1] < weekEnd) {
             startEndWeeks[1] = weekEnd;
         }
-    }
-
-    public int[] getStartEndWeeks() {
-        return startEndWeeks;
     }
 }

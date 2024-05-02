@@ -18,20 +18,36 @@ public class Activity {
         this.parentProject = parentProject;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    
     public String getName() {
         return name;
     }
 
-    public void setParentProject(Project project) {
-        parentProject = project;
-    }
-
     public Project getParentProject() {
         return parentProject;
+    }
+
+    public int[] getStartEndWeeks() { 
+        return startEndWeeks; 
+    }
+
+    public double getBudgetedTime() {
+        return budgetTime;
+    }
+
+    public double getConsumedTime() {
+        return consumedTime;
+    }
+    
+    public List<Employee> getAssignedEmployees() {
+        return assignedEmployeesList;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public void setParentProject(Project project) {
+        parentProject = project;
     }
 
     public void updateStartEndWeeks(int weekStart, int weekEnd) throws Exception {
@@ -44,10 +60,6 @@ public class Activity {
         }
     }
 
-    public int[] getStartEndWeeks() { 
-        return startEndWeeks; 
-    }
-
     public void updateBudgetedTime(double budgetTime) throws Exception {
         if (budgetTime <= 0.0) {
             throw new Exception("Budgeted time must be greater than 0.5 hours");
@@ -58,19 +70,7 @@ public class Activity {
         this.budgetTime = budgetTime;
     }
 
-    public double getBudgetedTime() {
-        return budgetTime;
-    }
-
-    public double getConsumedTime() {
-        return consumedTime;
-    }
-
     public void updateConsumedTime(double double1) {
         consumedTime += double1;
-    }
-
-    public List<Employee> getAssignedEmployees() {
-        return assignedEmployeesList;
     }
 }
