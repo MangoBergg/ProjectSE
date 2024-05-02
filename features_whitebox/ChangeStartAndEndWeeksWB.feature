@@ -6,9 +6,9 @@ Feature: Determine if start-and-end weeks of an activity updates as intended by 
 
   Scenario: Change start-and-end weeks when a project does not contain an activity
     Given a project "Project" exists
-    When the project contains no activities
-    Then the start-and-end weeks of an activity can not be updated
-    And  the start-and-end weeks of the project can not be updated
+    And the project contains only the activity "Activity"
+    When  the start-and-end weeks of the activity is updated to start week 12 and end week 15
+    Then the start-and-end weeks of the project is updated to start week 12 and end week 15
 
 
 

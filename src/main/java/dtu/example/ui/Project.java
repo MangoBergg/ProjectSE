@@ -55,13 +55,13 @@ public class Project {
         }
 
         if(!contained.isBlank()) {
-            System.out.println(Printer.BLUE + "Following activites exist in the project: " + name);
+            System.out.println(Printer.BLUE + "Following activities exist in the project: " + name);
             Printer.printLine();
             System.out.println(contained);
             Printer.printLine();
         }
         else {
-            System.out.println(Printer.BLUE + "There are no activites in the project: " + name);
+            System.out.println(Printer.BLUE + "There are no activities in the project: " + name);
         }
     }
 
