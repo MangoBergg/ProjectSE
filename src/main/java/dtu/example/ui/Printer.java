@@ -43,11 +43,14 @@ public class Printer {
 
     public static void displayProjectOverview(List<Project> projectList) {
         String contained = "";
-
+        int i = 0;
         for (Project project : projectList) {
-            contained += (Printer.PURPLE + "[" +  project.getProjectID() + "] " + Printer.GREEN + project.getName() + Printer.RESET);
-            contained += ("  (" + project.getActivityList().size() + " - Activities)" + "\n");
+            i++;
+            contained += ("(" + i + ") " + Printer.PURPLE + "[" +  project.getProjectID() + "] " + Printer.GREEN + project.getName() + Printer.RESET);
+            contained += ("  (Activities : " + project.getActivityList().size() + ")");
+            contained += project.getProjectManager() != null ? "    - Project Manager : " + project.getProjectManager().getEmployeeID() + "\n" : "\n";
         }
+
 
         if(!contained.isBlank()) {
             System.out.println(Printer.BLUE + "Following projects exist in the system:");
@@ -62,9 +65,10 @@ public class Printer {
 
     public static void displayActivityOverview(List<Activity> activityList) {
         String contained = "";
-
+        int i = 0;
         for (Activity activity : activityList) {
-            contained += (Printer.GREEN + activity.getName() + Printer.RESET);
+            i++;
+            contained += (i + Printer.GREEN + activity.getName() + Printer.RESET);
             contained += ("  (" + activity.getParentProject().getName() + ")" + "\n");
         }
 

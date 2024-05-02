@@ -76,7 +76,7 @@ public class Main {
                 case 2:
                     try {
                         System.out.println("What project do you want to update the project manager?: ");
-                        project = projectManagementApp.getProjectFromName(inputScanner.nextLine());
+                        project = projectManagementApp.projectList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
                         Printer.displayEmployeeOverview(projectManagementApp.employeeList);
                         System.out.println("What employee should be the project manager for the project: '" + project.getName() + "'?");
