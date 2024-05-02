@@ -145,8 +145,6 @@ public class Main {
                         } catch (IllegalArgumentException e) {
                             errorMessage.setErrorMessage("Invalid input. It must be budgeted time you want update in increments of 0.5: ");
                         }
-
-
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
                     }
