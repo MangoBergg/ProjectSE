@@ -138,8 +138,16 @@ public class Main {
                         activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
                         System.out.println("Current budgeted time is: " + activity.getBudgetedTime());
                         System.out.println("What should the budgeted time be?");
-                        double1 = Double.parseDouble(inputScanner.nextLine());
-                        activity.updateBudgetedTime(double1);
+
+                        // Handler hvis input ikke er en integer
+                        try {
+                            double1 = Double.parseDouble(inputScanner.nextLine());
+                            activity.updateBudgetedTime(double1);
+                        } catch (IllegalArgumentException e) {
+                            errorMessage.setErrorMessage("Invalid input. It must be budgeted time you want update in increments of 0.5: ");
+                        }
+
+
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
                     }
