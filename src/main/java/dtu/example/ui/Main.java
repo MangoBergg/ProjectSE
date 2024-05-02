@@ -27,11 +27,17 @@ public class Main {
             projectManagementApp.employeeList.add(new Employee("kuba"));
             projectManagementApp.employeeList.add(new Employee("puba"));
             projectManagementApp.employeeList.add(new Employee("duba"));
-            projectManagementApp.createActivity("testActivity1", projectManagementApp.createProject("Project1"));
-            projectManagementApp.createActivity("testActivity2", projectManagementApp.createProject("Project2"));
-            projectManagementApp.createActivity("testActivity3", projectManagementApp.createProject("Project3"));
-            projectManagementApp.createActivity("testActivity4", projectManagementApp.createProject("Project4"));
-            projectManagementApp.createActivity("testActivity5", projectManagementApp.createProject("Project5"));
+            projectManagementApp.createActivity("Programming", projectManagementApp.createProject("Project1"));
+            projectManagementApp.createActivity("Testing", projectManagementApp.getProjectFromName("Project1"));
+            projectManagementApp.createActivity("Refactoring", projectManagementApp.getProjectFromName("Project1"));
+            projectManagementApp.createActivity("Design", projectManagementApp.createProject("Project2"));
+            projectManagementApp.createActivity("Testing", projectManagementApp.getProjectFromName("Project2"));
+            projectManagementApp.createActivity("BusinessLogic", projectManagementApp.createProject("Project3"));
+            projectManagementApp.createActivity("Meeting", projectManagementApp.getProjectFromName("Project3"));
+            projectManagementApp.createActivity("Development", projectManagementApp.createProject("Project4"));
+            projectManagementApp.createActivity("Software Requirements Specification", projectManagementApp.getProjectFromName("Project4"));
+            projectManagementApp.createActivity("Customer wish", projectManagementApp.createProject("Project5"));
+            projectManagementApp.createActivity("Planning", projectManagementApp.getProjectFromName("Project5"));
         } catch (Exception e) {
             e.printStackTrace();
         }
