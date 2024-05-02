@@ -138,8 +138,6 @@ public class Main {
                         activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
                         System.out.println("Current budgeted time is: " + activity.getBudgetedTime());
                         System.out.println("What should the budgeted time be?");
-
-                        // Handler hvis input ikke er en integer
                         try {
                             double1 = Double.parseDouble(inputScanner.nextLine());
                             activity.updateBudgetedTime(double1);
