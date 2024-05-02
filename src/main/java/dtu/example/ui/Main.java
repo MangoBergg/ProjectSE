@@ -21,7 +21,7 @@ public class Main {
         ProjectManagementApp projectManagementApp = new ProjectManagementApp();
         projectManagementApp.employeeList.add(user);
 
-        /*projectManagementApp.employeeList.add(new Employee("juba"));
+        projectManagementApp.employeeList.add(new Employee("juba"));
         projectManagementApp.employeeList.add(new Employee("nuba"));
         projectManagementApp.employeeList.add(new Employee("kuba"));
         projectManagementApp.employeeList.add(new Employee("puba"));
@@ -34,7 +34,7 @@ public class Main {
             projectManagementApp.createActivity("testActivity5", projectManagementApp.createProject("Project5"));
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
         
 
         while(true) {
@@ -48,8 +48,16 @@ public class Main {
             Printer.displayProjectOverview(projectManagementApp.projectList);
             displayChoices();
             
-            int choice = Integer.parseInt(inputScanner.nextLine());
-            switch (choice) {
+            int choice;
+            try {
+                choice = Integer.parseInt(inputScanner.nextLine());
+                if (choice < 1 || choice > 10) {throw new Exception("Input not valid choice");}
+            } catch (Exception e) {
+                errorMessage.setErrorMessage("Input Exception: " + e.getMessage());
+                continue;
+            }
+
+            switch(choice) {
                 case 1:
                     try {
                         System.out.println("Give a title for the project: ");
