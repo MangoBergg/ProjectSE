@@ -45,7 +45,8 @@ public class Printer {
         String contained = "";
 
         for (Project project : projectList) {
-            contained += (Printer.PURPLE + "[" +  project.getProjectID() + "] " + Printer.GREEN + project.getName() + Printer.RESET + "\n");
+            contained += (Printer.PURPLE + "[" +  project.getProjectID() + "] " + Printer.GREEN + project.getName() + Printer.RESET);
+            contained += ("  (" + project.getActivityList().size() + " - Activities)" + "\n");
         }
 
         if(!contained.isBlank()) {
