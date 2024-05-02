@@ -1,4 +1,4 @@
-package example.cucumber;
+package example.whitebox;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -40,7 +40,7 @@ public class ProjectManagementApp {
 
     public Activity createActivity(String string, Project project) throws Exception {
         if (project.containsActivity(string)){
-            throw new Exception("An activity " + string + " already exists in this project");
+            throw new Exception("The activity already exists in this project");
         }
         if (string.isEmpty()) {
             throw new Exception("Give name for the activity");

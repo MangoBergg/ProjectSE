@@ -1,4 +1,4 @@
-package example.cucumber;
+package example.TDD_BDD;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
