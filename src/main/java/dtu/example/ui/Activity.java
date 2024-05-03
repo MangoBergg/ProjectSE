@@ -53,7 +53,11 @@ public class Activity {
     public void updateStartEndWeeks(int weekStart, int weekEnd) throws Exception {
         if (weekEnd < weekStart) {
             throw new Exception("End week cannot be before start week");
-        } else {
+        }
+        if (weekStart < 1 || weekStart > 52 || weekEnd > 52) {
+            throw new Exception("The start and end weeks must be within a year (1-52)");
+        }
+        else {
             startEndWeeks[0] = weekStart;
             startEndWeeks[1] = weekEnd;
             parentProject.updateStartEndWeeks(weekStart, weekEnd);
