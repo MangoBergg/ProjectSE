@@ -8,7 +8,7 @@ public class ProjectManagementApp {
 
     public List<Project> projectList = new ArrayList<>();
     public List<Activity> activityList = new ArrayList<>();
-    public List<Developer> employeeList = new ArrayList<>();
+    public List<Employee> employeeList = new ArrayList<>();
     private Calendar calendar;
     private int serialNumber = 1;
 
@@ -84,8 +84,8 @@ public class ProjectManagementApp {
         throw new Exception("That activity doesn't exist in the system");
     }
 
-    public Developer getEmployeeFromName(String employeeToFind) throws Exception {
-        for (Developer employee : employeeList) {
+    public Employee getEmployeeFromName(String employeeToFind) throws Exception {
+        for (Employee employee : employeeList) {
             if (employee.getEmployeeID().equals(employeeToFind)) {
                 return employee;
             }
@@ -98,13 +98,13 @@ public class ProjectManagementApp {
         return projectList.stream().anyMatch(p -> p.getName().equals(projectName));
     }
 
-    public List<Developer> findFreeEmployees(Activity activity) throws Exception {
-        List<Developer> returnList = new ArrayList<>();
+    public List<Employee> findFreeEmployees(Activity activity) throws Exception {
+        List<Employee> returnList = new ArrayList<>();
         int[] startEndWeeks = activity.getStartEndWeeks();
         int startWeek = startEndWeeks[0];
         int endWeek = startEndWeeks[1]; // Employee absence shouldn't overlap these weeks
     
-        for (Developer employee : employeeList) {
+        for (Employee employee : employeeList) {
             if (!activity.containsAssignedEmployee(employee)) {
                 boolean isFree = true;
                 for (Absence absence : employee.getAbsence()) {

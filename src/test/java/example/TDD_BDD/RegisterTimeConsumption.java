@@ -14,7 +14,7 @@ public class RegisterTimeConsumption {
     private Project testProject;
     private Activity testActivity;
 
-    private Developer employee;
+    private Employee employee;
 
     private double before, after;
     private ErrorMessageHolder errorMessage;

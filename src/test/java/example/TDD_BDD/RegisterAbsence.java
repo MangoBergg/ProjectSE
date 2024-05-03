@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 public class RegisterAbsence {
 
-    private Developer employee;
+    private Employee employee;
     private ErrorMessageHolder errorMessage;
 
 

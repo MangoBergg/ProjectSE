@@ -10,7 +10,7 @@ import static org.junit.Assert.assertFalse;
 
 public class FindFreeEmployee {
 
-    private Developer testEmployee;
+    private Employee testEmployee;
     private Project testProject;
     private Activity testActivity;
 

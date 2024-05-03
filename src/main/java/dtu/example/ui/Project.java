@@ -6,7 +6,7 @@ import java.util.List;
 public class Project {
     private String name;
     private int projectID;
-    private Developer projectManager;
+    private Employee projectManager;
     private List<Activity> activityList = new ArrayList<>();
     private int[] startEndWeeks = new int[2];
 
@@ -27,7 +27,7 @@ public class Project {
         return projectID;
     }
 
-    public Developer getProjectManager() {
+    public Employee getProjectManager() {
         return projectManager;
     }
     
@@ -35,7 +35,7 @@ public class Project {
         return startEndWeeks;
     }
     
-    public void setProjectManager(Developer newProjectmanager) {
+    public void setProjectManager(Employee newProjectmanager) {
         projectManager = newProjectmanager;
     }
 

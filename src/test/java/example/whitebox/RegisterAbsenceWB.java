@@ -9,7 +9,7 @@ import io.cucumber.java.en.When;
 
 public class RegisterAbsenceWB {
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
-    private Developer testEmployee;
+    private Employee testEmployee;
     private ErrorMessageHolder errorMessage;
 
     public RegisterAbsenceWB(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {

@@ -7,11 +7,11 @@ public class Main {
     
     public static void main(String[] args) {
         ErrorMessageHolder errorMessage = new ErrorMessageHolder();
-        Developer user = loginService();
+        Employee user = loginService();
     
         Project project;
         Activity activity;
-        Developer employee;
+        Employee employee;
 
         int int1;
         int int2;
@@ -232,7 +232,7 @@ public class Main {
         );
     }
 
-    private static Developer loginService() {
+    private static Employee loginService() {
 
         while (true) {
             System.out.println(Printer.BLUE + "Login with your ID:" + Printer.RESET);
@@ -241,7 +241,7 @@ public class Main {
             if (employeeID.matches("^[a-z]{4}$")) {
                 //Printer.printAndWait(1500, Printer.GREEN + "Welcome employee " + employeeID + Printer.RESET);
                 Printer.clearScreen();
-                return new Developer(employeeID);
+                return new Employee(employeeID);
             } else {
                 System.out.println(Printer.RED + "Invalid identification" + Printer.RESET);
                 continue;

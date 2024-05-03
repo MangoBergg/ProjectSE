@@ -11,7 +11,7 @@ public class AssignEmployee {
 
     private Activity testActivity;
     private Project testProject;
-    private Developer employee;
+    private Employee employee;
     private String projectName;
     private String activityName;
     private ErrorMessageHolder errorMessage;
