@@ -123,7 +123,7 @@ public class ProjectManagementApp {
                     int absenceStart = absence.absenceWeeks[0];
                     int absenceEnd = absence.absenceWeeks[1];
                     
-                    if (!(absenceEnd < startWeek || absenceStart > endWeek)) {
+                    if (!(absenceEnd <= startWeek || absenceStart >= endWeek)) {
                         isFree = false;
                         break;
                     }
