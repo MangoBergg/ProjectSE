@@ -12,7 +12,6 @@ public class CreateActivityWB {
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
     private Project testProject;
     private Activity testActivity;
-    private Employee testEmployee;
     private ErrorMessageHolder errorMessage;
 
     public CreateActivityWB(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
@@ -21,12 +20,30 @@ public class CreateActivityWB {
     }
 
     @When("the employee tries to make an activity with name {string}")
-    public void theEmployeeTriesToMakeAnActivityWithName(String string) {
-        testEmployee = new Developer("huba");
+    public void theEmployeeTriesToMakeAnActivityWithName(String string) throws Exception {
+        testProject = projectManagementApp.createProject("test");
         try {
-            projectManagementApp.createActivity(string, testProject);
+            testActivity = projectManagementApp.createActivity(string, testProject);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
+    }
+
+    @When("that activity {string} already exists in the project")
+    public void thatActivityAlreadyExistsInTheProject(String string) {
+        try {
+            testActivity = projectManagementApp.createActivity(string, testProject);
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @When("that activity does not already exist in the project")
+    public void thatActivityDoesNotAlreadyExistInTheProject() {
+        assertTrue(testProject.containsActivity(testActivity.getName()));
+    }
+    @Then("the new activity is created in that project")
+    public void theNewActivityIsCreatedInThatProject() {
+        assertTrue(testProject.containsActivity(testActivity.getName()));
     }
 }
