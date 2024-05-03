@@ -30,5 +30,11 @@ Feature: Determine if start-and-end weeks of an activity updates as intended by 
     When the end week is set to 25 and the start week is set to 18
     Then the error message "End week cannot be before start week" is given
 
+  Scenario: Attempting to set an end week outside the range of a year
+    Given a project "Project" exists
+    And it contains the activity "Activity"
+    When the start week is set to 1 and the end week is set to 64
+    Then the error message "The start and end weeks must be within a year (1-52)" is given
+
 
 
