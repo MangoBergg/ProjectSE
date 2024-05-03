@@ -24,10 +24,11 @@ Feature: Determine if start-and-end weeks of an activity updates as intended by 
     Then the start-and-end weeks of the project is updated to begin at the earliest start week 11 and end at the latest end week 20
 
 
-#  Scenario: Fail to set the end week before the start week for an activity
-#    Given the project "Project" contains the activity "Activity"
-#    When the end week is set to 25 and the start week is set to 18
-#    Then the error message "End week cannot be before start week" is given
+  Scenario: Fail to set the end week before the start week for an activity
+    Given a project "Project" exists
+    And it contains the activity "Activity"
+    When the end week is set to 25 and the start week is set to 18
+    Then the error message "End week cannot be before start week" is given
 
 
 

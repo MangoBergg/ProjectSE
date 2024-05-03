@@ -7,10 +7,9 @@ import dtu.example.ui.ProjectManagementApp;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class StartAndEndWeeksWB {
 
@@ -19,6 +18,7 @@ public class StartAndEndWeeksWB {
     private Project project;
     private Activity activity1;
     private Activity activity2;
+    private Activity activity;
 
     public StartAndEndWeeksWB(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
@@ -36,6 +36,7 @@ public class StartAndEndWeeksWB {
     }
     @Then("the project does not have start-and-end weeks")
     public void the_project_does_not_have_start_and_end_weeks() {
+        //assertNull(project.getStartEndWeeks());
         assertEquals(0, project.getStartEndWeeks()[0]);
         assertEquals(0, project.getStartEndWeeks()[1]);
     }
@@ -75,7 +76,23 @@ public class StartAndEndWeeksWB {
         assertEquals(11, project.getStartEndWeeks()[0]);
         assertEquals(20, project.getStartEndWeeks()[1]);
     }
+    
+    @Given("it contains the activity {string}")
+    public void it_contains_the_activity(String string) throws Exception {
+        activity = projectManagementApp.createActivity(string, project);
+    }
+    @When("the end week is set to {int} and the start week is set to {int}")
+    public void the_end_week_is_set_to_and_the_start_week_is_set_to(Integer int1, Integer int2) throws Exception {
+        try {
+            activity.updateStartEndWeeks(25, 18);
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
+    }
 
-
+    @Then("the error message {string} is given")
+    public void the_error_message_is_given(String string) {
+        assertEquals(string, errorMessage.getErrorMessage());
+    }
 
 }
