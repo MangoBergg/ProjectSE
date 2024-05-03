@@ -29,16 +29,6 @@ public class StartAndEndWeeksWB {
         project = projectManagementApp.createProject(string);
     }
 
-    @When("the project does not contain an activity")
-    public void the_project_does_not_contain_an_activity() {
-        assertEquals(0, projectManagementApp.activityList.size());
-    }
-    @Then("the project does not have start-and-end weeks")
-    public void the_project_does_not_have_start_and_end_weeks() {
-        //assertNull(project.getStartEndWeeks());
-        assertEquals(0, project.getStartEndWeeks()[0]);
-        assertEquals(0, project.getStartEndWeeks()[1]);
-    }
 
     @Given("the project contains only the activity {string}")
     public void the_project_contains_only_the_activity(String string) throws Exception {

@@ -50,10 +50,19 @@ public class ChangeStartAndEndWeeks {
     @When("the employee attempts to change the start week to {int} and end week to {int}")
     public void the_employee_attempts_to_change_the_start_week_to_and_end_week_to(Integer int1, Integer int2) {
         try {
-            testActivity.updateStartEndWeeks(0, 53);
+            testActivity.updateStartEndWeeks(int1, int2);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
 
+    }
+
+    @When("the employee attempts to set the start week to {int} and end week to {int}")
+    public void the_employee_attempts_to_set_the_start_week_to_and_end_week_to(Integer int1, Integer int2) {
+        try {
+            testActivity.updateStartEndWeeks(int1, int2);
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
     }
 }
