@@ -1,4 +1,4 @@
-package example.cucumber;
+package example.TDD_BDD;
 
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
@@ -28,6 +28,20 @@ public class CreateActivity {
         assertTrue(projectManagementApp.containsProject(string));
     }
 
+    
+    @Given("the activity named {string} already exists in the list of activities for a project")
+    public void theActivityNamedAlreadyExistsInTheListOfActivitiesForAProject(String string) throws Exception {
+        projectName = string;
+        testProject = projectManagementApp.createProject(projectName);
+        projectManagementApp.createActivity(string, testProject);
+
+        try {
+            projectManagementApp.createActivity(string, testProject);
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
+    }
+
     @When("a new activity named {string} is created")
     public void aNewActivityNamedIsCreated(String string){
         activityName = string;
@@ -42,23 +56,4 @@ public class CreateActivity {
     public void theActivityIsAddedToTheListOfActivity() {
         assertTrue(testProject.containsActivity(activityName));
     }
-
-
-    @Given("the activity named {string} already exists in the list of activities for a project")
-    public void theActivityNamedAlreadyExistsInTheListOfActivitiesForAProject(String string) throws Exception {
-        projectName = string;
-        testProject = projectManagementApp.createProject(projectName);
-        projectManagementApp.createActivity(string, testProject);
-
-        try {
-            projectManagementApp.createActivity(string, testProject);
-        } catch (Exception e) {
-            errorMessage.setErrorMessage(e.getMessage());
-        }
-    }
-
-
-
-
-
 }

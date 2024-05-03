@@ -21,6 +21,29 @@ public class Main {
         ProjectManagementApp projectManagementApp = new ProjectManagementApp();
         projectManagementApp.employeeList.add(user);
 
+        try {
+            projectManagementApp.employeeList.add(new Employee("juba"));
+            projectManagementApp.employeeList.add(new Employee("nuba"));
+            projectManagementApp.employeeList.add(new Employee("kuba"));
+            projectManagementApp.employeeList.add(new Employee("puba"));
+            projectManagementApp.employeeList.add(new Employee("duba"));
+
+            
+            projectManagementApp.createActivity("Programming", projectManagementApp.createProject("Project1"));
+            projectManagementApp.createActivity("Testing", projectManagementApp.getProjectFromName("Project1"));
+            projectManagementApp.createActivity("Refactoring", projectManagementApp.getProjectFromName("Project1"));
+            projectManagementApp.createActivity("Design", projectManagementApp.createProject("Project2"));
+            projectManagementApp.createActivity("Testing", projectManagementApp.getProjectFromName("Project2"));
+            projectManagementApp.createActivity("BusinessLogic", projectManagementApp.createProject("Project3"));
+            projectManagementApp.createActivity("Meeting", projectManagementApp.getProjectFromName("Project3"));
+            projectManagementApp.createActivity("Development", projectManagementApp.createProject("Project4"));
+            projectManagementApp.createActivity("Software Requirements Specification", projectManagementApp.getProjectFromName("Project4"));
+            projectManagementApp.createActivity("Customer wish", projectManagementApp.createProject("Project5"));
+            projectManagementApp.createActivity("Planning", projectManagementApp.getProjectFromName("Project5"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         while(true) {
             Printer.clearScreen();
             
@@ -29,11 +52,19 @@ public class Main {
                 errorMessage.setErrorMessage("");
             }
 
-            projectManagementApp.displayProjectOverview();
+            Printer.displayProjectOverview(projectManagementApp.projectList);
             displayChoices();
             
-            int choice = Integer.parseInt(inputScanner.nextLine());
-            switch (choice) {
+            int choice;
+            try {
+                choice = Integer.parseInt(inputScanner.nextLine());
+                if (choice < 1 || choice > 10) {throw new Exception("Input not valid choice");}
+            } catch (Exception e) {
+            errorMessage.setErrorMessage("Input Exception: " + e.getMessage());
+                continue;
+            }
+
+            switch(choice) {
                 case 1:
                     try {
                         System.out.println("Give a title for the project: ");
@@ -46,11 +77,11 @@ public class Main {
                 case 2:
                     try {
                         System.out.println("What project do you want to update the project manager?: ");
-                        project = projectManagementApp.getProjectFromName(inputScanner.nextLine());
+                        project = projectManagementApp.projectList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
-                        projectManagementApp.displayEmployeeOverview();
+                        Printer.displayEmployeeOverview(projectManagementApp.employeeList);
                         System.out.println("What employee should be the project manager for the project: '" + project.getName() + "'?");
-                        employee = projectManagementApp.getEmployeeFromName(inputScanner.nextLine());
+                        employee = projectManagementApp.employeeList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         project.setProjectManager(employee);
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
@@ -58,10 +89,22 @@ public class Main {
                     break;
 
                 case 3:
+                    try {
+                        System.out.println("Which project do you want to generate a status report for? : ");
+                        project = projectManagementApp.projectList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        Printer.clearScreen();
+                        System.out.println(new StatusReport(project).report);
+                        System.out.println("Type anything to go back: ");
+                        inputScanner.nextLine();
+                    } catch (Exception e) {
+                        errorMessage.setErrorMessage(e.getMessage());
+                    }    
+                    break;
+
                 case 4:
                     try {
                         System.out.println("What project do you want to add an activity?: ");
-                        project = projectManagementApp.getProjectFromName(inputScanner.nextLine());
+                        project = projectManagementApp.projectList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
                         project.displayActivityOverview();
                         System.out.println("What do you want to name the activity to be added to: '" + project.getName() + "'?");
@@ -74,9 +117,9 @@ public class Main {
                 case 5:
                     try {
                         Printer.clearScreen();
-                        projectManagementApp.displayActivityOverview();
+                        Printer.displayActivityOverview(projectManagementApp.activityList);
                         System.out.println("What activity do you want to update the weeks?: ");
-                        activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                        activity = projectManagementApp.activityList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         System.out.println("Current start end weeks is: " + activity.getStartEndWeeks()[0] + ", " + activity.getStartEndWeeks()[1]);
                         System.out.println("What should the start week be?");
                         int1 = Integer.parseInt(inputScanner.nextLine());
@@ -91,13 +134,17 @@ public class Main {
                 case 6:
                     try {
                         Printer.clearScreen();
-                        projectManagementApp.displayActivityOverview();
+                        Printer.displayActivityOverview(projectManagementApp.activityList);
                         System.out.println("What activity do you want to update the budgeted time?: ");
-                        activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                        activity = projectManagementApp.activityList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         System.out.println("Current budgeted time is: " + activity.getBudgetedTime());
                         System.out.println("What should the budgeted time be?");
-                        double1 = Double.parseDouble(inputScanner.nextLine());
-                        activity.updateBudgetedTime(double1);
+                        try {
+                            double1 = Double.parseDouble(inputScanner.nextLine());
+                            activity.updateBudgetedTime(double1);
+                        } catch (IllegalArgumentException e) {
+                            errorMessage.setErrorMessage("Invalid input. It must be budgeted time you want update in increments of 0.5: ");
+                        }
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
                     }
@@ -106,14 +153,14 @@ public class Main {
                 case 7:
                     try {
                         Printer.clearScreen();
-                        projectManagementApp.displayActivityOverview();
+                        Printer.displayActivityOverview(projectManagementApp.activityList);
                         System.out.println("What activity do you want to assign an employee?: ");
-                        activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                        activity = projectManagementApp.activityList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
-                        projectManagementApp.displayEmployeeOverview();
+                        Printer.displayEmployeeOverview(projectManagementApp.employeeList);
                         System.out.println("What employee should be added?");
-                        employee = projectManagementApp.getEmployeeFromName(inputScanner.nextLine());
-                        activity.assignEmployee(employee);
+                        employee = projectManagementApp.employeeList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        projectManagementApp.assignEmployee(employee, activity);
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
                     }
@@ -122,23 +169,24 @@ public class Main {
                 case 8:
                     try {
                         Printer.clearScreen();
-                        projectManagementApp.displayActivityOverview();
+                        Printer.displayActivityOverview(projectManagementApp.activityList);
                         System.out.println("What activity do you want to find an employee for?: ");
-                        activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                        activity = projectManagementApp.activityList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
-                        projectManagementApp.displayEmployeeOverviewList(projectManagementApp.findFreeEmployees(activity));
+                        Printer.displayEmployeeOverview(projectManagementApp.findFreeEmployees(activity));
                         System.out.println("Write any number to go back:");
                         inputScanner.nextLine();
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
                     }
                     break;
+
                 case 9:
                     try {
                         Printer.clearScreen();
-                        projectManagementApp.displayActivityOverview();
+                        Printer.displayActivityOverview(projectManagementApp.activityList);
                         System.out.println("What activity do you want to register time to?: ");
-                        activity = projectManagementApp.getActivityFromName(inputScanner.nextLine());
+                        activity = projectManagementApp.activityList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
                         System.out.println("How much time do you want to register?: ");
                         user.updateConsumedTime(Double.parseDouble(inputScanner.nextLine()), activity);

@@ -29,7 +29,12 @@ public class Project {
     public Employee getProjectManager() {
         return projectManager;
     }
+    
 
+    public int[] getStartEndWeeks() {
+        return startEndWeeks;
+    }
+    
     public void setProjectManager(Employee newProjectmanager) {
         projectManager = newProjectmanager;
     }
@@ -50,13 +55,13 @@ public class Project {
         }
 
         if(!contained.isBlank()) {
-            System.out.println(Printer.BLUE + "Following activites exist in the project: " + name);
+            System.out.println(Printer.BLUE + "Following activities exist in the project: " + name);
             Printer.printLine();
             System.out.println(contained);
             Printer.printLine();
         }
         else {
-            System.out.println(Printer.BLUE + "There are no activites in the project: " + name);
+            System.out.println(Printer.BLUE + "There are no activities in the project: " + name);
         }
     }
 
@@ -67,9 +72,5 @@ public class Project {
         if (startEndWeeks[1] < weekEnd) {
             startEndWeeks[1] = weekEnd;
         }
-    }
-
-    public int[] getStartEndWeeks() {
-        return startEndWeeks;
     }
 }

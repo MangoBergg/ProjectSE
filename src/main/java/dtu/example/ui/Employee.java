@@ -17,7 +17,11 @@ public class Employee {
         return employeeID;
     }
 
-    public void updateConsumedTime(Double double1, Activity testActivity) throws Exception {
+    public List<Absence> getAbsence() {
+        return absenceList;
+    }
+
+    public void updateConsumedTime(Double double1, Activity activity) throws Exception {
         if (double1 <= 0.0) {
             throw new Exception("Consumed time must be greater than 0.5 hours");
         }
@@ -27,14 +31,14 @@ public class Employee {
         }
 
         for (ConsumedTime consumedTime : consumedTimeList) {
-            if (consumedTime.activity.getName().equals(testActivity.getName())) {
+            if (consumedTime.activity.getName().equals(activity.getName())) {
                 consumedTime.time += double1;
-                testActivity.updateConsumedTime(double1);
+                activity.updateConsumedTime(double1);
                 return;
             }
         }
-        consumedTimeList.add(new ConsumedTime(double1, testActivity));
-        testActivity.updateConsumedTime(double1);
+        consumedTimeList.add(new ConsumedTime(double1, activity));
+        activity.updateConsumedTime(double1);
     }
 
     public void registerAbsence(String reason, int weekStart, int weekEnd) throws Exception {
@@ -48,7 +52,4 @@ public class Employee {
         absenceList.add(new Absence(reason, weekStart, weekEnd));
     }
 
-    public List<Absence> getAbsence() {
-        return absenceList;
-    }
 }

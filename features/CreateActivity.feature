@@ -10,4 +10,4 @@ Feature: Create an activity in a project
   Scenario: Fail to create a new activity with a name that already exists
     Given the activity named "Activity" already exists in the list of activities for a project
     When a new activity named "Activity" is created
-    Then an error message "An activity named ’Activity’ already exists in this project" is given
+    Then an error message "The activity already exists in this project" is given

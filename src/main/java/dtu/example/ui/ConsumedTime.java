@@ -9,6 +9,4 @@ public class ConsumedTime {
         this.time = time;
         this.activity = activity;
     }
-
-    
 }

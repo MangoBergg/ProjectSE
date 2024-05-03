@@ -1,4 +1,4 @@
-package example.cucumber;
+package example.whitebox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,6 @@ public class ContainsactivityWB {
     }
 
 
-
     @And("the project contains no activity")
     public void the_project_contains_no_activity() {
         assertTrue(project.getActivityList().isEmpty());
@@ -48,6 +47,5 @@ public class ContainsactivityWB {
     public void the_method_should_return_true() {
         assertEquals(project.containsActivity("coding"), true);
     }
-
 }
 

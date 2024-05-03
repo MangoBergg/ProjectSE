@@ -1,4 +1,4 @@
-package example.cucumber;
+package example.TDD_BDD;
 
 import dtu.example.ui.*;
 import io.cucumber.java.en.Then;

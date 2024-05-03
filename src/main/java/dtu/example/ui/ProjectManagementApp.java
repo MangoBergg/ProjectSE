@@ -6,16 +6,14 @@ import java.util.Calendar;
 
 public class ProjectManagementApp {
 
-    public List<Project> projectList;
-    public List<Activity> activityList;
-    public List<Employee> employeeList;
+    public List<Project> projectList = new ArrayList<>();
+    public List<Activity> activityList = new ArrayList<>();
+    public List<Employee> employeeList = new ArrayList<>();
     private Calendar calendar;
     private int serialNumber = 1;
 
     public ProjectManagementApp() {
         projectList = new ArrayList<>();
-        activityList = new ArrayList<>();
-        employeeList = new ArrayList<>();
         calendar = Calendar.getInstance();
     }
 
@@ -26,24 +24,6 @@ public class ProjectManagementApp {
         String formatSerial = String.format("%03d", serialNumber);
         serialNumber++;
         return Integer.parseInt(formatYear + formatSerial);
-    }
-
-    public void displayProjectOverview() {
-        String contained = "";
-
-        for (Project project : projectList) {
-            contained += (Printer.PURPLE + "[" +  project.getProjectID() + "] " + Printer.GREEN + project.getName() + Printer.RESET + "\n");
-        }
-
-        if(!contained.isBlank()) {
-            System.out.println(Printer.BLUE + "Following projects exist in the system:");
-            Printer.printLine();
-            System.out.println(contained);
-            Printer.printLine();
-        }
-        else {
-            System.out.println(Printer.BLUE + "There are no projects in the system");
-        }
     }
 
     public Project createProject(String string) throws Exception {
@@ -58,8 +38,19 @@ public class ProjectManagementApp {
         return project;
     }
 
-    public boolean containsProject(String projectName) {
-        return projectList.stream().anyMatch(p -> p.getName().equals(projectName));
+    public Activity createActivity(String string, Project project) throws Exception {
+        if (project.containsActivity(string)){
+            throw new Exception("The activity already exists in this project");
+        }
+        if (string.isEmpty()) {
+            throw new Exception("Give name for the activity");
+        }
+
+        Activity activity = new Activity(string, project);
+        activityList.add(activity);
+        project.addActivity(activity);
+        activity.setParentProject(project);
+        return activity;
     }
 
     public Project getProjectFromName(String projectToFind) throws Exception {
@@ -73,10 +64,21 @@ public class ProjectManagementApp {
     }
 
     public Activity getActivityFromName(String activityToFind) throws Exception {
+        List<Activity> foundActivities = new ArrayList<>();
+
         for (Activity activity : activityList) {
             if (activity.getName().equals(activityToFind)) {
-                return activity;
+                foundActivities.add(activity);
             }
+        }
+
+        if (foundActivities.size() > 1) {
+            System.out.println("Which activity: " + activityToFind + " do you mean?");
+            Printer.displayActivityOverview(foundActivities);
+            
+
+        } else if (foundActivities.size() == 1) {
+            return foundActivities.get(0);
         }
 
         throw new Exception("That activity doesn't exist in the system");
@@ -92,76 +94,20 @@ public class ProjectManagementApp {
         throw new Exception("That employee doesn't exist in the system");
     }
 
-
-    public Activity createActivity(String string, Project project) throws Exception {
-        if (project.containsActivity(string)){
-            throw new Exception("An activity named ’Activity’ already exists in this project");
-        }
-        if (string.isEmpty()) {
-            throw new Exception("Give name for the activity");
-        }
-
-        Activity activity = new Activity(string, project);
-        activityList.add(activity);
-        project.addActivity(activity);
-        activity.setParentProject(project);
-        return activity;
+    public boolean containsProject(String projectName) {
+        return projectList.stream().anyMatch(p -> p.getName().equals(projectName));
     }
 
-    public void displayActivityOverview() {
-        String contained = "";
-
-        for (Activity activity : activityList) {
-            contained += (Printer.GREEN + activity.getName() + Printer.RESET + "\n");
-        }
-
-        if(!contained.isBlank()) {
-            System.out.println(Printer.BLUE + "Following activites exist in the system:");
-            Printer.printLine();
-            System.out.println(contained);
-            Printer.printLine();
-        }
-        else {
-            System.out.println(Printer.BLUE + "There are no activities in the system");
-        }
+    public boolean containsAssignedEmployee(Employee employee, Activity activity) {
+        return activity.getAssignedEmployees().stream().anyMatch(e -> e.getEmployeeID().equals(employee.getEmployeeID()));
     }
 
-    public void displayEmployeeOverview() {
-        String contained = "";
-
-        for (Employee employee : employeeList) {
-            contained += (Printer.GREEN + employee.getEmployeeID() + Printer.RESET + "\n");
+    public void assignEmployee(Employee employee, Activity activity) throws Exception {
+        if (containsAssignedEmployee(employee, activity)) {
+            throw new Exception("The employee is already assigned to the activity");
         }
-
-        if(!contained.isBlank()) {
-            System.out.println(Printer.BLUE + "Following employees exist in the system:");
-            Printer.printLine();
-            System.out.println(contained);
-            Printer.printLine();
-        }
-        else {
-            System.out.println(Printer.BLUE + "There are no employees in the system");
-        }
+        activity.getAssignedEmployees().add(employee);
     }
-
-    public void displayEmployeeOverviewList(List<Employee> freeEmployeeList) {
-        String contained = "";
-
-        for (Employee employee : freeEmployeeList) {
-            contained += (Printer.GREEN + employee.getEmployeeID() + Printer.RESET + "\n");
-        }
-
-        if(!contained.isBlank()) {
-            System.out.println(Printer.BLUE + "Following employees are available:");
-            Printer.printLine();
-            System.out.println(contained);
-            Printer.printLine();
-        }
-        else {
-            System.out.println(Printer.BLUE + "There are no employees available");
-        }
-    }
-
 
     public List<Employee> findFreeEmployees(Activity activity) throws Exception {
         List<Employee> returnList = new ArrayList<>();
@@ -170,7 +116,7 @@ public class ProjectManagementApp {
         int endWeek = startEndWeeks[1]; // Employee absence shouldn't overlap these weeks
     
         for (Employee employee : employeeList) {
-            if (!activity.containsAssignedEmployee(employee)) {
+            if (!containsAssignedEmployee(employee, activity)) {
                 boolean isFree = true;
                 for (Absence absence : employee.getAbsence()) {
                     int absenceStart = absence.absenceWeeks[0];
