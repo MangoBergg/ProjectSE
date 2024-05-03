@@ -4,6 +4,12 @@ Feature: Determine if start-and-end weeks of an activity updates as intended by 
                latest end week of all activities.
   Actor: Employee
 
+  Scenario: A project does not have start-and-end weeks when it does not contain an activity
+    Given a project "Project" exists
+    When the project does not contain an activity
+    Then the project does not have start-and-end weeks
+
+
   Scenario: Set the start-and-end weeks for the first activity in a project
     Given a project "Project" exists
     And the project contains only the activity "Activity"
@@ -16,12 +22,6 @@ Feature: Determine if start-and-end weeks of an activity updates as intended by 
     When the second activity "Programming" is created in the project
     And the start-and-end weeks of the new activity is set to start week 11 and end week 20
     Then the start-and-end weeks of the project is updated to begin at the earliest start week 11 and end at the latest end week 20
-
-
-#  Scenario: A project does not have start-and-end weeks when it does not contain an activity
-#    Given a project "Project" exists
-#    When the project does not contain an activity
-#    Then the project does not have start-and-end weeks
 
 
 #  Scenario: Fail to set the end week before the start week for an activity
