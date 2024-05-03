@@ -12,3 +12,8 @@ Feature: Change the start-and-end dates of an activity
     Given an activity exists with start week 10 and end week 12
     When the employee attempts to change the start week to 15 and end week to 14
     Then an error message "End week cannot be before start week" is given
+
+  Scenario: Attempting to set an end week without the range of a year
+    Given an activity "Activity" exists
+    When the employee attempts to change the start week to 0 and end week to 53
+    Then an error message "The start and end weeks must be within a year (1-52)" is given
