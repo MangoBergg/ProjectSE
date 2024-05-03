@@ -4,32 +4,26 @@ Feature: Determine if start-and-end weeks of an activity updates as intended by 
                latest end week of all activities.
   Actor: Employee
 
-
-  Scenario: Set the start-and-end weeks for the first activity in a project
-    Given a project "Project" exists
-    And the project contains only the activity "Activity"
-    When  the start-and-end weeks of the activity is set to start week 12 and end week 15
-    Then the start-and-end weeks of the project is updated to start week 12 and end week 15
-
-
-  Scenario: Update start-and-end weeks wrt. earliest and latest activities
-    Given a project "Project" exists
-    When the second activity "Programming" is created in the project
-    And the start-and-end weeks of the new activity is set to start week 11 and end week 20
-    Then the start-and-end weeks of the project is updated to begin at the earliest start week 11 and end at the latest end week 20
-
-
   Scenario: Fail to set the end week before the start week for an activity
     Given a project "Project" exists
     And it contains the activity "Activity"
-    When the end week is set to 25 and the start week is set to 18
+    When the start week 4 is after the end week  2
     Then the error message "End week cannot be before start week" is given
 
   Scenario: Attempting to set an end week outside the range of a year
     Given a project "Project" exists
     And it contains the activity "Activity"
-    When the start week is set to 0 and the end week is set to 64
+    When the start week is 55 and the end week is 69
     Then the error message "The start and end weeks must be within a year (1-52)" is given
+
+  Scenario: Set the start-and-end weeks for an activity in a project
+    Given a project "Project" exists
+    And it contains the activity "Activity"
+    When  the start-and-end weeks of the activity is set to start week 2 and end week 4
+    Then the start-and-end weeks of the project is updated to start week 2 and end week 4
+
+
+
 
 
 

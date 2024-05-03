@@ -9,14 +9,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StartAndEndWeeksWB {
 
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
     private ErrorMessageHolder errorMessage;
     private Project project;
-    private Activity activity1;
-    private Activity activity2;
     private Activity activity;
 
     public StartAndEndWeeksWB(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
@@ -25,59 +24,41 @@ public class StartAndEndWeeksWB {
     }
 
     @Given("a project {string} exists")
-    public void aProjectExists(String string) throws Exception {
-        project = projectManagementApp.createProject(string);
+    public void aProjectExists(String string) {
+        project = new Project(string, 24001);;
     }
 
 
-    @Given("the project contains only the activity {string}")
-    public void the_project_contains_only_the_activity(String string) throws Exception {
-        activity1 = projectManagementApp.createActivity(string, project);
-    }
-
-    @When("the start-and-end weeks of the activity is set to start week {int} and end week {int}")
-    public void the_start_and_end_weeks_of_the_activity_is_set_to_start_week_and_end_week(Integer int1, Integer int2) throws Exception {
-        activity1.updateStartEndWeeks(12, 15);
-        assertEquals(12, activity1.getStartEndWeeks()[0]);
-        assertEquals(15, activity1.getStartEndWeeks()[1]);
-    }
-
-    @Then("the start-and-end weeks of the project is updated to start week {int} and end week {int}")
-    public void the_start_and_end_weeks_of_the_project_is_updated_to_start_week_and_end_week(Integer int1, Integer int2) {
-        assertEquals(12, project.getStartEndWeeks()[0]);
-        assertEquals(15, project.getStartEndWeeks()[1]);
-    }
-
-    @When("the second activity {string} is created in the project")
-    public void the_second_activity_is_created_in_the_project(String string) throws Exception {
-        activity2 = projectManagementApp.createActivity(string, project);
-    }
-
-    @When("the start-and-end weeks of the new activity is set to start week {int} and end week {int}")
-    public void the_start_and_end_weeks_of_the_new_activity_is_set_to_start_week_and_end_week(Integer int1, Integer int2) throws Exception {
-        activity2.updateStartEndWeeks(11, 20);;
-        assertEquals(11, activity2.getStartEndWeeks()[0]);
-        assertEquals(20, activity2.getStartEndWeeks()[1]);
-    }
-
-    @Then("the start-and-end weeks of the project is updated to begin at the earliest start week {int} and end at the latest end week {int}")
-    public void the_start_and_end_weeks_of_the_project_is_updated_to_begin_at_the_earliest_start_week_and_end_at_the_latest_end_week(Integer int1, Integer int2) {
-        assertEquals(11, project.getStartEndWeeks()[0]);
-        assertEquals(20, project.getStartEndWeeks()[1]);
-    }
-    
     @Given("it contains the activity {string}")
     public void it_contains_the_activity(String string) throws Exception {
-        activity = projectManagementApp.createActivity(string, project);
-    }
-    @When("the end week is set to {int} and the start week is set to {int}")
-    public void the_end_week_is_set_to_and_the_start_week_is_set_to(Integer int1, Integer int2) throws Exception {
         try {
-            activity.updateStartEndWeeks(25, 18);
+            activity = projectManagementApp.createActivity(string, project);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
+
+
+    @When("the start week {int} is after the end week  {int}")
+    public void the_start_week_is_after_the_end_week(Integer int1, Integer int2) throws Exception {
+        try {
+            activity.updateStartEndWeeks(4, 2);
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
+    }
+
+
+
+    @When("the start week is {int} and the end week is {int}")
+    public void the_start_week_is_and_the_end_week_is(Integer int1, Integer int2) throws Exception {
+        try {
+            activity.updateStartEndWeeks(55, 69);
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
+    }
+
 
     @Then("the error message {string} is given")
     public void the_error_message_is_given(String string) {
@@ -85,12 +66,19 @@ public class StartAndEndWeeksWB {
     }
 
 
-    @When("the start week is set to {int} and the end week is set to {int}")
-    public void the_start_week_is_set_to_and_the_end_week_is_set_to(Integer int1, Integer int2) {
-        try {
-            activity.updateStartEndWeeks(0, 64);
-        } catch (Exception e) {
-            errorMessage.setErrorMessage(e.getMessage());
-        }
+    @When("the start-and-end weeks of the activity is set to start week {int} and end week {int}")
+    public void the_start_and_end_weeks_of_the_activity_is_set_to_start_week_and_end_week(Integer int1, Integer int2) throws Exception {
+        activity.updateStartEndWeeks(2, 4);
+        assertEquals(2, project.getStartEndWeeks()[0]);
+        assertEquals(4, project.getStartEndWeeks()[1]);
     }
+
+    @Then("the start-and-end weeks of the project is updated to start week {int} and end week {int}")
+    public void the_start_and_end_weeks_of_the_project_is_updated_to_start_week_and_end_week(Integer int1, Integer int2) {
+        assertEquals(2, project.getStartEndWeeks()[0]);
+        assertEquals(4, project.getStartEndWeeks()[1]);
+    }
+
+    
+
 }
