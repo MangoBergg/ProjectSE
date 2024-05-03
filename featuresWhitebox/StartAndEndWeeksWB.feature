@@ -33,7 +33,7 @@ Feature: Determine if start-and-end weeks of an activity updates as intended by 
   Scenario: Attempting to set an end week outside the range of a year
     Given a project "Project" exists
     And it contains the activity "Activity"
-    When the start week is set to 1 and the end week is set to 64
+    When the start week is set to 0 and the end week is set to 64
     Then the error message "The start and end weeks must be within a year (1-52)" is given
 
 

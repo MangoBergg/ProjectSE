@@ -98,7 +98,7 @@ public class StartAndEndWeeksWB {
     @When("the start week is set to {int} and the end week is set to {int}")
     public void the_start_week_is_set_to_and_the_end_week_is_set_to(Integer int1, Integer int2) {
         try {
-            activity.updateStartEndWeeks(1, 64);
+            activity.updateStartEndWeeks(0, 64);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
