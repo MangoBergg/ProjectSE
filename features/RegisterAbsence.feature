@@ -1,6 +1,6 @@
  Feature:     Register absence as an employee
     Description: An employee assigns itself as absent at a specific start and end date
-    Actor:       Employee
+    Actor:  Employee
  
     Scenario: An employee registers absence
         When the employee "huba" attempts to register absence with the reason "reason", and a start week 2 that is before the end week 5
