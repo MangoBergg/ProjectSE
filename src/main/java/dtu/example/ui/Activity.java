@@ -16,6 +16,8 @@ public class Activity {
     public Activity(String string, Project parentProject) {
         this.name = string;
         this.parentProject = parentProject;
+        startEndWeeks[0] = 0;
+        startEndWeeks[1] = 0;
     }
 
     public String getName() {

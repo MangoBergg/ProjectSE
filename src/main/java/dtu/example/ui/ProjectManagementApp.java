@@ -48,6 +48,7 @@ public class ProjectManagementApp {
 
         Activity activity = new Activity(string, project);
         activityList.add(activity);
+
         project.getActivityList().add(activity);
         activity.setParentProject(project);
         return activity;
@@ -99,28 +100,39 @@ public class ProjectManagementApp {
     }
 
     public List<Employee> findFreeEmployees(Activity activity) throws Exception {
-        List<Employee> returnList = new ArrayList<>();
+        // Pre-conditions
+        if (employeeList.isEmpty()) {
+            throw new Exception("There are no employees in the system");
+        }
+        
         int[] startEndWeeks = activity.getStartEndWeeks();
         int startWeek = startEndWeeks[0];
-        int endWeek = startEndWeeks[1]; // Employee absence shouldn't overlap these weeks
+        int endWeek = startEndWeeks[1];
+        
+        if (startWeek == 0 || endWeek == 0) {
+            throw new Exception("Activity must have defined start and end weeks");
+        }
     
+        List<Employee> returnList = new ArrayList<>();
         for (Employee employee : employeeList) {
             if (!activity.containsAssignedEmployee(employee)) {
                 boolean isFree = true;
                 for (Absence absence : employee.getAbsence()) {
+                    if (absence == null || absence.absenceWeeks == null) { continue; }
+    
                     int absenceStart = absence.absenceWeeks[0];
                     int absenceEnd = absence.absenceWeeks[1];
-        
+                    
                     if (!(absenceEnd < startWeek || absenceStart > endWeek)) {
                         isFree = false;
                         break;
                     }
                 }
-                if (isFree) {
-                    returnList.add(employee);
-                }
+                if (isFree) { returnList.add(employee); }
             }
-        }
+        } 
+        
+        // Post-condition
         if (returnList.isEmpty()) {
             throw new Exception("No employee was found for that activity");
         }
