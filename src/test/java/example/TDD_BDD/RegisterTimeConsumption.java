@@ -14,7 +14,7 @@ public class RegisterTimeConsumption {
     private Project testProject;
     private Activity testActivity;
 
-    private Employee employee;
+    private Developer employee;
 
     private double before, after;
     private ErrorMessageHolder errorMessage;
@@ -29,7 +29,7 @@ public class RegisterTimeConsumption {
 
     @Given("the employee {string} is assigned to the activity {string} in the project {string}")
     public void theEmployeeIsAssignedToTheActivityInTheProject(String string, String string2, String string3) throws Exception {
-        employee = new Employee(string);
+        employee = new Developer(string);
         testProject = projectManagementApp.createProject(string3);
         testActivity = projectManagementApp.createActivity(string2, testProject);
         testActivity.assignEmployee(employee);
@@ -38,7 +38,7 @@ public class RegisterTimeConsumption {
 
     @Given("the employee {string} is not assigned to the activity {string}")
     public void the_employee_is_not_assigned_to_the_activity(String string, String string2) throws Exception {
-        employee = new Employee(string);
+        employee = new Developer(string);
         testProject = projectManagementApp.createProject("Project");
         testActivity = projectManagementApp.createActivity(string2, testProject);
         assertFalse(testActivity.containsAssignedEmployee(employee));

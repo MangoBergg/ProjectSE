@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 public class RegisterAbsence {
 
-    private Employee employee;
+    private Developer employee;
     private ErrorMessageHolder errorMessage;
 
 
@@ -19,7 +19,7 @@ public class RegisterAbsence {
 
     @When("the employee {string} attempts to register absence with the reason {string}, and a start week {int} that is before the end week {int}")
     public void theEmployeeAttemptsToRegisterAbsenceWithTheReasonAndAStartWeekThatIsBeforeTheEndWeek(String string, String string2, Integer int1, Integer int2) {
-        employee = new Employee(string);
+        employee = new Developer(string);
         try {
             employee.registerAbsence(string2, int1, int2);
         } catch (Exception e) {
@@ -29,7 +29,7 @@ public class RegisterAbsence {
 
     @When("the employee {string} attempts to register absence with the reason {string}, and a starting week {int} that is after the end week {int}")
     public void theEmployeeAttemptsToRegisterAbsenceWithTheReasonAndAStartingWeekThatIsAfterTheEndWeek(String string, String string2, Integer int1, Integer int2) {
-        employee = new Employee(string);
+        employee = new Developer(string);
         try {
             employee.registerAbsence(string2, int1, int2);
         } catch (Exception e) {
@@ -39,7 +39,7 @@ public class RegisterAbsence {
 
     @When("the employee {string} attempts to register absence with the reason {string}, and a starting week {int} that is before the end date {int}")
     public void theEmployeeAttemptsToRegisterAbsenceWithTheReasonAndAStartingWeekThatIsBeforeTheEndDate(String string, String string2, int int1, int int2) {
-        employee = new Employee(string);
+        employee = new Developer(string);
         try {
             employee.registerAbsence(string2, int1, int2);
         } catch (Exception e) {

@@ -7,11 +7,11 @@ public class Main {
     
     public static void main(String[] args) {
         ErrorMessageHolder errorMessage = new ErrorMessageHolder();
-        Employee user = loginService();
+        Developer user = loginService();
     
         Project project;
         Activity activity;
-        Employee employee;
+        Developer employee;
 
         int int1;
         int int2;
@@ -23,11 +23,11 @@ public class Main {
         projectManagementApp.employeeList.add(user);
 
         try {
-            projectManagementApp.employeeList.add(new Employee("juba"));
-            projectManagementApp.employeeList.add(new Employee("nuba"));
-            projectManagementApp.employeeList.add(new Employee("kuba"));
-            projectManagementApp.employeeList.add(new Employee("puba"));
-            projectManagementApp.employeeList.add(new Employee("duba"));
+            projectManagementApp.employeeList.add(new Developer("juba"));
+            projectManagementApp.employeeList.add(new Developer("nuba"));
+            projectManagementApp.employeeList.add(new Developer("kuba"));
+            projectManagementApp.employeeList.add(new Developer("puba"));
+            projectManagementApp.employeeList.add(new Developer("duba"));
 
             
             projectManagementApp.createActivity("Programming", projectManagementApp.createProject("Project1"));
@@ -232,7 +232,7 @@ public class Main {
         );
     }
 
-    private static Employee loginService() {
+    private static Developer loginService() {
 
         while (true) {
             System.out.println(Printer.BLUE + "Login with your ID:" + Printer.RESET);
@@ -241,7 +241,7 @@ public class Main {
             if (employeeID.matches("^[a-z]{4}$")) {
                 //Printer.printAndWait(1500, Printer.GREEN + "Welcome employee " + employeeID + Printer.RESET);
                 Printer.clearScreen();
-                return new Employee(employeeID);
+                return new Developer(employeeID);
             } else {
                 System.out.println(Printer.RED + "Invalid identification" + Printer.RESET);
                 continue;

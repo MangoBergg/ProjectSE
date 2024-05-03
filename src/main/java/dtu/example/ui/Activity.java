@@ -11,7 +11,7 @@ public class Activity {
     private int[] startEndWeeks = new int[2];
     private double budgetTime = 0.0;
     private double consumedTime = 0.0;
-    private List<Employee> assignedEmployeesList = new ArrayList<>();
+    private List<Developer> assignedEmployeesList = new ArrayList<>();
 
     public Activity(String string, Project parentProject) {
         this.name = string;
@@ -38,7 +38,7 @@ public class Activity {
         return consumedTime;
     }
     
-    public List<Employee> getAssignedEmployees() {
+    public List<Developer> getAssignedEmployees() {
         return assignedEmployeesList;
     }
 
@@ -78,14 +78,14 @@ public class Activity {
         consumedTime += double1;
     }
     
-    public void assignEmployee(Employee employee) throws Exception {
+    public void assignEmployee(Developer employee) throws Exception {
         if (containsAssignedEmployee(employee)) {
             throw new Exception("The employee is already assigned to the activity");
         }
         getAssignedEmployees().add(employee);
     }
 
-    public boolean containsAssignedEmployee(Employee employee) {
+    public boolean containsAssignedEmployee(Developer employee) {
         return getAssignedEmployees().stream().anyMatch(e -> e.getEmployeeID().equals(employee.getEmployeeID()));
     }
 }

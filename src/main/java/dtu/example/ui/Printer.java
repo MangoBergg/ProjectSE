@@ -85,11 +85,11 @@ public class Printer {
         }
     }
 
-    public static void displayEmployeeOverview(List<Employee> employeeList) {
+    public static void displayEmployeeOverview(List<Developer> employeeList) {
         String contained = "";
         int i = 0;
         
-        for (Employee employee : employeeList) {
+        for (Developer employee : employeeList) {
             i++;
             contained += (i + " " + Printer.GREEN + employee.getEmployeeID() + Printer.RESET + "\n");
         }

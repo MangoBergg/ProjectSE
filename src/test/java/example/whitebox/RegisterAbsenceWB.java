@@ -9,7 +9,7 @@ import io.cucumber.java.en.When;
 
 public class RegisterAbsenceWB {
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
-    private Employee testEmployee;
+    private Developer testEmployee;
     private ErrorMessageHolder errorMessage;
 
     public RegisterAbsenceWB(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
@@ -19,7 +19,7 @@ public class RegisterAbsenceWB {
 
     @When("the employee tries to register absence with the reason {string} and weekStart is {int} and weekEnd is {int}")
     public void theEmployeeTriesToRegisterAbsenceWithTheReasonAndWeekStartIsAndWeekEndIs(String string, int int1, int int2) {
-        testEmployee = new Employee("huba");
+        testEmployee = new Developer("huba");
         try {
             testEmployee.registerAbsence(string, int1, int2);
         } catch (Exception e) {

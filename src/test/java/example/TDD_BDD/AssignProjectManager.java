@@ -24,7 +24,7 @@ public class AssignProjectManager {
     @When("the user registers a project manager")
     public void theUserRegistersAProjectManager() throws Exception {
         testProject = projectManagementApp.getProjectFromName("Project");
-        testProject.setProjectManager(new Employee("juba"));
+        testProject.setProjectManager(new Developer("juba"));
     }
 
     @Then("the project manager is updated")

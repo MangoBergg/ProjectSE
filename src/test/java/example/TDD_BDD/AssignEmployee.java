@@ -11,7 +11,7 @@ public class AssignEmployee {
 
     private Activity testActivity;
     private Project testProject;
-    private Employee employee;
+    private Developer employee;
     private String projectName;
     private String activityName;
     private ErrorMessageHolder errorMessage;
@@ -25,7 +25,7 @@ public class AssignEmployee {
 
     @Given("the employee attempts to assign an employee {string} to the activity {string} in the project {string}")
     public void the_employee_attempts_to_assign_an_employee_to_the_activity_in_the_project(String string, String string2, String string3) throws Exception {
-        employee = new Employee("test");
+        employee = new Developer("test");
         activityName = string2;
         projectName = string3;
         testProject = projectManagementApp.createProject(projectName);

@@ -10,7 +10,7 @@ import static org.junit.Assert.assertFalse;
 
 public class FindFreeEmployee {
 
-    private Employee testEmployee;
+    private Developer testEmployee;
     private Project testProject;
     private Activity testActivity;
 
@@ -25,7 +25,7 @@ public class FindFreeEmployee {
 
     @Given("{string} needs to assign employees to the activity {string} scheduled for weeks {int} to {int}")
     public void needsToAssignEmployeesToTheActivityScheduledForWeeksTo(String string, String string2, int int1, int int2) throws Exception {
-        testEmployee = new Employee(string);
+        testEmployee = new Developer(string);
         testEmployee.registerAbsence("reason", int1, int2);
 
         testProject = new Project("Project", projectManagementApp.generateProjectNumber());
