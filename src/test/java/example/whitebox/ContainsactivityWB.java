@@ -1,25 +1,15 @@
 package example.whitebox;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 import static org.junit.Assert.*;
 
 public class ContainsactivityWB {
 
     private Project project;
-    private Activity activity;
-    private boolean result;
-
-    private String activityname;
-
-
 
     @Given("a new project")
     public void a_new_project() {
