@@ -40,12 +40,12 @@ public class ContainsactivityWB {
 
     @Then("the method should return false")
     public void the_method_should_return_false() {
-        assertFalse(project.containsActivity("coding"));
+        assertEquals(project.containsActivity("coding"), false);
     }
 
     @Then("the method should return true")
     public void the_method_should_return_true() {
-        assertTrue(project.containsActivity("coding"));
+        assertEquals(project.containsActivity("coding"), true);
     }
 }
 

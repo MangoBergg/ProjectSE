@@ -22,8 +22,8 @@ public class Employee {
     }
 
     public void updateConsumedTime(Double double1, Activity activity) throws Exception {
-        if (double1 <= 0.0) {
-            throw new Exception("Consumed time must be greater than 0.5 hours");
+        if (double1 < 0.5) {
+            throw new Exception("Consumed time must be greater than or equal to 0.5 hours");
         }
         
         if (double1 % 0.5 != 0) {
