@@ -6,7 +6,7 @@ import dtu.example.ui.Activity;
 import dtu.example.ui.ErrorMessageHolder;
 import dtu.example.ui.Project;
 import dtu.example.ui.ProjectManagementApp;
-import dtu.example.ui.StatusReport;
+
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -15,7 +15,7 @@ public class StatusReportTest {
     
     private Project testProject;
     private Activity testActivity;
-    private StatusReport testStatusReport;
+    private String statusReport;
 
     public StatusReportTest(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
@@ -27,11 +27,11 @@ public class StatusReportTest {
         testActivity = projectManagementApp.createActivity("testActivity", testProject);
         testActivity.updateBudgetedTime(20);
         testActivity.updateConsumedTime(15);
-        testStatusReport = new StatusReport(testProject);
+        statusReport = testProject.makeReport();
     }
 
     @Then("a status report for the project is returned to the employee with valuable information.")
     public void aStatusReportForTheProjectIsReturnedToTheEmployeeWithValuableInformation() {
-        assertFalse(testStatusReport.report.isEmpty());
+        assertFalse(statusReport.isEmpty());
     }
 }

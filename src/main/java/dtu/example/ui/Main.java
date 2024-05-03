@@ -94,7 +94,7 @@ public class Main {
                         System.out.println("Which project do you want to generate a status report for? : ");
                         project = projectManagementApp.projectList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
-                        System.out.println(new StatusReport(project).report);
+                        System.out.println(project.makeReport());
                         System.out.println("Type anything to go back: ");
                         inputScanner.nextLine();
                     } catch (Exception e) {
