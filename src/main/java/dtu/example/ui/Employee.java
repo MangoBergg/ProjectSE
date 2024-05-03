@@ -51,5 +51,4 @@ public class Employee {
 
         absenceList.add(new Absence(reason, weekStart, weekEnd));
     }
-
 }
