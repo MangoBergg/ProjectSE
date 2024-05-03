@@ -98,17 +98,6 @@ public class ProjectManagementApp {
         return projectList.stream().anyMatch(p -> p.getName().equals(projectName));
     }
 
-    public boolean containsAssignedEmployee(Employee employee, Activity activity) {
-        return activity.getAssignedEmployees().stream().anyMatch(e -> e.getEmployeeID().equals(employee.getEmployeeID()));
-    }
-
-    public void assignEmployee(Employee employee, Activity activity) throws Exception {
-        if (containsAssignedEmployee(employee, activity)) {
-            throw new Exception("The employee is already assigned to the activity");
-        }
-        activity.getAssignedEmployees().add(employee);
-    }
-
     public List<Employee> findFreeEmployees(Activity activity) throws Exception {
         List<Employee> returnList = new ArrayList<>();
         int[] startEndWeeks = activity.getStartEndWeeks();
@@ -116,7 +105,7 @@ public class ProjectManagementApp {
         int endWeek = startEndWeeks[1]; // Employee absence shouldn't overlap these weeks
     
         for (Employee employee : employeeList) {
-            if (!containsAssignedEmployee(employee, activity)) {
+            if (!activity.containsAssignedEmployee(employee)) {
                 boolean isFree = true;
                 for (Absence absence : employee.getAbsence()) {
                     int absenceStart = absence.absenceWeeks[0];

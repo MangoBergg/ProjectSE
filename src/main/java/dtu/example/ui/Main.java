@@ -161,7 +161,7 @@ public class Main {
                         Printer.displayEmployeeOverview(projectManagementApp.employeeList);
                         System.out.println("What employee should be added?");
                         employee = projectManagementApp.employeeList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
-                        projectManagementApp.assignEmployee(employee, activity);
+                        activity.assignEmployee(employee);
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
                     }

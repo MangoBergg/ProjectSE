@@ -31,7 +31,7 @@ public class AssignEmployee {
         testProject = projectManagementApp.createProject(projectName);
         testActivity = projectManagementApp.createActivity(activityName, testProject);
         try {
-            projectManagementApp.assignEmployee(employee, testActivity);
+            testActivity.assignEmployee(employee);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
@@ -39,13 +39,13 @@ public class AssignEmployee {
 
     @Then("the employee is assigned to the activity")
     public void the_employee_is_assigned_to_the_activity() {
-        assertTrue(projectManagementApp.containsAssignedEmployee(employee, testActivity));
+        assertTrue(testActivity.containsAssignedEmployee(employee));
     }
 
     @When("the employee {string} is already assigned to the activity")
     public void the_employee_is_already_assigned_to_the_activity(String string) {
         try {
-            projectManagementApp.assignEmployee(employee, testActivity);
+            testActivity.assignEmployee(employee);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }

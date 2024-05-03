@@ -14,6 +14,7 @@ public class Project {
         this.name = string;
         this.projectID = projectID;
     }
+    
     public List<Activity> getActivityList() {
         return activityList;
     }
@@ -30,7 +31,6 @@ public class Project {
         return projectManager;
     }
     
-
     public int[] getStartEndWeeks() {
         return startEndWeeks;
     }

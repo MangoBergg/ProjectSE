@@ -40,7 +40,6 @@ public class Printer {
         System.out.println(BLACK + "_______________________________________________________________________" + RESET);
     }
 
-
     public static void displayProjectOverview(List<Project> projectList) {
         String contained = "";
         int i = 0;
