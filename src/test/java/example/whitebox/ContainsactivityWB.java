@@ -29,7 +29,7 @@ public class ContainsactivityWB {
     @Given("the project contains the activity {string}")
     public void the_project_contains_the_activity(String string) {
         Activity activity = new Activity(string, project);
-        project.addActivity(activity);
+        project.getActivityList().add(activity);
     }
 
 

@@ -48,7 +48,7 @@ public class ProjectManagementApp {
 
         Activity activity = new Activity(string, project);
         activityList.add(activity);
-        project.addActivity(activity);
+        project.getActivityList().add(activity);
         activity.setParentProject(project);
         return activity;
     }

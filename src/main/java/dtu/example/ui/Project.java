@@ -39,30 +39,8 @@ public class Project {
         projectManager = newProjectmanager;
     }
 
-    public void addActivity(Activity activity) {
-        activityList.add(activity);
-    }
-
     public boolean containsActivity(String activityName) {
         return activityList.stream().anyMatch(a -> a.getName().equals(activityName));
-    }
-
-    public void displayActivityOverview() {
-        String contained = "";
-
-        for (Activity activity : activityList) {
-            contained += (Printer.GREEN + activity.getName() + Printer.RESET + "\n");
-        }
-
-        if(!contained.isBlank()) {
-            System.out.println(Printer.BLUE + "Following activities exist in the project: " + name);
-            Printer.printLine();
-            System.out.println(contained);
-            Printer.printLine();
-        }
-        else {
-            System.out.println(Printer.BLUE + "There are no activities in the project: " + name);
-        }
     }
 
     public void updateStartEndWeeks(int weekStart, int weekEnd) {

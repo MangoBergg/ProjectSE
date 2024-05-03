@@ -107,7 +107,7 @@ public class Main {
                         System.out.println("What project do you want to add an activity?: ");
                         project = projectManagementApp.projectList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
-                        project.displayActivityOverview();
+                        Printer.displayActivityOverview(project.getActivityList());
                         System.out.println("What do you want to name the activity to be added to: '" + project.getName() + "'?");
                         projectManagementApp.createActivity(inputScanner.nextLine(), project);
                     } catch (Exception e) {
