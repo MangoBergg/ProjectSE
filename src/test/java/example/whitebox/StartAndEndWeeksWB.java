@@ -44,13 +44,15 @@ public class StartAndEndWeeksWB {
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
-        //activity.updateStartEndWeeks(12, 15);
-        assertTrue((activity.getStartEndWeeks()[0] == 12) && (activity.getStartEndWeeks()[1] == 15));
+        activity.updateStartEndWeeks(12, 15);
+        assertEquals(12, activity.getStartEndWeeks()[0]);
+        assertEquals(15, activity.getStartEndWeeks()[1]);
     }
 
     @Then("the start-and-end weeks of the project is updated to start week {int} and end week {int}")
     public void the_start_and_end_weeks_of_the_project_is_updated_to_start_week_and_end_week(Integer int1, Integer int2) {
-        assertEquals(true, activity.getParentProject().getStartEndWeeks()[0] == 12 && activity.getParentProject().getStartEndWeeks()[1] == 15);
+        assertEquals(12, activity.getParentProject().getStartEndWeeks()[0]);
+        assertEquals(15, activity.getParentProject().getStartEndWeeks()[1]);
     }
 
 }
