@@ -11,11 +11,11 @@ Feature: Determine if start-and-end weeks of an activity updates as intended by 
     Then the start-and-end weeks of the project is updated to start week 12 and end week 15
 
 
-#  Scenario: Update start-and-end weeks wrt. earliest and latest activities
-#    Given a project "Project" exists
-#    When the second activity "Programming" is created in the project
-#    And the start-and-end weeks of the new activity is set to start week 11 and end week 20
-#    Then the start-and-end weeks of the project is updated to begin at the earliest start week 11 and end at the latest end week 20
+  Scenario: Update start-and-end weeks wrt. earliest and latest activities
+    Given a project "Project" exists
+    When the second activity "Programming" is created in the project
+    And the start-and-end weeks of the new activity is set to start week 11 and end week 20
+    Then the start-and-end weeks of the project is updated to begin at the earliest start week 11 and end at the latest end week 20
 
 
 #  Scenario: A project does not have start-and-end weeks when it does not contain an activity
