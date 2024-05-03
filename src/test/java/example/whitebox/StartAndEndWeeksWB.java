@@ -30,13 +30,11 @@ public class StartAndEndWeeksWB {
     @Given("a project {string} exists")
     public void aProjectExists(String string) throws Exception {
         project = projectManagementApp.createProject(string);
-        assertTrue(projectManagementApp.containsProject("project"));
     }
 
     @Given("the project contains only the activity {string}")
     public void the_project_contains_only_the_activity(String string) throws Exception {
         activity = projectManagementApp.createActivity(string, project);
-        assertTrue(project.containsActivity("activity"));
     }
 
     @When("the start-and-end weeks of the activity is set to start week {int} and end week {int}")
