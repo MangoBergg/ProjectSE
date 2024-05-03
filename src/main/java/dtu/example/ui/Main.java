@@ -189,7 +189,15 @@ public class Main {
                         activity = projectManagementApp.activityList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
                         System.out.println("How much time do you want to register?: ");
-                        user.updateConsumedTime(Double.parseDouble(inputScanner.nextLine()), activity);
+                        //user.updateConsumedTime(Double.parseDouble(inputScanner.nextLine()), activity);
+
+                        try {
+                            double1 = Double.parseDouble(inputScanner.nextLine());
+                            user.updateConsumedTime(double1, activity);
+                        } catch (IllegalArgumentException e) {
+                            errorMessage.setErrorMessage("Invalid input. It must be consumed time you want to register in increments of 0.5: ");
+                        }
+
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
                     }
