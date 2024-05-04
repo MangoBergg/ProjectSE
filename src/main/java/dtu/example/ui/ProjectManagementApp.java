@@ -40,8 +40,8 @@ public class ProjectManagementApp {
 
     public Activity createActivity(String string, Project project) throws Exception {
         //Pre-conditions
-        assert(string.isEmpty()) : "Give name for the activity";
-        assert(project.containsActivity(string)) : "The activity already exists in this project";
+        assert(!string.isEmpty()) : "Give name for the activity";
+        assert(!project.containsActivity(string)) : "The activity already exists in this project";
 
         Activity activity = new Activity(string, project);
         activityList.add(activity);
@@ -49,7 +49,7 @@ public class ProjectManagementApp {
         activity.setParentProject(project);
 
         //Post-conditions
-        assert(!project.getActivityList().contains(activity)) : "The activity does not exist in activityList, which means it is not created";
+        assert(project.getActivityList().contains(activity)) : "The activity does not exist in activityList, which means it is not created";
 
         return activity;
     }
