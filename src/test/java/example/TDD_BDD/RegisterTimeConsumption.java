@@ -47,12 +47,12 @@ public class RegisterTimeConsumption {
     }
 
     @When("the employee registers consumed time as {double} hours on the activity {string}")
-    public void theEmployeeRegistersConsumedTimeAsHoursOnTheActivity(Double double1, String string) throws Exception {
+    public void theEmployeeRegistersConsumedTimeAsHoursOnTheActivity(Double double1, String string) {
         try {
             before = testActivity.getConsumedTime();
             employee.updateConsumedTime(double1, testActivity);
             after = testActivity.getConsumedTime();
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
