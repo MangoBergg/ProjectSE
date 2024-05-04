@@ -101,17 +101,13 @@ public class ProjectManagementApp {
 
     public List<Employee> findFreeEmployees(Activity activity) throws Exception {
         // Pre-conditions
-        if (employeeList.isEmpty()) {
-            throw new Exception("There are no employees in the system");
-        }
-        
+        assert !employeeList.isEmpty() : "There are no employees in the system";
+
         int[] startEndWeeks = activity.getStartEndWeeks();
         int startWeek = startEndWeeks[0];
         int endWeek = startEndWeeks[1];
         
-        if (startWeek == 0 || endWeek == 0) {
-            throw new Exception("Activity must have defined start and end weeks");
-        }
+        assert !(startWeek == 0 || endWeek == 0) : "Activity must have defined start and end weeks";
     
         List<Employee> returnList = new ArrayList<>();
         for (Employee employee : employeeList) {
@@ -133,9 +129,7 @@ public class ProjectManagementApp {
         } 
         
         // Post-condition
-        if (returnList.isEmpty()) {
-            throw new Exception("No employee was found for that activity");
-        }
+        assert !returnList.isEmpty() : "No employee was found for that activity";
         return returnList;
     }
 }

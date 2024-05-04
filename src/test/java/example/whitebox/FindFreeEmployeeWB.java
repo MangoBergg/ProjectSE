@@ -1,6 +1,5 @@
 package example.whitebox;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -36,7 +35,7 @@ public class FindFreeEmployeeWB {
 
         try {
             employeeList = projectManagementApp.findFreeEmployees(testActivity);
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
@@ -52,7 +51,7 @@ public class FindFreeEmployeeWB {
         try {
             projectManagementApp.employeeList.add(testEmployee);
             employeeList = projectManagementApp.findFreeEmployees(testActivity);
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
@@ -66,7 +65,7 @@ public class FindFreeEmployeeWB {
         try {
             projectManagementApp.employeeList.add(testEmployee);
             employeeList = projectManagementApp.findFreeEmployees(testActivity);
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
@@ -93,7 +92,7 @@ public class FindFreeEmployeeWB {
         try {
             projectManagementApp.employeeList.add(testEmployee);
             employeeList = projectManagementApp.findFreeEmployees(testActivity);
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
