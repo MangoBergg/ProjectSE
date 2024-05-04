@@ -49,7 +49,7 @@ public class ProjectManagementApp {
         activity.setParentProject(project);
 
         //Post-conditions
-        assert(project.getActivityList().contains(activity)) : "The activity now exists in activityList, which means it is created";
+        assert(!project.getActivityList().contains(activity)) : "The activity does not exist in activityList, which means it is not created";
 
         return activity;
     }
