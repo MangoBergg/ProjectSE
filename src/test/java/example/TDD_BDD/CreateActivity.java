@@ -29,9 +29,9 @@ public class CreateActivity {
         assertTrue(projectManagementApp.containsProject(string));
     }
 
-    
-    @Given("the activity named {string} already exists in the list of activities for a project")
-    public void theActivityNamedAlreadyExistsInTheListOfActivitiesForAProject(String string) throws Exception {
+
+    @When("the employee attemps to create an activity {string} when the activity already exists")
+    public void the_employee_attemps_to_create_an_activity_when_the_activity_already_exists(String string) throws Exception {
         projectManagementApp.createActivity(string, testProject);
         try {
             projectManagementApp.createActivity(string, testProject);
@@ -40,8 +40,8 @@ public class CreateActivity {
         }
     }
 
-    @When("the employee tries to make an activity with an empty name {string}")
-    public void the_employee_tries_to_make_an_activity_with_an_empty_name(String string) throws Exception {
+    @When("the employee attemps to create an activity {string} without a name")
+    public void the_employee_attemps_to_create_an_activity_without_a_name(String string) {
         try {
             projectManagementApp.createActivity("", testProject);
         } catch (Exception e) {
@@ -63,4 +63,7 @@ public class CreateActivity {
     public void theActivityIsAddedToTheListOfActivity() {
         assertTrue(testProject.containsActivity(activityName));
     }
+
+
+
 }
