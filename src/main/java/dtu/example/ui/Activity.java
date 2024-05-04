@@ -52,8 +52,8 @@ public class Activity {
 
     public void updateStartEndWeeks(int weekStart, int weekEnd) {
         // Precondition
-        assert (weekEnd < weekStart);
-        assert (weekStart < 1 || weekStart > 52 || weekEnd > 52);
+        assert weekEnd >= weekStart : "End week cannot be before start week";
+        assert (weekStart >= 1 && weekStart <= 52 && weekEnd >= 1 && weekEnd <= 52) : "The start and end weeks must be within a year (1-52)";
 
         startEndWeeks[0] = weekStart;
         startEndWeeks[1] = weekEnd;

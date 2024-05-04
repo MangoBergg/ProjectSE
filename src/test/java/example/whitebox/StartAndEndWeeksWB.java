@@ -43,7 +43,7 @@ public class StartAndEndWeeksWB {
     public void the_start_week_is_after_the_end_week(Integer int1, Integer int2) throws Exception {
         try {
             activity.updateStartEndWeeks(4, 2);
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
@@ -54,7 +54,7 @@ public class StartAndEndWeeksWB {
     public void the_start_week_is_and_the_end_week_is(Integer int1, Integer int2) throws Exception {
         try {
             activity.updateStartEndWeeks(55, 69);
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }

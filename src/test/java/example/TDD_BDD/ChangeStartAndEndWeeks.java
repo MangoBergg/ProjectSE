@@ -28,7 +28,11 @@ public class ChangeStartAndEndWeeks {
 
     @When("the employee changes the start week to {int} and end week to {int} for the activity")
     public void theEmployeeChangesTheStartWeekToAndEndWeekToForTheActivity(int int1, int int2) throws AssertionError {
-        testActivity.updateStartEndWeeks(int1, int2);
+        try {
+            testActivity.updateStartEndWeeks(int1, int2);
+        } catch (AssertionError e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
     }
 
     @Then("the start and end weeks of the activity are updated to {int} and {int}")
@@ -45,16 +49,28 @@ public class ChangeStartAndEndWeeks {
     public void an_activity_exists_with_start_week_and_end_week(Integer int1, Integer int2) throws java.lang.Exception {
         testProject = projectManagementApp.createProject("project");
         testActivity = projectManagementApp.createActivity("test2", testProject);
-        testActivity.updateStartEndWeeks(int1, int2);
+        try {
+            testActivity.updateStartEndWeeks(int1, int2);
+        } catch (AssertionError e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
     }
 
     @When("the employee attempts to change the start week to {int} and end week to {int}")
     public void the_employee_attempts_to_change_the_start_week_to_and_end_week_to(Integer int1, Integer int2) throws AssertionError {
-        testActivity.updateStartEndWeeks(int1, int2);
+        try {
+            testActivity.updateStartEndWeeks(int1, int2);
+        } catch (AssertionError e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
     }
 
     @When("the employee attempts to set the start week to {int} and end week to {int}")
     public void the_employee_attempts_to_set_the_start_week_to_and_end_week_to(Integer int1, Integer int2) throws AssertionError {
-        testActivity.updateStartEndWeeks(int1, int2);
+        try {
+            testActivity.updateStartEndWeeks(int1, int2);
+        } catch (AssertionError e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
     }
 }
