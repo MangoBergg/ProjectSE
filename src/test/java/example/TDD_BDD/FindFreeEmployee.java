@@ -27,7 +27,9 @@ public class FindFreeEmployee {
         testEmployee.registerAbsence("reason", int1, int2);
         testProject = new Project("Project", projectManagementApp.generateProjectNumber());
         testActivity = new Activity(string2, testProject);
-        testActivity.updateStartEndWeeks(int1, int2);
+        
+        testActivity.getStartEndWeeks()[0] = int1;
+        testActivity.getStartEndWeeks()[1] = int2;
     }
 
     @When("{string} prompts a list of free employees for the activity {string}")
