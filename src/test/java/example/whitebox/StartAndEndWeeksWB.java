@@ -3,9 +3,9 @@ package example.whitebox;
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IProject;
 import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.ui.ErrorMessageHolder;
-import dtu.example.ui.Project;
-import dtu.example.ui.ProjectManagementApp;
+import dtu.example.model.ErrorMessageHolder;
+import dtu.example.model.Project;
+import dtu.example.model.ProjectManagementApp;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -23,6 +23,8 @@ public class StartAndEndWeeksWB {
     public StartAndEndWeeksWB(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         projectManagementApp.getProjectRepository().reset();
+        projectManagementApp.getActivityRepository().reset();
+        projectManagementApp.getEmployeeRepository().reset();
         this.errorMessage = errorMessage;
     }
 
@@ -35,7 +37,7 @@ public class StartAndEndWeeksWB {
     @Given("it contains the activity {string}")
     public void it_contains_the_activity(String string) throws Exception {
         try {
-            activity = projectManagementApp.createActivity(string, project);
+            activity = projectManagementApp.getActivityFactory().createActivity(string, project);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }

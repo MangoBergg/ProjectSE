@@ -3,7 +3,9 @@ package example.TDD_BDD;
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IProject;
 import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.ui.*;
+import dtu.example.model.ErrorMessageHolder;
+import dtu.example.model.ProjectManagementApp;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,13 +22,15 @@ public class ChangeStartAndEndWeeks {
     public ChangeStartAndEndWeeks(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         projectManagementApp.getProjectRepository().reset();
+        projectManagementApp.getActivityRepository().reset();
+        projectManagementApp.getEmployeeRepository().reset();
         this.errorMessage = errorMessage;
     }
 
     @Given("an activity {string} exists")
     public void an_activity_exists(String string) throws java.lang.Exception {
-        testProject = projectManagementApp.createProject("project");
-        testActivity = projectManagementApp.createActivity(string, testProject);
+        testProject = projectManagementApp.getProjectFactory().createProject("project");
+        testActivity = projectManagementApp.getActivityFactory().createActivity(string, testProject);
     }
 
     @When("the employee changes the start week to {int} and end week to {int} for the activity")
@@ -50,8 +54,8 @@ public class ChangeStartAndEndWeeks {
 
     @Given("an activity exists with start week {int} and end week {int}")
     public void an_activity_exists_with_start_week_and_end_week(Integer int1, Integer int2) throws java.lang.Exception {
-        testProject = projectManagementApp.createProject("project");
-        testActivity = projectManagementApp.createActivity("test2", testProject);
+        testProject = projectManagementApp.getProjectFactory().createProject("project");
+        testActivity = projectManagementApp.getActivityFactory().createActivity("test2", testProject);
         try {
             testActivity.updateStartEndWeeks(int1, int2);
         } catch (AssertionError e) {

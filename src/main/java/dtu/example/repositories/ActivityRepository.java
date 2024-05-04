@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dtu.example.interfaces.IActivity;
-import dtu.example.ui.Printer;
+import dtu.example.model.Printer;
 
 
 public class ActivityRepository {
@@ -50,7 +50,7 @@ public class ActivityRepository {
         activityList.add(activity);
     }
 
-    public boolean containsProject(String activityName) {
+    public boolean containsActivity(String activityName) {
         return activityList.stream().anyMatch(p -> p.getName().equals(activityName));
     }
 

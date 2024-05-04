@@ -2,8 +2,8 @@ package dtu.example.interfaces;
 
 import java.util.List;
 
-import dtu.example.ui.Absence;
-import dtu.example.ui.ConsumedTime;
+import dtu.example.model.Absence;
+import dtu.example.model.ConsumedTime;
 
 public interface IEmployee {
 

@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.ui.*;
+import dtu.example.model.ErrorMessageHolder;
+import dtu.example.model.ProjectManagementApp;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,6 +20,8 @@ public class CreateProject {
     public CreateProject(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         projectManagementApp.getProjectRepository().reset();
+        projectManagementApp.getActivityRepository().reset();
+        projectManagementApp.getEmployeeRepository().reset();
         this.errorMessage = errorMessage;
     }
 
@@ -26,7 +30,7 @@ public class CreateProject {
     public void aNewProjectNamedIsCreated(String string) {
         projectName = string;
         try {
-            projectManagementApp.createProject(string);
+            projectManagementApp.getProjectFactory().createProject(string);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
@@ -42,13 +46,13 @@ public class CreateProject {
     // The following code is reused from Hubert's video
     @Given("the project named {string} already exists in the list of projects")
     public void theProjectNamedAlreadyExistsInTheListOfProjects(String string) throws Exception {
-        projectManagementApp.createProject(string);
+        projectManagementApp.getProjectFactory().createProject(string);
     }
 
     @When("the employee attempts to create a new project without specifying a name")
     public void theEmployeeAttemptsToCreateANewProjectWithoutSpecifyingAName() throws Exception {
         try {
-            projectManagementApp.createProject("");
+            projectManagementApp.getProjectFactory().createProject("");
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }

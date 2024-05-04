@@ -1,4 +1,4 @@
-package dtu.example.ui;
+package dtu.example.model;
 
 import java.util.List;
 

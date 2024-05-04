@@ -1,4 +1,4 @@
-package dtu.example.ui;
+package dtu.example.model;
 
 import dtu.example.interfaces.IDeveloper;
 

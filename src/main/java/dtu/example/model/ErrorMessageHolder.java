@@ -1,4 +1,4 @@
-package dtu.example.ui;
+package dtu.example.model;
 
 
 // The following code is reused from the Library App exercises

@@ -1,13 +1,18 @@
-package dtu.example.ui;
+package dtu.example;
 import java.util.Scanner;
 
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IPrinter;
 import dtu.example.interfaces.IProject;
+import dtu.example.model.Developer;
+import dtu.example.model.Employee;
+import dtu.example.model.ErrorMessageHolder;
+import dtu.example.model.Printer;
+import dtu.example.model.ProjectManagementApp;
 
 
-public class Main {
+public class Runnable {
     private static Scanner inputScanner = new Scanner(System.in);
     
     public static void main(String[] args) {
@@ -25,27 +30,27 @@ public class Main {
         double double2;
 
         ProjectManagementApp projectManagementApp = new ProjectManagementApp();
-        projectManagementApp.employeeList.add(user);
+        projectManagementApp.getEmployeeRepository().addEmployee(user);
 
         try {
-            projectManagementApp.employeeList.add(new Developer("juba"));
-            projectManagementApp.employeeList.add(new Developer("nuba"));
-            projectManagementApp.employeeList.add(new Developer("kuba"));
-            projectManagementApp.employeeList.add(new Developer("puba"));
-            projectManagementApp.employeeList.add(new Developer("duba"));
+            projectManagementApp.getEmployeeRepository().addEmployee(new Developer("juba"));
+            projectManagementApp.getEmployeeRepository().addEmployee(new Developer("nuba"));
+            projectManagementApp.getEmployeeRepository().addEmployee(new Developer("kuba"));
+            projectManagementApp.getEmployeeRepository().addEmployee(new Developer("puba"));
+            projectManagementApp.getEmployeeRepository().addEmployee(new Developer("duba"));
 
             
-            projectManagementApp.createActivity("Programming", projectManagementApp.createProject("Project1"));
-            projectManagementApp.createActivity("Testing", projectManagementApp.getProjectRepository().getProjectFromName("Project1"));
-            projectManagementApp.createActivity("Refactoring", projectManagementApp.getProjectRepository().getProjectFromName("Project1"));
-            projectManagementApp.createActivity("Design", projectManagementApp.createProject("Project2"));
-            projectManagementApp.createActivity("Testing", projectManagementApp.getProjectRepository().getProjectFromName("Project2"));
-            projectManagementApp.createActivity("BusinessLogic", projectManagementApp.createProject("Project3"));
-            projectManagementApp.createActivity("Meeting", projectManagementApp.getProjectRepository().getProjectFromName("Project3"));
-            projectManagementApp.createActivity("Development", projectManagementApp.createProject("Project4"));
-            projectManagementApp.createActivity("Software Requirements Specification", projectManagementApp.getProjectRepository().getProjectFromName("Project4"));
-            projectManagementApp.createActivity("Customer wish", projectManagementApp.createProject("Project5"));
-            projectManagementApp.createActivity("Planning", projectManagementApp.getProjectRepository().getProjectFromName("Project5"));
+            projectManagementApp.getActivityFactory().createActivity("Programming", projectManagementApp.getProjectFactory().createProject("Project1"));
+            projectManagementApp.getActivityFactory().createActivity("Testing", projectManagementApp.getProjectRepository().getProjectFromName("Project1"));
+            projectManagementApp.getActivityFactory().createActivity("Refactoring", projectManagementApp.getProjectRepository().getProjectFromName("Project1"));
+            projectManagementApp.getActivityFactory().createActivity("Design", projectManagementApp.getProjectFactory().createProject("Project2"));
+            projectManagementApp.getActivityFactory().createActivity("Testing", projectManagementApp.getProjectRepository().getProjectFromName("Project2"));
+            projectManagementApp.getActivityFactory().createActivity("BusinessLogic", projectManagementApp.getProjectFactory().createProject("Project3"));
+            projectManagementApp.getActivityFactory().createActivity("Meeting", projectManagementApp.getProjectRepository().getProjectFromName("Project3"));
+            projectManagementApp.getActivityFactory().createActivity("Development", projectManagementApp.getProjectFactory().createProject("Project4"));
+            projectManagementApp.getActivityFactory().createActivity("Software Requirements Specification", projectManagementApp.getProjectRepository().getProjectFromName("Project4"));
+            projectManagementApp.getActivityFactory().createActivity("Customer wish", projectManagementApp.getProjectFactory().createProject("Project5"));
+            projectManagementApp.getActivityFactory().createActivity("Planning", projectManagementApp.getProjectRepository().getProjectFromName("Project5"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,7 +79,7 @@ public class Main {
                 case 1:
                     try {
                         System.out.println("Give a title for the project: ");
-                        projectManagementApp.createProject(inputScanner.nextLine());
+                        projectManagementApp.getProjectFactory().createProject(inputScanner.nextLine());
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
                     }
@@ -85,9 +90,9 @@ public class Main {
                         System.out.println("What project do you want to update the project manager?: ");
                         project = projectManagementApp.getProjectRepository().getProjectList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
-                        Printer.displayEmployeeOverview(projectManagementApp.employeeList);
+                        Printer.displayEmployeeOverview(projectManagementApp.getEmployeeRepository().getEmployeeList());
                         System.out.println("What employee should be the project manager for the project: '" + project.getName() + "'?");
-                        employee = projectManagementApp.employeeList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        employee = projectManagementApp.getEmployeeRepository().getEmployeeList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         project.setProjectManager(employee);
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
@@ -114,7 +119,7 @@ public class Main {
                         Printer.clearScreen();
                         Printer.displayActivityOverview(project.getActivityList());
                         System.out.println("What do you want to name the activity to be added to: '" + project.getName() + "'?");
-                        projectManagementApp.createActivity(inputScanner.nextLine(), project);
+                        projectManagementApp.getActivityFactory().createActivity(inputScanner.nextLine(), project);
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());
                     }
@@ -163,9 +168,9 @@ public class Main {
                         System.out.println("What activity do you want to assign an employee?: ");
                         activity = projectManagementApp.getActivityRepository().getActivityList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
-                        Printer.displayEmployeeOverview(projectManagementApp.employeeList);
+                        Printer.displayEmployeeOverview(projectManagementApp.getEmployeeRepository().getEmployeeList());
                         System.out.println("What employee should be added?");
-                        employee = projectManagementApp.employeeList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        employee = projectManagementApp.getEmployeeRepository().getEmployeeList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         activity.assignEmployee(employee);
                     } catch (Exception e) {
                         errorMessage.setErrorMessage(e.getMessage());

@@ -4,7 +4,9 @@ import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IProject;
 import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.ui.*;
+import dtu.example.model.Developer;
+import dtu.example.model.ErrorMessageHolder;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -28,6 +30,8 @@ public class RegisterTimeConsumption {
     public RegisterTimeConsumption(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         projectManagementApp.getProjectRepository().reset();
+        projectManagementApp.getActivityRepository().reset();
+        projectManagementApp.getEmployeeRepository().reset();
         this.errorMessage = errorMessage;
     }
 
@@ -35,8 +39,8 @@ public class RegisterTimeConsumption {
     @Given("the employee {string} is assigned to the activity {string} in the project {string}")
     public void theEmployeeIsAssignedToTheActivityInTheProject(String string, String string2, String string3) throws Exception {
         employee = new Developer(string);
-        testProject = projectManagementApp.createProject(string3);
-        testActivity = projectManagementApp.createActivity(string2, testProject);
+        testProject = projectManagementApp.getProjectFactory().createProject(string3);
+        testActivity = projectManagementApp.getActivityFactory().createActivity(string2, testProject);
         testActivity.assignEmployee(employee);
         assertTrue(testActivity.containsAssignedEmployee(employee));
     }
@@ -44,8 +48,8 @@ public class RegisterTimeConsumption {
     @Given("the employee {string} is not assigned to the activity {string}")
     public void the_employee_is_not_assigned_to_the_activity(String string, String string2) throws Exception {
         employee = new Developer(string);
-        testProject = projectManagementApp.createProject("Project");
-        testActivity = projectManagementApp.createActivity(string2, testProject);
+        testProject = projectManagementApp.getProjectFactory().createProject("Project");
+        testActivity = projectManagementApp.getActivityFactory().createActivity(string2, testProject);
         assertFalse(testActivity.containsAssignedEmployee(employee));
     }
 

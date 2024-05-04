@@ -4,7 +4,9 @@ import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IProject;
 import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.ui.*;
+import dtu.example.model.Developer;
+import dtu.example.model.ErrorMessageHolder;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -25,6 +27,8 @@ public class AssignEmployee {
     public AssignEmployee(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         projectManagementApp.getProjectRepository().reset();
+        projectManagementApp.getActivityRepository().reset();
+        projectManagementApp.getEmployeeRepository().reset();
         this.errorMessage = errorMessage;
     }
 
@@ -33,8 +37,8 @@ public class AssignEmployee {
         employee = new Developer("test");
         activityName = string2;
         projectName = string3;
-        testProject = projectManagementApp.createProject(projectName);
-        testActivity = projectManagementApp.createActivity(activityName, testProject);
+        testProject = projectManagementApp.getProjectFactory().createProject(projectName);
+        testActivity = projectManagementApp.getActivityFactory().createActivity(activityName, testProject);
         try {
             testActivity.assignEmployee(employee);
         } catch (Exception e) {

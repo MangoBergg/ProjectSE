@@ -3,12 +3,20 @@ package example.TDD_BDD;
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IProject;
-import dtu.example.ui.*;
+import dtu.example.model.Activity;
+import dtu.example.model.Developer;
+import dtu.example.model.ErrorMessageHolder;
+import dtu.example.model.Project;
+import dtu.example.model.ProjectManagementApp;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import static org.junit.Assert.assertFalse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FindFreeEmployee {
@@ -19,9 +27,13 @@ public class FindFreeEmployee {
     private ProjectManagementApp projectManagementApp;
     private ErrorMessageHolder errorMessage;
 
+    private List<IEmployee> testEmployeeList = new ArrayList<>();
+
     public FindFreeEmployee(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         projectManagementApp.getProjectRepository().reset();
+        projectManagementApp.getActivityRepository().reset();
+        projectManagementApp.getEmployeeRepository().reset();
         this.errorMessage = errorMessage;
     }
 
@@ -29,7 +41,7 @@ public class FindFreeEmployee {
     public void needsToAssignEmployeesToTheActivityScheduledForWeeksTo(String string, String string2, int int1, int int2) throws Exception {
         testEmployee = new Developer(string);
         testEmployee.registerAbsence("reason", int1, int2);
-        testProject = new Project("Project", projectManagementApp.generateProjectNumber());
+        testProject = new Project("Project", projectManagementApp.getProjectFactory().generateProjectNumber());
         testActivity = new Activity(string2, testProject);
         
         testActivity.getStartEndWeeks()[0] = int1;
@@ -39,7 +51,7 @@ public class FindFreeEmployee {
     @When("{string} prompts a list of free employees for the activity {string}")
     public void promptsAListOfFreeEmployeesForTheActivity(String string, String string2) {
         try {
-            projectManagementApp.findFreeEmployees(testActivity);
+            testEmployeeList = projectManagementApp.findFreeEmployees(testActivity);
         } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
@@ -47,6 +59,6 @@ public class FindFreeEmployee {
 
     @Then("a list is returned containing employees who are not absent in week {int} to {int}. Not assigned to {string}")
     public void aListIsReturnedContainingEmployeesWhoAreNotAbsentInWeekToNotAssignedTo(Integer int1, Integer int2, String string) {
-        assertFalse(projectManagementApp.employeeList.contains(testEmployee));
+        assertFalse(testEmployeeList.contains(testEmployee));
     }
 }

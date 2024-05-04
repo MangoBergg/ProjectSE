@@ -3,7 +3,9 @@ package example.TDD_BDD;
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IProject;
 import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.ui.*;
+import dtu.example.model.ErrorMessageHolder;
+import dtu.example.model.ProjectManagementApp;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
@@ -19,13 +21,15 @@ public class BudgetedTime {
     public BudgetedTime(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage){
         this.projectManagementApp = projectManagementApp;
         projectManagementApp.getProjectRepository().reset();
+        projectManagementApp.getActivityRepository().reset();
+        projectManagementApp.getEmployeeRepository().reset();
         this.errorMessage = errorMessage;
     }
 
     @Given("the budgeted time for the activity {string} is set to {double} hours")
     public void the_budgeted_time_for_the_activity_is_set_to_hours(String string, Double double1) throws Exception {
-        testProject = projectManagementApp.createProject("project");
-        testActivity = projectManagementApp.createActivity(string, testProject);
+        testProject = projectManagementApp.getProjectFactory().createProject("project");
+        testActivity = projectManagementApp.getActivityFactory().createActivity(string, testProject);
         try {
             testActivity.updateBudgetedTime(double1);
         } catch (Exception e) {

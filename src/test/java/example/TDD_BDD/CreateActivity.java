@@ -2,7 +2,8 @@ package example.TDD_BDD;
 
 import dtu.example.interfaces.IProject;
 import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.ui.*;
+import dtu.example.model.ErrorMessageHolder;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,6 +21,8 @@ public class CreateActivity {
     public CreateActivity(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         projectManagementApp.getProjectRepository().reset();
+        projectManagementApp.getActivityRepository().reset();
+        projectManagementApp.getEmployeeRepository().reset();
         this.errorMessage = errorMessage;
     }
 
@@ -27,16 +30,16 @@ public class CreateActivity {
     @Given("the employee selects a project named {string} from the list of projects")
     public void theEmployeeSelectsAProjectNamedFromTheListOfProjects(String string) throws Exception {
         projectName = string;
-        testProject = projectManagementApp.createProject(projectName);
+        testProject = projectManagementApp.getProjectFactory().createProject(projectName);
         assertTrue(projectManagementApp.getProjectRepository().containsProject(string));
     }
 
 
     @When("the employee attemps to create an activity {string} when the activity already exists")
     public void the_employee_attemps_to_create_an_activity_when_the_activity_already_exists(String string) throws AssertionError {
-        projectManagementApp.createActivity(string, testProject);
+        projectManagementApp.getActivityFactory().createActivity(string, testProject);
         try {
-            projectManagementApp.createActivity(string, testProject);
+            projectManagementApp.getActivityFactory().createActivity(string, testProject);
         } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
@@ -45,7 +48,7 @@ public class CreateActivity {
     @When("the employee attemps to create an activity {string} without a name")
     public void the_employee_attemps_to_create_an_activity_without_a_name(String string) throws AssertionError {
         try {
-            projectManagementApp.createActivity("", testProject);
+            projectManagementApp.getActivityFactory().createActivity("", testProject);
         } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
@@ -55,7 +58,7 @@ public class CreateActivity {
     public void aNewActivityNamedIsCreated(String string){
         activityName = string;
         try {
-            projectManagementApp.createActivity(string, testProject);
+            projectManagementApp.getActivityFactory().createActivity(string, testProject);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }

@@ -6,10 +6,10 @@ import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IProject;
 import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.ui.Activity;
-import dtu.example.ui.Developer;
-import dtu.example.ui.ErrorMessageHolder;
-import dtu.example.ui.ProjectManagementApp;
+import dtu.example.model.Activity;
+import dtu.example.model.Developer;
+import dtu.example.model.ErrorMessageHolder;
+import dtu.example.model.ProjectManagementApp;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -23,12 +23,14 @@ public class UpdateConsumedTimeWB {
     public UpdateConsumedTimeWB(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         projectManagementApp.getProjectRepository().reset();
+        projectManagementApp.getActivityRepository().reset();
+        projectManagementApp.getEmployeeRepository().reset();
         this.errorMessage = errorMessage;
     }
 
     @When("the employee updates consumed time and the input double is {double} hours")
     public void theEmployeeUpdatesConsumedTimeAndTheInputDoubleIsHours(Double double1) throws Exception {
-        testProject = projectManagementApp.createProject("project");
+        testProject = projectManagementApp.getProjectFactory().createProject("project");
         testActivity = new Activity("activity", testProject);
         testEmployee = new Developer("huba");
         try {
