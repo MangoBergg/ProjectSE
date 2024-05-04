@@ -38,9 +38,14 @@ public class Employee implements IEmployee {
     }
 
     @Override
+    public List<ConsumedTime> getConsumedTimes() {
+        return consumedTimeList;
+    }
+    
+    @Override
     public void updateConsumedTime(double hours, IActivity activity) {
         //Pre-conditions
-        assert hours>=0.5 : "Consumed time must be greater than or equal to 0.5 hours";
+        assert hours >= 0.5 : "Consumed time must be greater than or equal to 0.5 hours";
         assert hours % 0.5 == 0 : "Invalid input. Please ensure your time is in increments of 0.5";
 
         for (ConsumedTime consumedTime : consumedTimeList) {
