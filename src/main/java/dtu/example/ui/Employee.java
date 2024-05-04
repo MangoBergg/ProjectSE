@@ -21,13 +21,9 @@ public class Employee {
     }
 
     public void updateConsumedTime(double hours, Activity activity) throws Exception {
-        if (hours < 0.5) {
-            throw new Exception("Consumed time must be greater than or equal to 0.5 hours");
-        }
-        
-        if (hours % 0.5 != 0) {
-            throw new Exception("Invalid input. Please ensure your time is in increments of 0.5");
-        }
+        //Pre-conditions
+        assert hours>=0.5 : "Consumed time must be greater than or equal to 0.5 hours";
+        assert hours % 0.5 == 0 : "Invalid input. Please ensure your time is in increments of 0.5";
 
         for (ConsumedTime consumedTime : consumedTimeList) {
             if (consumedTime.activity.getName().equals(activity.getName())) {
@@ -36,7 +32,10 @@ public class Employee {
                 return;
             }
         }
-        consumedTimeList.add(new ConsumedTime(hours, activity));
+        ConsumedTime consumedTime = new ConsumedTime(hours, activity);
+        consumedTimeList.add(consumedTime);
+        //Post-conditions
+        assert consumedTimeList.contains(consumedTime) : "Consumed time has not been updated";
         activity.updateConsumedTime(hours);
     }
 
