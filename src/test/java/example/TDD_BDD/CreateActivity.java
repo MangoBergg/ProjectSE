@@ -31,12 +31,18 @@ public class CreateActivity {
     
     @Given("the activity named {string} already exists in the list of activities for a project")
     public void theActivityNamedAlreadyExistsInTheListOfActivitiesForAProject(String string) throws Exception {
-        projectName = string;
-        testProject = projectManagementApp.createProject(projectName);
         projectManagementApp.createActivity(string, testProject);
-
         try {
             projectManagementApp.createActivity(string, testProject);
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @When("the employee tries to make an activity with an empty name {string}")
+    public void the_employee_tries_to_make_an_activity_with_an_empty_name(String string) throws Exception {
+        try {
+            projectManagementApp.createActivity("", testProject);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }

@@ -27,11 +27,11 @@ public class ProjectManagementApp {
     }
 
     public Project createProject(String string) throws Exception {
-        if (containsProject(string)){
-            throw new Exception("Project with that name already exists");
-        }
         if (string.isEmpty()) {
             throw new Exception("Give name");
+        }
+        if (containsProject(string)){
+            throw new Exception("Project with that name already exists");
         }
         Project project = new Project(string, generateProjectNumber());
         projectList.add(project);
