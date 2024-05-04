@@ -38,7 +38,7 @@ public class ProjectManagementApp {
         return project;
     }
 
-    public Activity createActivity(String string, Project project) throws Exception {
+    public Activity createActivity(String string, Project project) {
         //Pre-conditions
         assert(!string.isEmpty()) : "Name cannot be empty";
         assert(!project.containsActivity(string)) : "The activity already exists in this project";

@@ -1,8 +1,6 @@
 package example.whitebox;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import dtu.example.ui.*;
 import io.cucumber.java.en.Then;
@@ -24,7 +22,7 @@ public class CreateActivityWB {
         testProject = projectManagementApp.createProject("test");
         try {
             testActivity = projectManagementApp.createActivity(string, testProject);
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
@@ -33,7 +31,7 @@ public class CreateActivityWB {
     public void thatActivityAlreadyExistsInTheProject(String string) {
         try {
             testActivity = projectManagementApp.createActivity(string, testProject);
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
