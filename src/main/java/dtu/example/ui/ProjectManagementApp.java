@@ -40,7 +40,7 @@ public class ProjectManagementApp {
 
     public Activity createActivity(String string, Project project) throws Exception {
         //Pre-conditions
-        assert(!string.isEmpty()) : "Give name for the activity";
+        assert(!string.isEmpty()) : "Name cannot be empty";
         assert(!project.containsActivity(string)) : "The activity already exists in this project";
 
         Activity activity = new Activity(string, project);
