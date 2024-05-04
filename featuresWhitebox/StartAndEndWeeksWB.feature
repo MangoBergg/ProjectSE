@@ -8,11 +8,13 @@ Feature: Determine if start-and-end weeks of an activity updates as intended by 
     Given a project "Project" exists
     And it contains the activity "Activity"
     When the start week 4 is after the end week  2
+    Then an error message "End week cannot be before start week" is given
 
   Scenario: 1(false), 2 (true), 4
     Given a project "Project" exists
     And it contains the activity "Activity"
     When the start week is 55 and the end week is 69
+    Then an error message "The start and end weeks must be within a year (1-52)" is given
 
   Scenario: 1(false), 2 (false), 5
     Given a project "Project" exists

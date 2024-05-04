@@ -41,8 +41,8 @@ public class UpdateConsumedTimeWB {
         }
     }
     
-    @Then("The user’s consumed time for the activity programming is updated by adding double1 hours to the activity programming")
-    public void theUserSConsumedTimeForTheActivityProgrammingIsUpdatedByAddingDouble1HoursToTheActivityProgramming() throws Exception {
+    @Then("the user’s consumed time for the activity programming is updated by adding double1 hours to the activity programming")
+    public void theUserSConsumedTimeForTheActivityProgrammingIsUpdatedByAddingDouble1HoursToTheActivityProgramming() {
         assertTrue(testActivity.getConsumedTime() == 2.0);
         assertTrue(testEmployee.getConsumedTimes().get(0).time == 2.0);
         assertTrue(true);

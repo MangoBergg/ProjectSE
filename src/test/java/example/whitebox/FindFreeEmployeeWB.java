@@ -106,4 +106,8 @@ public class FindFreeEmployeeWB {
         assertTrue(employeeList.contains(testEmployee));
     }
 
+    @Then("an error message {string} is given")
+    public void anErrorMessageIsGiven(String string) {
+        assertEquals(string, errorMessage.getErrorMessage());
+    }
 }

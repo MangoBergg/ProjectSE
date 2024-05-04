@@ -14,4 +14,5 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 		 ,publish= false
 		 )
 public class CucumberTest {
+	
 }
