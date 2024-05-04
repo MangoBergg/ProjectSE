@@ -2,6 +2,10 @@ package dtu.example.ui;
 
 import java.util.List;
 
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IEmployee;
+import dtu.example.interfaces.IProject;
+
 public class Printer {
     public static final String RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";
@@ -43,7 +47,7 @@ public class Printer {
     public static void displayProjectOverview(List<Project> projectList) {
         String contained = "";
         int i = 0;
-        for (Project project : projectList) {
+        for (IProject project : projectList) {
             i++;
             contained += ("(" + i + ") " + Printer.PURPLE + "[" +  project.getProjectID() + "] " + Printer.GREEN + project.getName() + Printer.RESET);
             contained += ("  (Activities : " + project.getActivityList().size() + ")");
@@ -66,7 +70,7 @@ public class Printer {
         String contained = "";
         int i = 0;
 
-        for (Activity activity : activityList) {
+        for (IActivity activity : activityList) {
             i++;
             contained += ("(" + i + ") " + Printer.GREEN + activity.getName() + Printer.RESET);
             double progress = activity.getBudgetedTime() == 0 ? 0 : activity.getConsumedTime() / activity.getBudgetedTime() * 100;
@@ -89,7 +93,7 @@ public class Printer {
         String contained = "";
         int i = 0;
         
-        for (Employee employee : employeeList) {
+        for (IEmployee employee : employeeList) {
             i++;
             contained += (i + " " + Printer.GREEN + employee.getEmployeeID() + Printer.RESET + "\n");
         }

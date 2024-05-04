@@ -2,9 +2,9 @@ package example.TDD_BDD;
 
 import static org.junit.Assert.assertFalse;
 
-import dtu.example.ui.Activity;
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IProject;
 import dtu.example.ui.ErrorMessageHolder;
-import dtu.example.ui.Project;
 import dtu.example.ui.ProjectManagementApp;
 
 import io.cucumber.java.en.Then;
@@ -13,8 +13,8 @@ import io.cucumber.java.en.When;
 public class StatusReportTest {
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
     
-    private Project testProject;
-    private Activity testActivity;
+    private IProject testProject;
+    private IActivity testActivity;
     private String statusReport;
 
     public StatusReportTest(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {

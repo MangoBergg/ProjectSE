@@ -1,5 +1,7 @@
 package example.TDD_BDD;
 
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IProject;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AssignEmployee {
 
-    private Activity testActivity;
-    private Project testProject;
+    private IActivity testActivity;
+    private IProject testProject;
     private Employee employee;
     private String projectName;
     private String activityName;

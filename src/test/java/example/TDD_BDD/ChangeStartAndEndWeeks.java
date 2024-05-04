@@ -1,10 +1,11 @@
 package example.TDD_BDD;
 
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IProject;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.messages.types.Exception;
 
 import static org.junit.Assert.*;
 
@@ -12,8 +13,8 @@ public class ChangeStartAndEndWeeks {
 
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
     private ErrorMessageHolder errorMessage;
-    private Project testProject;
-    private Activity testActivity;
+    private IProject testProject;
+    private IActivity testActivity;
 
     public ChangeStartAndEndWeeks(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;

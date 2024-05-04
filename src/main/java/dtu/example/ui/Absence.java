@@ -1,6 +1,8 @@
 package dtu.example.ui;
 
-public class Absence {
+import dtu.example.interfaces.IAbsence;
+
+public class Absence implements IAbsence {
     
     public String absenceReason;
     public int[] absenceWeeks = new int[2];

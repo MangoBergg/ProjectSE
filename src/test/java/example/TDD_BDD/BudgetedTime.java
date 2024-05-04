@@ -1,5 +1,7 @@
 package example.TDD_BDD;
 
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IProject;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,8 +12,8 @@ public class BudgetedTime {
 
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
     private ErrorMessageHolder errorMessage;
-    private Project testProject;
-    private Activity testActivity;
+    private IProject testProject;
+    private IActivity testActivity;
 
     public BudgetedTime(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage){
         this.projectManagementApp = projectManagementApp;

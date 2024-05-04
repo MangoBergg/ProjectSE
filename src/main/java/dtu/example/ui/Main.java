@@ -1,6 +1,9 @@
 package dtu.example.ui;
 import java.util.Scanner;
 
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IProject;
+
 
 public class Main {
     private static Scanner inputScanner = new Scanner(System.in);
@@ -9,8 +12,8 @@ public class Main {
         ErrorMessageHolder errorMessage = new ErrorMessageHolder();
         Employee user = loginService();
     
-        Project project;
-        Activity activity;
+        IProject project;
+        IActivity activity;
         Employee employee;
 
         int int1;

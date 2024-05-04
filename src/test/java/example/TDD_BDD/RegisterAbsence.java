@@ -1,5 +1,6 @@
 package example.TDD_BDD;
 
+import dtu.example.interfaces.IEmployee;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 public class RegisterAbsence {
 
-    private Employee employee;
+    private IEmployee employee;
     private ErrorMessageHolder errorMessage;
 
 

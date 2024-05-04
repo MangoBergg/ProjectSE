@@ -2,14 +2,16 @@ package example.whitebox;
 
 import static org.junit.Assert.assertTrue;
 
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IProject;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class CreateActivityWB {
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
-    private Project testProject;
-    private Activity testActivity;
+    private IProject testProject;
+    private IActivity testActivity;
     private ErrorMessageHolder errorMessage;
 
     public CreateActivityWB(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {

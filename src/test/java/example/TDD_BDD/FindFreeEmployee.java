@@ -1,5 +1,8 @@
 package example.TDD_BDD;
 
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IEmployee;
+import dtu.example.interfaces.IProject;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,9 +13,9 @@ import static org.junit.Assert.assertFalse;
 
 public class FindFreeEmployee {
 
-    private Employee testEmployee;
-    private Project testProject;
-    private Activity testActivity;
+    private IEmployee testEmployee;
+    private IProject testProject;
+    private IActivity testActivity;
     private ProjectManagementApp projectManagementApp;
     private ErrorMessageHolder errorMessage;
 

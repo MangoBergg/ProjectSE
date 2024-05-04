@@ -1,5 +1,7 @@
 package example.TDD_BDD;
 
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IProject;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,8 +13,8 @@ import static org.junit.Assert.assertTrue;
 
 public class RegisterTimeConsumption {
 
-    private Project testProject;
-    private Activity testActivity;
+    private IProject testProject;
+    private IActivity testActivity;
 
     private Employee employee;
 

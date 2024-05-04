@@ -3,7 +3,10 @@ package dtu.example.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Employee {
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IEmployee;
+
+public class Employee implements IEmployee {
     private String employeeID;
     private List<ConsumedTime> consumedTimeList = new ArrayList<>();
     private List<Absence> absenceList = new ArrayList<>();
@@ -12,15 +15,18 @@ public class Employee {
         this.employeeID = string;
     }
 
+    @Override
     public String getEmployeeID() {
         return employeeID;
     }
 
+    @Override
     public List<Absence> getAbsence() {
         return absenceList;
     }
 
-    public void updateConsumedTime(double hours, Activity activity) throws Exception {
+    @Override
+    public void updateConsumedTime(double hours, IActivity activity) throws Exception {
         if (hours < 0.5) {
             throw new Exception("Consumed time must be greater than or equal to 0.5 hours");
         }
@@ -40,6 +46,7 @@ public class Employee {
         activity.updateConsumedTime(hours);
     }
 
+    @Override
     public void registerAbsence(String reason, int weekStart, int weekEnd) throws Exception {
         if (weekEnd < weekStart) {
             throw new Exception("Starting week must be before the end week");

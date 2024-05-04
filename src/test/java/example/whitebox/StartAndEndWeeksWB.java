@@ -1,6 +1,7 @@
 package example.whitebox;
 
-import dtu.example.ui.Activity;
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IProject;
 import dtu.example.ui.ErrorMessageHolder;
 import dtu.example.ui.Project;
 import dtu.example.ui.ProjectManagementApp;
@@ -15,8 +16,8 @@ public class StartAndEndWeeksWB {
 
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
     private ErrorMessageHolder errorMessage;
-    private Project project;
-    private Activity activity;
+    private IProject project;
+    private IActivity activity;
 
     public StartAndEndWeeksWB(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;

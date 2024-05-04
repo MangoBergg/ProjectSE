@@ -1,6 +1,11 @@
 package dtu.example.ui;
 
 import java.util.List;
+
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IEmployee;
+import dtu.example.interfaces.IProject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -26,7 +31,7 @@ public class ProjectManagementApp {
         return Integer.parseInt(formatYear + formatSerial);
     }
 
-    public Project createProject(String string) throws Exception {
+    public IProject createProject(String string) throws Exception {
         if (string.isEmpty()) {
             throw new Exception("Give name");
         }
@@ -38,7 +43,7 @@ public class ProjectManagementApp {
         return project;
     }
 
-    public Activity createActivity(String string, Project project) {
+    public IActivity createActivity(String string, IProject project) {
         //Pre-conditions
         assert(!string.isEmpty()) : "Name cannot be empty";
         assert(!project.containsActivity(string)) : "The activity already exists in this project";
@@ -54,8 +59,8 @@ public class ProjectManagementApp {
         return activity;
     }
 
-    public Project getProjectFromName(String projectToFind) throws Exception {
-        for (Project project : projectList) {
+    public IProject getProjectFromName(String projectToFind) throws Exception {
+        for (IProject project : projectList) {
             if (project.getName().equals(projectToFind)) {
                 return project;
             }
@@ -64,7 +69,7 @@ public class ProjectManagementApp {
         throw new Exception("That project doesn't exist in the system");
     }
 
-    public Activity getActivityFromName(String activityToFind) throws Exception {
+    public IActivity getActivityFromName(String activityToFind) throws Exception {
         List<Activity> foundActivities = new ArrayList<>();
 
         for (Activity activity : activityList) {
@@ -85,8 +90,8 @@ public class ProjectManagementApp {
         throw new Exception("That activity doesn't exist in the system");
     }
 
-    public Employee getEmployeeFromName(String employeeToFind) throws Exception {
-        for (Employee employee : employeeList) {
+    public IEmployee getEmployeeFromName(String employeeToFind) throws Exception {
+        for (IEmployee employee : employeeList) {
             if (employee.getEmployeeID().equals(employeeToFind)) {
                 return employee;
             }
@@ -99,7 +104,7 @@ public class ProjectManagementApp {
         return projectList.stream().anyMatch(p -> p.getName().equals(projectName));
     }
 
-    public List<Employee> findFreeEmployees(Activity activity) {
+    public List<Employee> findFreeEmployees(IActivity activity) {
         // Pre-conditions
         assert !employeeList.isEmpty() : "There are no employees in the system";
 

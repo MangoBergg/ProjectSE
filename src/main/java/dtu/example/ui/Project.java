@@ -3,10 +3,14 @@ package dtu.example.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project {
+import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IEmployee;
+import dtu.example.interfaces.IProject;
+
+public class Project implements IProject {
     private String name;
     private int projectID;
-    private Employee projectManager;
+    private IEmployee projectManager;
     private List<Activity> activityList = new ArrayList<>();
     private int[] startEndWeeks = new int[2];
 
@@ -15,34 +19,42 @@ public class Project {
         this.projectID = projectID;
     }
     
+    @Override
     public List<Activity> getActivityList() {
         return activityList;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public int getProjectID() {
         return projectID;
     }
 
-    public Employee getProjectManager() {
+    @Override
+    public IEmployee getProjectManager() {
         return projectManager;
     }
     
+    @Override
     public int[] getStartEndWeeks() {
         return startEndWeeks;
     }
     
-    public void setProjectManager(Employee newProjectmanager) {
+    @Override
+    public void setProjectManager(IEmployee newProjectmanager) {
         projectManager = newProjectmanager;
     }
 
+    @Override
     public boolean containsActivity(String activityName) {
         return activityList.stream().anyMatch(a -> a.getName().equals(activityName));
     }
 
+    @Override
     public void updateStartEndWeeks(int weekStart, int weekEnd) {
         // Precondition
         assert startEndWeeks[0] == 0 || startEndWeeks[0] > weekStart;
@@ -57,12 +69,13 @@ public class Project {
 
     }
 
+    @Override
     public String makeReport() {
         StringBuilder returnString = new StringBuilder();
         returnString.append("Status Report:\n");
         returnString.append("---------------------------------------------------------\n");
 
-        for (Activity activity : getActivityList()) {
+        for (IActivity activity : getActivityList()) {
             double budgetTime = activity.getBudgetedTime();
             double totalConsumedTime = activity.getConsumedTime();
 
