@@ -101,4 +101,9 @@ public class FindFreeEmployeeWB {
     public void aListContainingTheEmployeeIsReturned(String string) {
         assertTrue(employeeList.contains(testEmployee));
     }
+
+    @Then("an error message {string} is given")
+    public void anErrorMessageIsGiven(String string) {
+        
+    }
 }

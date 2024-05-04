@@ -79,6 +79,4 @@ public class StartAndEndWeeksWB {
         assertEquals(4, project.getStartEndWeeks()[1]);
     }
 
-    
-
 }
