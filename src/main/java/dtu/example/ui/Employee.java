@@ -25,6 +25,7 @@ public class Employee implements IEmployee {
         return absenceList;
     }
 
+<<<<<<< HEAD
     @Override
     public void updateConsumedTime(double hours, IActivity activity) throws Exception {
         if (hours < 0.5) {
@@ -34,6 +35,12 @@ public class Employee implements IEmployee {
         if (hours % 0.5 != 0) {
             throw new Exception("Invalid input. Please ensure your time is in increments of 0.5");
         }
+=======
+    public void updateConsumedTime(double hours, Activity activity) throws Exception {
+        //Pre-conditions
+        assert hours>=0.5 : "Consumed time must be greater than or equal to 0.5 hours";
+        assert hours % 0.5 == 0 : "Invalid input. Please ensure your time is in increments of 0.5";
+>>>>>>> b32e068613346f586658ac67561d7eb43db18cc6
 
         for (ConsumedTime consumedTime : consumedTimeList) {
             if (consumedTime.activity.getName().equals(activity.getName())) {
@@ -42,7 +49,10 @@ public class Employee implements IEmployee {
                 return;
             }
         }
-        consumedTimeList.add(new ConsumedTime(hours, activity));
+        ConsumedTime consumedTime = new ConsumedTime(hours, activity);
+        consumedTimeList.add(consumedTime);
+        //Post-conditions
+        assert consumedTimeList.contains(consumedTime) : "Consumed time has not been updated";
         activity.updateConsumedTime(hours);
     }
 
