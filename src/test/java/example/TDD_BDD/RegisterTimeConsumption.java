@@ -1,6 +1,7 @@
 package example.TDD_BDD;
 
 import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IProject;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
