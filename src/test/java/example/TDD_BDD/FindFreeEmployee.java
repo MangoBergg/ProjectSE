@@ -13,10 +13,8 @@ public class FindFreeEmployee {
     private Employee testEmployee;
     private Project testProject;
     private Activity testActivity;
-
-    private ErrorMessageHolder errorMessage;
     private ProjectManagementApp projectManagementApp;
-
+    private ErrorMessageHolder errorMessage;
 
     public FindFreeEmployee(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
@@ -27,17 +25,16 @@ public class FindFreeEmployee {
     public void needsToAssignEmployeesToTheActivityScheduledForWeeksTo(String string, String string2, int int1, int int2) throws Exception {
         testEmployee = new Developer(string);
         testEmployee.registerAbsence("reason", int1, int2);
-
         testProject = new Project("Project", projectManagementApp.generateProjectNumber());
         testActivity = new Activity(string2, testProject);
         testActivity.updateStartEndWeeks(int1, int2);
     }
 
     @When("{string} prompts a list of free employees for the activity {string}")
-    public void promptsAListOfFreeEmployeesForTheActivity(String string, String string2) throws Exception {
+    public void promptsAListOfFreeEmployeesForTheActivity(String string, String string2) {
         try {
             projectManagementApp.findFreeEmployees(testActivity);
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }

@@ -99,7 +99,7 @@ public class ProjectManagementApp {
         return projectList.stream().anyMatch(p -> p.getName().equals(projectName));
     }
 
-    public List<Employee> findFreeEmployees(Activity activity) throws Exception {
+    public List<Employee> findFreeEmployees(Activity activity) {
         // Pre-conditions
         assert !employeeList.isEmpty() : "There are no employees in the system";
 
