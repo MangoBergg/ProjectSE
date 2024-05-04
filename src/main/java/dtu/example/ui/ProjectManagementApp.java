@@ -5,15 +5,16 @@ import java.util.List;
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IProject;
+import dtu.example.interfaces.IProjectManagementApp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ProjectManagementApp {
+public class ProjectManagementApp implements IProjectManagementApp {
 
-    public List<Project> projectList = new ArrayList<>();
-    public List<Activity> activityList = new ArrayList<>();
-    public List<Employee> employeeList = new ArrayList<>();
+    public List<IProject> projectList = new ArrayList<>();
+    public List<IActivity> activityList = new ArrayList<>();
+    public List<IEmployee> employeeList = new ArrayList<>();
     private Calendar calendar;
     private int serialNumber = 1;
 
@@ -22,6 +23,7 @@ public class ProjectManagementApp {
         calendar = Calendar.getInstance();
     }
 
+    @Override
     public int generateProjectNumber() {
         //If serialNumber = 1 and year is 2024 then this method returns 24001.
         int lastTwoYearDigits = calendar.get(Calendar.YEAR) % 100;
@@ -31,6 +33,7 @@ public class ProjectManagementApp {
         return Integer.parseInt(formatYear + formatSerial);
     }
 
+    @Override
     public IProject createProject(String string) throws Exception {
         if (string.isEmpty()) {
             throw new Exception("Give name");
@@ -43,6 +46,7 @@ public class ProjectManagementApp {
         return project;
     }
 
+    @Override
     public IActivity createActivity(String string, IProject project) {
         //Pre-conditions
         assert(!string.isEmpty()) : "Name cannot be empty";
@@ -59,6 +63,7 @@ public class ProjectManagementApp {
         return activity;
     }
 
+    @Override
     public IProject getProjectFromName(String projectToFind) throws Exception {
         for (IProject project : projectList) {
             if (project.getName().equals(projectToFind)) {
@@ -69,10 +74,11 @@ public class ProjectManagementApp {
         throw new Exception("That project doesn't exist in the system");
     }
 
+    @Override
     public IActivity getActivityFromName(String activityToFind) throws Exception {
-        List<Activity> foundActivities = new ArrayList<>();
+        List<IActivity> foundActivities = new ArrayList<>();
 
-        for (Activity activity : activityList) {
+        for (IActivity activity : activityList) {
             if (activity.getName().equals(activityToFind)) {
                 foundActivities.add(activity);
             }
@@ -90,6 +96,7 @@ public class ProjectManagementApp {
         throw new Exception("That activity doesn't exist in the system");
     }
 
+    @Override
     public IEmployee getEmployeeFromName(String employeeToFind) throws Exception {
         for (IEmployee employee : employeeList) {
             if (employee.getEmployeeID().equals(employeeToFind)) {
@@ -100,11 +107,13 @@ public class ProjectManagementApp {
         throw new Exception("That employee doesn't exist in the system");
     }
 
+    @Override
     public boolean containsProject(String projectName) {
         return projectList.stream().anyMatch(p -> p.getName().equals(projectName));
     }
 
-    public List<Employee> findFreeEmployees(IActivity activity) {
+    @Override
+    public List<IEmployee> findFreeEmployees(IActivity activity) {
         // Pre-conditions
         assert !employeeList.isEmpty() : "There are no employees in the system";
 
@@ -114,8 +123,8 @@ public class ProjectManagementApp {
         
         assert !(startWeek == 0 || endWeek == 0) : "Activity must have defined start and end weeks";
     
-        List<Employee> returnList = new ArrayList<>();
-        for (Employee employee : employeeList) {
+        List<IEmployee> returnList = new ArrayList<>();
+        for (IEmployee employee : employeeList) {
             if (!activity.containsAssignedEmployee(employee)) {
                 boolean isFree = true;
                 for (Absence absence : employee.getAbsence()) {

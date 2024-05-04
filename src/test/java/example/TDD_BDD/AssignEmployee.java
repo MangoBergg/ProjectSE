@@ -1,7 +1,9 @@
 package example.TDD_BDD;
 
 import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IProject;
+import dtu.example.interfaces.IProjectManagementApp;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,14 +15,14 @@ public class AssignEmployee {
 
     private IActivity testActivity;
     private IProject testProject;
-    private Employee employee;
+    private IEmployee employee;
     private String projectName;
     private String activityName;
     private ErrorMessageHolder errorMessage;
-    private ProjectManagementApp projectManagementApp;
+    private IProjectManagementApp projectManagementApp;
 
 
-    public AssignEmployee(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
+    public AssignEmployee(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         this.errorMessage = errorMessage;
     }

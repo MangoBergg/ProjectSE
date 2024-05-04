@@ -2,6 +2,7 @@ package example.whitebox;
 
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IProject;
+import dtu.example.interfaces.IProjectManagementApp;
 import dtu.example.ui.ErrorMessageHolder;
 import dtu.example.ui.Project;
 import dtu.example.ui.ProjectManagementApp;
@@ -14,12 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StartAndEndWeeksWB {
 
-    ProjectManagementApp projectManagementApp = new ProjectManagementApp();
+    IProjectManagementApp projectManagementApp = new ProjectManagementApp();
     private ErrorMessageHolder errorMessage;
     private IProject project;
     private IActivity activity;
 
-    public StartAndEndWeeksWB(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
+    public StartAndEndWeeksWB(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         this.errorMessage = errorMessage;
     }

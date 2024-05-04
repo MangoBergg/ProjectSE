@@ -4,17 +4,18 @@ import static org.junit.Assert.assertTrue;
 
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IProject;
+import dtu.example.interfaces.IProjectManagementApp;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class CreateActivityWB {
-    ProjectManagementApp projectManagementApp = new ProjectManagementApp();
+    IProjectManagementApp projectManagementApp = new ProjectManagementApp();
     private IProject testProject;
     private IActivity testActivity;
     private ErrorMessageHolder errorMessage;
 
-    public CreateActivityWB(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
+    public CreateActivityWB(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         this.errorMessage = errorMessage;
     }

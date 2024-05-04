@@ -1,6 +1,8 @@
 package dtu.example.ui;
 
-public class Developer extends Employee {
+import dtu.example.interfaces.IDeveloper;
+
+public class Developer extends Employee implements IDeveloper {
 
     public Developer(String string) {
         super(string);

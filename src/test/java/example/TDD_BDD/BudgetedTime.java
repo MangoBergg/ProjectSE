@@ -2,6 +2,7 @@ package example.TDD_BDD;
 
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IProject;
+import dtu.example.interfaces.IProjectManagementApp;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,12 +11,12 @@ import static org.junit.Assert.assertTrue;
 
 public class BudgetedTime {
 
-    ProjectManagementApp projectManagementApp = new ProjectManagementApp();
+    IProjectManagementApp projectManagementApp = new ProjectManagementApp();
     private ErrorMessageHolder errorMessage;
     private IProject testProject;
     private IActivity testActivity;
 
-    public BudgetedTime(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage){
+    public BudgetedTime(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage){
         this.projectManagementApp = projectManagementApp;
         this.errorMessage = errorMessage;
     }

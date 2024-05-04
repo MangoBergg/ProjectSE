@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IProject;
 import dtu.example.ui.Activity;
 import dtu.example.ui.Developer;
-import dtu.example.ui.Employee;
 import dtu.example.ui.ErrorMessageHolder;
 import dtu.example.ui.ProjectManagementApp;
 import io.cucumber.java.en.Then;
@@ -20,8 +20,8 @@ public class FindFreeEmployeeWB {
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
     private IProject testProject;
     private IActivity testActivity;
-    private Employee testEmployee;
-    private List<Employee> employeeList;
+    private IEmployee testEmployee;
+    private List<IEmployee> employeeList;
     private ErrorMessageHolder errorMessage;
 
     public FindFreeEmployeeWB(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {

@@ -15,7 +15,7 @@ public class Activity implements IActivity {
     private int[] startEndWeeks = new int[2];
     private double budgetTime = 0.0;
     private double consumedTime = 0.0;
-    private List<Employee> assignedEmployeesList = new ArrayList<>();
+    private List<IEmployee> assignedEmployeesList = new ArrayList<>();
 
     public Activity(String string, IProject parentProject) {
         this.name = string;
@@ -48,7 +48,7 @@ public class Activity implements IActivity {
     }
     
     @Override
-    public List<Employee> getAssignedEmployees() {
+    public List<IEmployee> getAssignedEmployees() {
         return assignedEmployeesList;
     }
 
@@ -94,7 +94,7 @@ public class Activity implements IActivity {
     }
     
     @Override
-    public void assignEmployee(Employee employee) throws Exception {
+    public void assignEmployee(IEmployee employee) throws Exception {
         if (containsAssignedEmployee(employee)) {
             throw new Exception("The employee is already assigned to the activity");
         }

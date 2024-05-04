@@ -1,6 +1,7 @@
 package example.TDD_BDD;
 
 import dtu.example.interfaces.IProject;
+import dtu.example.interfaces.IProjectManagementApp;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreateActivity {
 
-    private ProjectManagementApp projectManagementApp;
+    private IProjectManagementApp projectManagementApp;
     private String projectName;
     private String activityName;
     private ErrorMessageHolder errorMessage;
     private IProject testProject;
 
-    public CreateActivity(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
+    public CreateActivity(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         this.errorMessage = errorMessage;
     }

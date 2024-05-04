@@ -2,6 +2,8 @@ package dtu.example.ui;
 import java.util.Scanner;
 
 import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IEmployee;
+import dtu.example.interfaces.IPrinter;
 import dtu.example.interfaces.IProject;
 
 
@@ -10,11 +12,11 @@ public class Main {
     
     public static void main(String[] args) {
         ErrorMessageHolder errorMessage = new ErrorMessageHolder();
-        Employee user = loginService();
+        IEmployee user = loginService();
     
         IProject project;
         IActivity activity;
-        Employee employee;
+        IEmployee employee;
 
         int int1;
         int int2;
@@ -52,7 +54,7 @@ public class Main {
             Printer.clearScreen();
             
             if (errorMessage.getErrorMessage() != "") {
-                System.out.println(Printer.RED + errorMessage.getErrorMessage());
+                System.out.println(IPrinter.RED + errorMessage.getErrorMessage());
                 errorMessage.setErrorMessage("");
             }
 
@@ -227,7 +229,7 @@ public class Main {
     }
 
     private static void displayChoices() {
-        System.out.println(Printer.RESET +
+        System.out.println(IPrinter.RESET +
                         "1 - Add Project. 2 - Assign Project Manager. 3 - Get Status Report \n" +
                         "4 - Create Activity. 5 - Change Start and End Weeks. 6 - Change Budgeted Time \n" + 
                         "7 - Assign Employee to Activity. 8 - Find Free Employee \n" + 
@@ -235,10 +237,10 @@ public class Main {
         );
     }
 
-    private static Employee loginService() {
+    private static IEmployee loginService() {
 
         while (true) {
-            System.out.println(Printer.BLUE + "Login with your ID:" + Printer.RESET);
+            System.out.println(IPrinter.BLUE + "Login with your ID:" + IPrinter.RESET);
             String employeeID = inputScanner.nextLine();
 
             if (employeeID.matches("^[a-z]{4}$")) {
@@ -246,7 +248,7 @@ public class Main {
                 Printer.clearScreen();
                 return new Employee(employeeID);
             } else {
-                System.out.println(Printer.RED + "Invalid identification" + Printer.RESET);
+                System.out.println(IPrinter.RED + "Invalid identification" + IPrinter.RESET);
                 continue;
             }
         }

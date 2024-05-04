@@ -3,6 +3,7 @@ package example.TDD_BDD;
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IProject;
+import dtu.example.interfaces.IProjectManagementApp;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -17,14 +18,14 @@ public class RegisterTimeConsumption {
     private IProject testProject;
     private IActivity testActivity;
 
-    private Employee employee;
+    private IEmployee employee;
 
     private double before, after;
     private ErrorMessageHolder errorMessage;
-    private ProjectManagementApp projectManagementApp;
+    private IProjectManagementApp projectManagementApp;
 
 
-    public RegisterTimeConsumption(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
+    public RegisterTimeConsumption(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         this.errorMessage = errorMessage;
     }
@@ -48,7 +49,7 @@ public class RegisterTimeConsumption {
     }
 
     @When("the employee registers consumed time as {double} hours on the activity {string}")
-    public void theEmployeeRegistersConsumedTimeAsHoursOnTheActivity(Double double1, String string) {
+    public void theEmployeeRegistersConsumedTimeAsHoursOnTheActivity(Double double1, String string) throws Exception {
         try {
             before = testActivity.getConsumedTime();
             employee.updateConsumedTime(double1, testActivity);

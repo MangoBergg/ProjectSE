@@ -2,8 +2,6 @@ package dtu.example.interfaces;
 
 import java.util.List;
 
-import dtu.example.ui.Employee;
-
 public interface IActivity {
 
     String getName();
@@ -16,7 +14,7 @@ public interface IActivity {
 
     double getConsumedTime();
 
-    List<Employee> getAssignedEmployees();
+    List<IEmployee> getAssignedEmployees();
 
     void setName(String name);
 
@@ -28,7 +26,7 @@ public interface IActivity {
 
     void updateConsumedTime(double double1);
 
-    void assignEmployee(Employee employee) throws Exception;
+    void assignEmployee(IEmployee employee) throws Exception;
 
     boolean containsAssignedEmployee(IEmployee employee);
 

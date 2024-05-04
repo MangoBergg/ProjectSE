@@ -11,7 +11,7 @@ public class Project implements IProject {
     private String name;
     private int projectID;
     private IEmployee projectManager;
-    private List<Activity> activityList = new ArrayList<>();
+    private List<IActivity> activityList = new ArrayList<>();
     private int[] startEndWeeks = new int[2];
 
     public Project(String string, int projectID){
@@ -20,7 +20,7 @@ public class Project implements IProject {
     }
     
     @Override
-    public List<Activity> getActivityList() {
+    public List<IActivity> getActivityList() {
         return activityList;
     }
 

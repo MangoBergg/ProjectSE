@@ -2,29 +2,25 @@ package example.whitebox;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IProject;
+import dtu.example.interfaces.IProjectManagementApp;
 import dtu.example.ui.Activity;
 import dtu.example.ui.Developer;
-import dtu.example.ui.Employee;
 import dtu.example.ui.ErrorMessageHolder;
-import dtu.example.ui.Project;
 import dtu.example.ui.ProjectManagementApp;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class UpdateConsumedTimeWB {
-    ProjectManagementApp projectManagementApp = new ProjectManagementApp();
+    IProjectManagementApp projectManagementApp = new ProjectManagementApp();
     private IProject testProject;
     private IActivity testActivity;
     private IEmployee testEmployee;
     private ErrorMessageHolder errorMessage;
 
-    public UpdateConsumedTimeWB(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
+    public UpdateConsumedTimeWB(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
         this.errorMessage = errorMessage;
     }

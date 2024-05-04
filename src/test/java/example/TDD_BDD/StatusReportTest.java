@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 
 import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IProject;
+import dtu.example.interfaces.IProjectManagementApp;
 import dtu.example.ui.ErrorMessageHolder;
 import dtu.example.ui.ProjectManagementApp;
 
@@ -11,13 +12,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class StatusReportTest {
-    ProjectManagementApp projectManagementApp = new ProjectManagementApp();
+    IProjectManagementApp projectManagementApp = new ProjectManagementApp();
     
     private IProject testProject;
     private IActivity testActivity;
     private String statusReport;
 
-    public StatusReportTest(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
+    public StatusReportTest(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
     }
 

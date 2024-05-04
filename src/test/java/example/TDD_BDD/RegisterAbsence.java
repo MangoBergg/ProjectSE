@@ -1,6 +1,7 @@
 package example.TDD_BDD;
 
 import dtu.example.interfaces.IEmployee;
+import dtu.example.interfaces.IProjectManagementApp;
 import dtu.example.ui.*;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,7 +15,7 @@ public class RegisterAbsence {
     private ErrorMessageHolder errorMessage;
 
 
-    public RegisterAbsence(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
+    public RegisterAbsence(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.errorMessage = errorMessage;
     }
 
