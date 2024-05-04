@@ -21,6 +21,7 @@ public class FindFreeEmployee {
 
     public FindFreeEmployee(ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
+        projectManagementApp.getProjectRepository().reset();
         this.errorMessage = errorMessage;
     }
 

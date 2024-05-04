@@ -17,6 +17,7 @@ public class CreateActivityWB {
 
     public CreateActivityWB(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
+        projectManagementApp.getProjectRepository().reset();
         this.errorMessage = errorMessage;
     }
 

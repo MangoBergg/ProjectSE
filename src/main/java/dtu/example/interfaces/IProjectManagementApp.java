@@ -2,6 +2,9 @@ package dtu.example.interfaces;
 
 import java.util.List;
 
+import dtu.example.repositories.ActivityRepository;
+import dtu.example.repositories.ProjectRepository;
+
 public interface IProjectManagementApp {
 
     int generateProjectNumber();
@@ -10,14 +13,10 @@ public interface IProjectManagementApp {
 
     IActivity createActivity(String string, IProject project);
 
-    IProject getProjectFromName(String projectToFind) throws Exception;
-
-    IActivity getActivityFromName(String activityToFind) throws Exception;
-
     IEmployee getEmployeeFromName(String employeeToFind) throws Exception;
-
-    boolean containsProject(String projectName);
 
     List<IEmployee> findFreeEmployees(IActivity activity);
 
+    ProjectRepository getProjectRepository();
+    ActivityRepository getActivityRepository();
 }

@@ -22,6 +22,7 @@ public class StartAndEndWeeksWB {
 
     public StartAndEndWeeksWB(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
+        projectManagementApp.getProjectRepository().reset();
         this.errorMessage = errorMessage;
     }
 

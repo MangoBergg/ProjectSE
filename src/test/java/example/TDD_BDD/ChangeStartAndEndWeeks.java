@@ -19,6 +19,7 @@ public class ChangeStartAndEndWeeks {
 
     public ChangeStartAndEndWeeks(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
+        projectManagementApp.getProjectRepository().reset();
         this.errorMessage = errorMessage;
     }
 

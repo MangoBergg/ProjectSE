@@ -6,21 +6,25 @@ import dtu.example.interfaces.IActivity;
 import dtu.example.interfaces.IEmployee;
 import dtu.example.interfaces.IProject;
 import dtu.example.interfaces.IProjectManagementApp;
+import dtu.example.repositories.ActivityRepository;
+import dtu.example.repositories.ProjectRepository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ProjectManagementApp implements IProjectManagementApp {
 
-    public List<IProject> projectList = new ArrayList<>();
-    public List<IActivity> activityList = new ArrayList<>();
+    private ProjectRepository projectRepository;
+    private ActivityRepository activityRepository;
+    
     public List<IEmployee> employeeList = new ArrayList<>();
     private Calendar calendar;
     private int serialNumber = 1;
 
     public ProjectManagementApp() {
-        projectList = new ArrayList<>();
         calendar = Calendar.getInstance();
+        projectRepository = ProjectRepository.getInstance();
+        activityRepository = ActivityRepository.getInstance();
     }
 
     @Override
@@ -34,15 +38,25 @@ public class ProjectManagementApp implements IProjectManagementApp {
     }
 
     @Override
+    public ProjectRepository getProjectRepository() {
+        return projectRepository;
+    }
+
+    @Override
+    public ActivityRepository getActivityRepository() {
+        return activityRepository;
+    }
+
+    @Override
     public IProject createProject(String string) throws Exception {
         if (string.isEmpty()) {
             throw new Exception("Give name");
         }
-        if (containsProject(string)){
+        if (projectRepository.containsProject(string)){
             throw new Exception("Project with that name already exists");
         }
-        Project project = new Project(string, generateProjectNumber());
-        projectList.add(project);
+        IProject project = new Project(string, generateProjectNumber());
+        projectRepository.addProject(project);
         return project;
     }
 
@@ -52,8 +66,8 @@ public class ProjectManagementApp implements IProjectManagementApp {
         assert(!string.isEmpty()) : "Name cannot be empty";
         assert(!project.containsActivity(string)) : "The activity already exists in this project";
 
-        Activity activity = new Activity(string, project);
-        activityList.add(activity);
+        IActivity activity = new Activity(string, project);
+        activityRepository.addActivity(activity);
         project.getActivityList().add(activity);
         activity.setParentProject(project);
 
@@ -61,39 +75,6 @@ public class ProjectManagementApp implements IProjectManagementApp {
         assert(project.getActivityList().contains(activity)) : "The activity does not exist in activityList, which means it is not created";
 
         return activity;
-    }
-
-    @Override
-    public IProject getProjectFromName(String projectToFind) throws Exception {
-        for (IProject project : projectList) {
-            if (project.getName().equals(projectToFind)) {
-                return project;
-            }
-        }
-
-        throw new Exception("That project doesn't exist in the system");
-    }
-
-    @Override
-    public IActivity getActivityFromName(String activityToFind) throws Exception {
-        List<IActivity> foundActivities = new ArrayList<>();
-
-        for (IActivity activity : activityList) {
-            if (activity.getName().equals(activityToFind)) {
-                foundActivities.add(activity);
-            }
-        }
-
-        if (foundActivities.size() > 1) {
-            System.out.println("Which activity: " + activityToFind + " do you mean?");
-            Printer.displayActivityOverview(foundActivities);
-            
-
-        } else if (foundActivities.size() == 1) {
-            return foundActivities.get(0);
-        }
-
-        throw new Exception("That activity doesn't exist in the system");
     }
 
     @Override
@@ -105,11 +86,6 @@ public class ProjectManagementApp implements IProjectManagementApp {
         }
 
         throw new Exception("That employee doesn't exist in the system");
-    }
-
-    @Override
-    public boolean containsProject(String projectName) {
-        return projectList.stream().anyMatch(p -> p.getName().equals(projectName));
     }
 
     @Override

@@ -19,6 +19,7 @@ public class CreateActivity {
 
     public CreateActivity(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
+        projectManagementApp.getProjectRepository().reset();
         this.errorMessage = errorMessage;
     }
 
@@ -27,7 +28,7 @@ public class CreateActivity {
     public void theEmployeeSelectsAProjectNamedFromTheListOfProjects(String string) throws Exception {
         projectName = string;
         testProject = projectManagementApp.createProject(projectName);
-        assertTrue(projectManagementApp.containsProject(string));
+        assertTrue(projectManagementApp.getProjectRepository().containsProject(string));
     }
 
 

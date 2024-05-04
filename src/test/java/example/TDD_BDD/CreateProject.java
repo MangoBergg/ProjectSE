@@ -17,6 +17,7 @@ public class CreateProject {
 
     public CreateProject(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
+        projectManagementApp.getProjectRepository().reset();
         this.errorMessage = errorMessage;
     }
 
@@ -35,7 +36,7 @@ public class CreateProject {
     // The following code is reused from Hubert's video
     @Then("the project is added to the list of projects")
     public void theProjectIsAddedToTheListOfProjects() {
-        assertTrue(projectManagementApp.containsProject(projectName));
+        assertTrue(projectManagementApp.getProjectRepository().containsProject(projectName));
     }
 
     // The following code is reused from Hubert's video

@@ -36,16 +36,16 @@ public class Main {
 
             
             projectManagementApp.createActivity("Programming", projectManagementApp.createProject("Project1"));
-            projectManagementApp.createActivity("Testing", projectManagementApp.getProjectFromName("Project1"));
-            projectManagementApp.createActivity("Refactoring", projectManagementApp.getProjectFromName("Project1"));
+            projectManagementApp.createActivity("Testing", projectManagementApp.getProjectRepository().getProjectFromName("Project1"));
+            projectManagementApp.createActivity("Refactoring", projectManagementApp.getProjectRepository().getProjectFromName("Project1"));
             projectManagementApp.createActivity("Design", projectManagementApp.createProject("Project2"));
-            projectManagementApp.createActivity("Testing", projectManagementApp.getProjectFromName("Project2"));
+            projectManagementApp.createActivity("Testing", projectManagementApp.getProjectRepository().getProjectFromName("Project2"));
             projectManagementApp.createActivity("BusinessLogic", projectManagementApp.createProject("Project3"));
-            projectManagementApp.createActivity("Meeting", projectManagementApp.getProjectFromName("Project3"));
+            projectManagementApp.createActivity("Meeting", projectManagementApp.getProjectRepository().getProjectFromName("Project3"));
             projectManagementApp.createActivity("Development", projectManagementApp.createProject("Project4"));
-            projectManagementApp.createActivity("Software Requirements Specification", projectManagementApp.getProjectFromName("Project4"));
+            projectManagementApp.createActivity("Software Requirements Specification", projectManagementApp.getProjectRepository().getProjectFromName("Project4"));
             projectManagementApp.createActivity("Customer wish", projectManagementApp.createProject("Project5"));
-            projectManagementApp.createActivity("Planning", projectManagementApp.getProjectFromName("Project5"));
+            projectManagementApp.createActivity("Planning", projectManagementApp.getProjectRepository().getProjectFromName("Project5"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,7 +58,7 @@ public class Main {
                 errorMessage.setErrorMessage("");
             }
 
-            Printer.displayProjectOverview(projectManagementApp.projectList);
+            Printer.displayProjectOverview(projectManagementApp.getProjectRepository().getProjectList());
             displayChoices();
             
             int choice;
@@ -83,7 +83,7 @@ public class Main {
                 case 2:
                     try {
                         System.out.println("What project do you want to update the project manager?: ");
-                        project = projectManagementApp.projectList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        project = projectManagementApp.getProjectRepository().getProjectList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
                         Printer.displayEmployeeOverview(projectManagementApp.employeeList);
                         System.out.println("What employee should be the project manager for the project: '" + project.getName() + "'?");
@@ -97,7 +97,7 @@ public class Main {
                 case 3:
                     try {
                         System.out.println("Which project do you want to generate a status report for? : ");
-                        project = projectManagementApp.projectList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        project = projectManagementApp.getProjectRepository().getProjectList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
                         System.out.println(project.makeReport());
                         System.out.println("Type anything to go back: ");
@@ -110,7 +110,7 @@ public class Main {
                 case 4:
                     try {
                         System.out.println("What project do you want to add an activity?: ");
-                        project = projectManagementApp.projectList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        project = projectManagementApp.getProjectRepository().getProjectList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
                         Printer.displayActivityOverview(project.getActivityList());
                         System.out.println("What do you want to name the activity to be added to: '" + project.getName() + "'?");
@@ -123,9 +123,9 @@ public class Main {
                 case 5:
                     try {
                         Printer.clearScreen();
-                        Printer.displayActivityOverview(projectManagementApp.activityList);
+                        Printer.displayActivityOverview(projectManagementApp.getActivityRepository().getActivityList());
                         System.out.println("What activity do you want to update the weeks?: ");
-                        activity = projectManagementApp.activityList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        activity = projectManagementApp.getActivityRepository().getActivityList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         System.out.println("Current start end weeks is: " + activity.getStartEndWeeks()[0] + ", " + activity.getStartEndWeeks()[1]);
                         System.out.println("What should the start week be?");
                         int1 = Integer.parseInt(inputScanner.nextLine());
@@ -140,9 +140,9 @@ public class Main {
                 case 6:
                     try {
                         Printer.clearScreen();
-                        Printer.displayActivityOverview(projectManagementApp.activityList);
+                        Printer.displayActivityOverview(projectManagementApp.getActivityRepository().getActivityList());
                         System.out.println("What activity do you want to update the budgeted time?: ");
-                        activity = projectManagementApp.activityList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        activity = projectManagementApp.getActivityRepository().getActivityList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         System.out.println("Current budgeted time is: " + activity.getBudgetedTime());
                         System.out.println("What should the budgeted time be?");
                         try {
@@ -159,9 +159,9 @@ public class Main {
                 case 7:
                     try {
                         Printer.clearScreen();
-                        Printer.displayActivityOverview(projectManagementApp.activityList);
+                        Printer.displayActivityOverview(projectManagementApp.getActivityRepository().getActivityList());
                         System.out.println("What activity do you want to assign an employee?: ");
-                        activity = projectManagementApp.activityList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        activity = projectManagementApp.getActivityRepository().getActivityList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
                         Printer.displayEmployeeOverview(projectManagementApp.employeeList);
                         System.out.println("What employee should be added?");
@@ -175,9 +175,9 @@ public class Main {
                 case 8:
                     try {
                         Printer.clearScreen();
-                        Printer.displayActivityOverview(projectManagementApp.activityList);
+                        Printer.displayActivityOverview(projectManagementApp.getActivityRepository().getActivityList());
                         System.out.println("What activity do you want to find an employee for?: ");
-                        activity = projectManagementApp.activityList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        activity = projectManagementApp.getActivityRepository().getActivityList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
                         Printer.displayEmployeeOverview(projectManagementApp.findFreeEmployees(activity));
                         System.out.println("Write any number to go back:");
@@ -190,9 +190,9 @@ public class Main {
                 case 9:
                     try {
                         Printer.clearScreen();
-                        Printer.displayActivityOverview(projectManagementApp.activityList);
+                        Printer.displayActivityOverview(projectManagementApp.getActivityRepository().getActivityList());
                         System.out.println("What activity do you want to register time to?: ");
-                        activity = projectManagementApp.activityList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
+                        activity = projectManagementApp.getActivityRepository().getActivityList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
                         Printer.clearScreen();
                         System.out.println("How much time do you want to register?: ");
                         //user.updateConsumedTime(Double.parseDouble(inputScanner.nextLine()), activity);

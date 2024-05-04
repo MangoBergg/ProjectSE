@@ -20,6 +20,7 @@ public class StatusReportTest {
 
     public StatusReportTest(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
+        projectManagementApp.getProjectRepository().reset();
     }
 
     @When("an employee prompts a status report for the project {string}")

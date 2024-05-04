@@ -18,6 +18,7 @@ public class BudgetedTime {
 
     public BudgetedTime(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage){
         this.projectManagementApp = projectManagementApp;
+        projectManagementApp.getProjectRepository().reset();
         this.errorMessage = errorMessage;
     }
 

@@ -27,6 +27,7 @@ public class RegisterTimeConsumption {
 
     public RegisterTimeConsumption(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
+        projectManagementApp.getProjectRepository().reset();
         this.errorMessage = errorMessage;
     }
 

@@ -16,6 +16,7 @@ public class AssignProjectManager {
 
     public AssignProjectManager(IProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage) {
         this.projectManagementApp = projectManagementApp;
+        projectManagementApp.getProjectRepository().reset();
     }
 
     @Given("a project {string} exists")
@@ -25,7 +26,7 @@ public class AssignProjectManager {
 
     @When("the user registers a project manager")
     public void theUserRegistersAProjectManager() throws Exception {
-        testProject = projectManagementApp.getProjectFromName("Project");
+        testProject = projectManagementApp.getProjectRepository().getProjectFromName("Project");
         testProject.setProjectManager(new Developer("juba"));
     }
 
