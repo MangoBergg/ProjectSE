@@ -2,6 +2,7 @@ package example.whitebox;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
@@ -104,6 +105,6 @@ public class FindFreeEmployeeWB {
 
     @Then("an error message {string} is given")
     public void anErrorMessageIsGiven(String string) {
-        
+        assertEquals(string, errorMessage.getErrorMessage());
     }
 }
