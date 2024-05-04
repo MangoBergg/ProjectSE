@@ -29,8 +29,8 @@ public class FindFreeEmployeeWB {
         this.errorMessage = errorMessage;
     }
 
-    @When("the employee searches for available employees for an activity {string} and the employeeList is empty")
-    public void theEmployeeSearchesForAvailableEmployeesForAnActivityAndTheEmployeeListIsEmpty(String string) throws Exception {
+    @When("the employee searches for available employees for an activity {string} in an empty employeeList")
+    public void the_employee_searches_for_available_employees_for_an_activity_in_an_empty_employee_list(String string) throws Exception {
         testProject = projectManagementApp.createProject("project");
         testActivity = new Activity(string, testProject);
         testEmployee = new Developer("huba");
@@ -41,9 +41,31 @@ public class FindFreeEmployeeWB {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
-    
-    @When("the employee searches for available employees for an activity {string} and the employeeList is not empty")
-    public void theEmployeeSearchesForAvailableEmployeesForAnActivityAndTheEmployeeListIsNotEmpty(String string) throws Exception {
+
+
+
+    @When("the employee searches for available employees for an activity {string} in an employeeList that is not empty")
+    public void the_employee_searches_for_available_employees_for_an_activity_in_an_employee_list_that_is_not_empty(String string) throws Exception {
+        testProject = projectManagementApp.createProject("project");
+        testActivity = new Activity(string, testProject);
+        testEmployee = new Developer("huba");
+
+        try {
+            projectManagementApp.employeeList.add(testEmployee);
+            employeeList = projectManagementApp.findFreeEmployees(testActivity);
+        } catch (AssertionError e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @When("the activity doesnt have defined weeks")
+    public void the_activity_doesnt_have_defined_weeks() {
+        assertEquals(0, testActivity.getStartEndWeeks()[0]);
+        assertEquals(0, testActivity.getStartEndWeeks()[1]);
+    }
+
+    @When("the employee searches for available employees for an activity {string} with start and end weeks in an employeeList that is not empty")
+    public void the_employee_searches_for_available_employees_for_an_activity_with_start_and_end_weeks_in_an_employee_list_that_is_not_empty(String string) throws Exception {
         testProject = projectManagementApp.createProject("project");
         testActivity = new Activity(string, testProject);
         testActivity.updateStartEndWeeks(1, 4);
@@ -56,26 +78,6 @@ public class FindFreeEmployeeWB {
         } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
-    }
-
-    @When("the employee searches for available employees for an activity {string} and the employeeList is not empty and the activity doesnt have defined weeks")
-    public void theEmployeeSearchesForAvailableEmployeesForAnActivityAndTheEmployeeListIsNotEmptyAndTheActivityDoesntHaveDefinedWeeks(String string) throws Exception {
-        testProject = projectManagementApp.createProject("project");
-        testActivity = new Activity(string, testProject);
-        testEmployee = new Developer("huba");
-
-        try {
-            projectManagementApp.employeeList.add(testEmployee);
-            employeeList = projectManagementApp.findFreeEmployees(testActivity);
-        } catch (AssertionError e) {
-            errorMessage.setErrorMessage(e.getMessage());
-        }
-    }
-
-    @When("the activity doesn't have defined weeks")
-    public void theActivityDoesnTHaveDefinedWeeks() {
-        testActivity.getStartEndWeeks()[0] = 0;
-        testActivity.getStartEndWeeks()[1] = 0;
     }
 
     @When("no available employee is found for the activity")
@@ -104,8 +106,4 @@ public class FindFreeEmployeeWB {
         assertTrue(employeeList.contains(testEmployee));
     }
 
-    @Then("an error message {string} is given")
-    public void anErrorMessageIsGiven(String string) {
-        assertEquals(string, errorMessage.getErrorMessage());
-    }
 }

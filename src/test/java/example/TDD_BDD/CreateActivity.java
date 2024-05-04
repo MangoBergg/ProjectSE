@@ -31,20 +31,20 @@ public class CreateActivity {
 
 
     @When("the employee attemps to create an activity {string} when the activity already exists")
-    public void the_employee_attemps_to_create_an_activity_when_the_activity_already_exists(String string) throws Exception {
+    public void the_employee_attemps_to_create_an_activity_when_the_activity_already_exists(String string) throws AssertionError {
         projectManagementApp.createActivity(string, testProject);
         try {
             projectManagementApp.createActivity(string, testProject);
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
 
     @When("the employee attemps to create an activity {string} without a name")
-    public void the_employee_attemps_to_create_an_activity_without_a_name(String string) {
+    public void the_employee_attemps_to_create_an_activity_without_a_name(String string) throws AssertionError {
         try {
             projectManagementApp.createActivity("", testProject);
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
