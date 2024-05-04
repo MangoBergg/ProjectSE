@@ -39,12 +39,13 @@ public class ProjectManagementApp {
     }
 
     public Activity createActivity(String string, Project project) throws Exception {
+        //Pre-conditions
         assert(string.isEmpty()) : "Give name for the activity";
         assert(project.containsActivity(string)) : "The activity already exists in this project";
 
+        //Post-conditions
         Activity activity = new Activity(string, project);
         activityList.add(activity);
-
         project.getActivityList().add(activity);
         activity.setParentProject(project);
         return activity;
