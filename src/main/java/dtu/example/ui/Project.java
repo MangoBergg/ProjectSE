@@ -44,12 +44,17 @@ public class Project {
     }
 
     public void updateStartEndWeeks(int weekStart, int weekEnd) {
-        if (startEndWeeks[0] == 0 || startEndWeeks[0] > weekStart) {
-            startEndWeeks[0] = weekStart;
-        } 
-        if (startEndWeeks[1] < weekEnd) {
-            startEndWeeks[1] = weekEnd;
-        }
+        // Precondition
+        assert startEndWeeks[0] == 0 || startEndWeeks[0] > weekStart;
+        startEndWeeks[0] = weekStart;
+
+        assert startEndWeeks[1] < weekEnd;
+        startEndWeeks[1] = weekEnd;
+
+        // Postcondition
+        assert (startEndWeeks[0] == weekStart);
+        assert (startEndWeeks[1] == weekEnd);
+
     }
 
     public String makeReport() {

@@ -16,8 +16,6 @@ public class Activity {
     public Activity(String string, Project parentProject) {
         this.name = string;
         this.parentProject = parentProject;
-        startEndWeeks[0] = 0;
-        startEndWeeks[1] = 0;
     }
 
     public String getName() {
@@ -53,12 +51,17 @@ public class Activity {
     }
 
     public void updateStartEndWeeks(int weekStart, int weekEnd) {
-        assert (weekEnd < weekStart) : "End week cannot be before start week";
+        // Precondition
+        assert (weekEnd < weekStart);
+        assert (weekStart < 1 || weekStart > 52 || weekEnd > 52);
 
-        assert (weekStart < 1 || weekStart > 52 || weekEnd > 52) : "The start and end weeks must be within a year (1-52)";
         startEndWeeks[0] = weekStart;
         startEndWeeks[1] = weekEnd;
         parentProject.updateStartEndWeeks(weekStart, weekEnd);
+
+        // Postcondition
+        assert (startEndWeeks[0] == weekStart);
+        assert (startEndWeeks[1] == weekEnd);
     }
 
     public void updateBudgetedTime(double budgetTime) throws Exception {
