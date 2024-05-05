@@ -107,7 +107,7 @@ public class Printer implements IPrinter {
                         "4 - Create Activity. 5 - Change Start and End Weeks. 6 - Change Budgeted Time \n" + 
                         "7 - Assign Employee to Activity. 8 - Find Free Employee \n" + 
                         "9 - Register Consumed Time. 10 - Register Absence \n" + 
-                        "11 - Delete Project \n"
+                        "11 - Delete Project. 12 - Delete Activity\n"
         );
     }
 }
