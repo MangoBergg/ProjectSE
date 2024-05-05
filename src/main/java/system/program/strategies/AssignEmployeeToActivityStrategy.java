@@ -17,9 +17,9 @@ public class AssignEmployeeToActivityStrategy implements UserActionStrategy {
             System.out.println("Which activity do you want to assign an employee to?: ");
             IActivity activity = projectManagementApp.getActivityRepository().getActivityList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
             Printer.clearScreen();
-            Printer.displayEmployeeOverview(projectManagementApp.getEmployeeRepository().getEmployeeList());
-            System.out.println("Which employee should be added?");
-            IEmployee employee = projectManagementApp.getEmployeeRepository().getEmployeeList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
+            Printer.displayEmployeeOverview(projectManagementApp.findFreeEmployees(activity));
+            System.out.println("Which free employee should be assigned?");
+            IEmployee employee = projectManagementApp.findFreeEmployees(activity).get(Integer.parseInt(inputScanner.nextLine()) - 1);
             activity.assignEmployee(employee);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
