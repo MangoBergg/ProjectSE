@@ -12,7 +12,7 @@ public class AddActivityToProjectStrategy implements UserActionStrategy {
     @Override
     public void execute(Scanner inputScanner, ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage, IEmployee user) {
         try {
-            System.out.println("What project do you want to add an activity?: ");
+            System.out.println("Which project do you want to add an activity to?: ");
             IProject project = projectManagementApp.getProjectRepository().getProjectList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
             Printer.clearScreen();
             Printer.displayActivityOverview(project.getActivityList());

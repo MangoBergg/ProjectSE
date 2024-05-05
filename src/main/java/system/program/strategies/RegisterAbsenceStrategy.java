@@ -12,7 +12,7 @@ public class RegisterAbsenceStrategy implements UserActionStrategy {
     public void execute(Scanner inputScanner, ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage, IEmployee user) {
         try {
             Printer.clearScreen();
-            System.out.println("What's the reason for your absence?: ");
+            System.out.println("What is the reason for your absence?: ");
             String reason = inputScanner.nextLine();
             System.out.println("What is the starting week of your absence?: ");
             int startWeek = Integer.parseInt(inputScanner.nextLine());

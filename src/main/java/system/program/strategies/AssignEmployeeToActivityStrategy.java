@@ -14,11 +14,11 @@ public class AssignEmployeeToActivityStrategy implements UserActionStrategy {
         try {
             Printer.clearScreen();
             Printer.displayActivityOverview(projectManagementApp.getActivityRepository().getActivityList());
-            System.out.println("What activity do you want to assign an employee to?: ");
+            System.out.println("Which activity do you want to assign an employee to?: ");
             IActivity activity = projectManagementApp.getActivityRepository().getActivityList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
             Printer.clearScreen();
             Printer.displayEmployeeOverview(projectManagementApp.getEmployeeRepository().getEmployeeList());
-            System.out.println("What employee should be added?");
+            System.out.println("Which employee should be added?");
             IEmployee employee = projectManagementApp.getEmployeeRepository().getEmployeeList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
             activity.assignEmployee(employee);
         } catch (Exception e) {

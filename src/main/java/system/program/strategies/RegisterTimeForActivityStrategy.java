@@ -14,7 +14,7 @@ public class RegisterTimeForActivityStrategy implements UserActionStrategy {
         try {
             Printer.clearScreen();
             Printer.displayActivityOverview(projectManagementApp.getActivityRepository().getActivityList());
-            System.out.println("What activity do you want to register time for?: ");
+            System.out.println("Which activity do you want to register time to?: ");
             IActivity activity = projectManagementApp.getActivityRepository().getActivityList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
             Printer.clearScreen();
             System.out.println("How much time do you want to register?: ");

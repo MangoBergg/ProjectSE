@@ -14,7 +14,7 @@ public class UpdateActivityBudgetedTimeStrategy implements UserActionStrategy {
         try {
             Printer.clearScreen();
             Printer.displayActivityOverview(projectManagementApp.getActivityRepository().getActivityList());
-            System.out.println("What activity do you want to update the budgeted time?: ");
+            System.out.println("Which activity do you want to update the budgeted time for?: ");
             IActivity activity = projectManagementApp.getActivityRepository().getActivityList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
             System.out.println("Current budgeted time is: " + activity.getBudgetedTime());
             System.out.println("What should the budgeted time be?");
