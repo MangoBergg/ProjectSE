@@ -101,13 +101,33 @@ public class Printer implements IPrinter {
         }
     }
 
+    public static void displayConsumedTime(List<ConsumedTime> consumedTimes) {
+        String contained = "";
+        int i = 0;
+        
+        for (ConsumedTime consumedTime : consumedTimes) {
+            i++;
+            contained += (i + " " + IPrinter.GREEN + consumedTime.activity.getName() + IPrinter.RESET + " Current time: " + consumedTime.time + "\n");
+        }
+
+        if(!contained.isBlank()) {
+            System.out.println(IPrinter.BLUE + "You have these times registered:");
+            Printer.printLine();
+            System.out.println(contained);
+            Printer.printLine();
+        }
+        else {
+            System.out.println(IPrinter.BLUE + "You don't have any consumed time registered.");
+        }
+    }
+
     public static void displayChoices() {
         System.out.print(IPrinter.RESET +
                         "1 - Add Project. 2 - Assign Project Manager. 3 - Get Status Report \n" +
                         "4 - Create Activity. 5 - Change Start and End Weeks. 6 - Change Budgeted Time \n" + 
                         "7 - Assign Employee to Activity. 8 - Find Free Employee \n" + 
                         "9 - Register Consumed Time. 10 - Register Absence \n" + 
-                        "11 - Delete Project. 12 - Delete Activity\n"
+                        "11 - Delete Project. 12 - Delete Activity. 13 - Update Consumed Time\n"
         );
     }
 }

@@ -43,7 +43,7 @@ public class Runnable {
             int choice;
             try {
                 choice = Integer.parseInt(inputScanner.nextLine());
-                if (choice < 1 || choice > 12) {
+                if (choice < 1 || choice > 13) {
                     throw new Exception("Input not valid choice");
                 }
             } catch (Exception e) {

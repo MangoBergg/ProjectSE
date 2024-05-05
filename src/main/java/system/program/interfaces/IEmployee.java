@@ -13,6 +13,7 @@ public interface IEmployee {
 
     List<ConsumedTime> getConsumedTimes();
     
+    void changeConsumedTime(double hours, IActivity activity) throws Exception;
     void updateConsumedTime(double hours, IActivity activity) throws Exception;
 
     void registerAbsence(String reason, int weekStart, int weekEnd) throws Exception;

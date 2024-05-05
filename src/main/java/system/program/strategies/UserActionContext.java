@@ -24,6 +24,7 @@ public class UserActionContext {
         strategyMap.put(10, new RegisterAbsenceStrategy());
         strategyMap.put(11, new DeleteProjectStrategy());
         strategyMap.put(12, new DeleteActivityStrategy());
+        strategyMap.put(13, new UpdateConsumedTimeStrategy());
     }
 
     public void execute(int choice, Scanner inputScanner, ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage, IEmployee user) {
