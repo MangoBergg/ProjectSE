@@ -1,13 +1,12 @@
 package example.TDD_BDD;
 
-import dtu.example.interfaces.IActivity;
-import dtu.example.interfaces.IProject;
-import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.model.ErrorMessageHolder;
-import dtu.example.model.ProjectManagementApp;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import system.program.interfaces.IActivity;
+import system.program.interfaces.IProject;
+import system.program.interfaces.IProjectManagementApp;
+import system.program.model.ErrorMessageHolder;
+import system.program.model.ProjectManagementApp;
 
 import static org.junit.Assert.assertTrue;
 

@@ -3,13 +3,12 @@ package example.TDD_BDD;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.model.ErrorMessageHolder;
-import dtu.example.model.ProjectManagementApp;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import system.program.interfaces.IProjectManagementApp;
+import system.program.model.ErrorMessageHolder;
+import system.program.model.ProjectManagementApp;
 
 public class CreateProject {
 

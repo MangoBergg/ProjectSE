@@ -1,13 +1,12 @@
 package example.TDD_BDD;
 
-import dtu.example.interfaces.IEmployee;
-import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.model.Absence;
-import dtu.example.model.Developer;
-import dtu.example.model.ErrorMessageHolder;
-
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import system.program.interfaces.IEmployee;
+import system.program.interfaces.IProjectManagementApp;
+import system.program.model.Absence;
+import system.program.model.Developer;
+import system.program.model.ErrorMessageHolder;
 
 import static org.junit.Assert.assertTrue;
 

@@ -2,13 +2,13 @@ package example.TDD_BDD;
 
 import static org.junit.Assert.assertFalse;
 
-import dtu.example.interfaces.IActivity;
-import dtu.example.interfaces.IProject;
-import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.model.ErrorMessageHolder;
-import dtu.example.model.ProjectManagementApp;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import system.program.interfaces.IActivity;
+import system.program.interfaces.IProject;
+import system.program.interfaces.IProjectManagementApp;
+import system.program.model.ErrorMessageHolder;
+import system.program.model.ProjectManagementApp;
 
 public class StatusReportTest {
     IProjectManagementApp projectManagementApp = new ProjectManagementApp();

@@ -1,15 +1,14 @@
 package example.TDD_BDD;
 
-import dtu.example.interfaces.IActivity;
-import dtu.example.interfaces.IEmployee;
-import dtu.example.interfaces.IProject;
-import dtu.example.interfaces.IProjectManagementApp;
-import dtu.example.model.Developer;
-import dtu.example.model.ErrorMessageHolder;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import system.program.interfaces.IActivity;
+import system.program.interfaces.IEmployee;
+import system.program.interfaces.IProject;
+import system.program.interfaces.IProjectManagementApp;
+import system.program.model.Developer;
+import system.program.model.ErrorMessageHolder;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

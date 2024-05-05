@@ -6,15 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import dtu.example.interfaces.IActivity;
-import dtu.example.interfaces.IEmployee;
-import dtu.example.interfaces.IProject;
-import dtu.example.model.Activity;
-import dtu.example.model.Developer;
-import dtu.example.model.ErrorMessageHolder;
-import dtu.example.model.ProjectManagementApp;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import system.program.interfaces.IActivity;
+import system.program.interfaces.IEmployee;
+import system.program.interfaces.IProject;
+import system.program.model.Activity;
+import system.program.model.Developer;
+import system.program.model.ErrorMessageHolder;
+import system.program.model.ProjectManagementApp;
 
 public class FindFreeEmployeeWB {
     ProjectManagementApp projectManagementApp = new ProjectManagementApp();
