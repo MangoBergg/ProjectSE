@@ -22,6 +22,7 @@ public class UserActionContext {
         strategyMap.put(8, new FindFreeEmployeeStrategy());
         strategyMap.put(9, new RegisterTimeForActivityStrategy());
         strategyMap.put(10, new RegisterAbsenceStrategy());
+        strategyMap.put(11, new DeleteProjectStrategy());
     }
 
     public void execute(int choice, Scanner inputScanner, ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage, IEmployee user) {
