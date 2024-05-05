@@ -74,8 +74,7 @@ public class Project implements IProject {
         StringBuilder returnString = new StringBuilder();
         returnString.append("Status Report:\n");
         returnString.append("---------------------------------------------------------\n");
-
-        //int[] startEndWeeksProject = name.getStartEndWeeks();
+        returnString.append("Start and end weeks: " + startEndWeeks[0] + " - " + startEndWeeks[1] + "\n");
 
         for (IActivity activity : getActivityList()) {
             int[] startEndWeeks = activity.getStartEndWeeks();
