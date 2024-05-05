@@ -66,6 +66,7 @@ public class Printer implements IPrinter {
             contained += ("(" + i + ") " + IPrinter.GREEN + activity.getName() + IPrinter.RESET);
             double progress = activity.getBudgetedTime() == 0 ? 0 : activity.getConsumedTime() / activity.getBudgetedTime() * 100;
             contained += " Progress: " + (int) Math.round(progress) +  "%";
+            contained += IPrinter.GREEN + " Planned: " + IPrinter.RESET + activity.getStartEndWeeks()[0] + " - " + activity.getStartEndWeeks()[1];
             contained += ("  (" + activity.getParentProject().getName() + ") \n");
         }
 
@@ -98,5 +99,14 @@ public class Printer implements IPrinter {
         else {
             System.out.println(IPrinter.BLUE + "There are no employees in the system");
         }
+    }
+
+    public static void displayChoices() {
+        System.out.print(IPrinter.RESET +
+                        "1 - Add Project. 2 - Assign Project Manager. 3 - Get Status Report \n" +
+                        "4 - Create Activity. 5 - Change Start and End Weeks. 6 - Change Budgeted Time \n" + 
+                        "7 - Assign Employee to Activity. 8 - Find Free Employee \n" + 
+                        "9 - Register Consumed Time. 10 - Register Absence \n"
+        );
     }
 }

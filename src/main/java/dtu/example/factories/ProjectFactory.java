@@ -3,10 +3,11 @@ package dtu.example.factories;
 import java.util.Calendar;
 
 import dtu.example.interfaces.IProject;
+import dtu.example.interfaces.IProjectFactory;
 import dtu.example.model.Project;
 import dtu.example.repositories.ProjectRepository;
 
-public class ProjectFactory {
+public class ProjectFactory implements IProjectFactory {
     ProjectRepository projectRepository;
     private int serialNumber = 1;
     private Calendar calendar;
@@ -16,6 +17,7 @@ public class ProjectFactory {
         projectRepository = ProjectRepository.getInstance();
     }
 
+    @Override
     public IProject createProject(String string) throws Exception {
         if (string.isEmpty()) {
             throw new Exception("Give name");
@@ -28,6 +30,7 @@ public class ProjectFactory {
         return project;
     }
 
+    @Override
     public int generateProjectNumber() {
         //If serialNumber = 1 and year is 2024 then this method returns 24001.
         int lastTwoYearDigits = calendar.get(Calendar.YEAR) % 100;

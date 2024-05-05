@@ -1,17 +1,19 @@
 package dtu.example.factories;
 
 import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IActivityFactory;
 import dtu.example.interfaces.IProject;
 import dtu.example.model.Activity;
 import dtu.example.repositories.ActivityRepository;
 
-public class ActivityFactory {
+public class ActivityFactory implements IActivityFactory {
     ActivityRepository activityRepository;
 
     public ActivityFactory() {
         activityRepository = ActivityRepository.getInstance();
     }
 
+    @Override
     public IActivity createActivity(String string, IProject project) {
         //Pre-conditions
         assert(!string.isEmpty()) : "Name cannot be empty";

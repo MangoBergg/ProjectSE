@@ -66,7 +66,6 @@ public class Project implements IProject {
         // Postcondition
         assert (startEndWeeks[0] == weekStart);
         assert (startEndWeeks[1] == weekEnd);
-
     }
 
     @Override

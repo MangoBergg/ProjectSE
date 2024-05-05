@@ -5,7 +5,9 @@ import java.util.List;
 import dtu.example.factories.ActivityFactory;
 import dtu.example.factories.ProjectFactory;
 import dtu.example.interfaces.IActivity;
+import dtu.example.interfaces.IActivityFactory;
 import dtu.example.interfaces.IEmployee;
+import dtu.example.interfaces.IProjectFactory;
 import dtu.example.interfaces.IProjectManagementApp;
 import dtu.example.repositories.ActivityRepository;
 import dtu.example.repositories.EmployeeRepository;
@@ -19,8 +21,8 @@ public class ProjectManagementApp implements IProjectManagementApp {
     private ActivityRepository activityRepository;
     private EmployeeRepository employeeRepository;
 
-    private ProjectFactory projectFactory;
-    private ActivityFactory activityFactory;
+    private IProjectFactory projectFactory;
+    private IActivityFactory activityFactory;
 
     public ProjectManagementApp() {
         projectRepository = ProjectRepository.getInstance();
@@ -46,12 +48,12 @@ public class ProjectManagementApp implements IProjectManagementApp {
     }
 
     @Override
-    public ProjectFactory getProjectFactory() {
+    public IProjectFactory getProjectFactory() {
         return projectFactory;
     }
 
     @Override
-    public ActivityFactory getActivityFactory() {
+    public IActivityFactory getActivityFactory() {
         return activityFactory;
     }
 
