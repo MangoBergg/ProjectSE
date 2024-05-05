@@ -22,23 +22,7 @@ public class Runnable {
         projectManagementApp.getEmployeeRepository().addEmployee(user);
 
         try {
-            projectManagementApp.getEmployeeRepository().addEmployee(new Developer("juba"));
-            projectManagementApp.getEmployeeRepository().addEmployee(new Developer("nuba"));
-            projectManagementApp.getEmployeeRepository().addEmployee(new Developer("kuba"));
-            projectManagementApp.getEmployeeRepository().addEmployee(new Developer("puba"));
-            projectManagementApp.getEmployeeRepository().addEmployee(new Developer("duba"));
-
-            projectManagementApp.getActivityFactory().createActivity("Programming", projectManagementApp.getProjectFactory().createProject("Project1"));
-            projectManagementApp.getActivityFactory().createActivity("Testing", projectManagementApp.getProjectRepository().getProjectFromName("Project1"));
-            projectManagementApp.getActivityFactory().createActivity("Refactoring", projectManagementApp.getProjectRepository().getProjectFromName("Project1"));
-            projectManagementApp.getActivityFactory().createActivity("Design", projectManagementApp.getProjectFactory().createProject("Project2"));
-            projectManagementApp.getActivityFactory().createActivity("Testing", projectManagementApp.getProjectRepository().getProjectFromName("Project2"));
-            projectManagementApp.getActivityFactory().createActivity("BusinessLogic", projectManagementApp.getProjectFactory().createProject("Project3"));
-            projectManagementApp.getActivityFactory().createActivity("Meeting", projectManagementApp.getProjectRepository().getProjectFromName("Project3"));
-            projectManagementApp.getActivityFactory().createActivity("Development", projectManagementApp.getProjectFactory().createProject("Project4"));
-            projectManagementApp.getActivityFactory().createActivity("Software Requirements Specification", projectManagementApp.getProjectRepository().getProjectFromName("Project4"));
-            projectManagementApp.getActivityFactory().createActivity("Customer wish", projectManagementApp.getProjectFactory().createProject("Project5"));
-            projectManagementApp.getActivityFactory().createActivity("Planning", projectManagementApp.getProjectRepository().getProjectFromName("Project5"));
+            setupDemo(projectManagementApp);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,5 +67,25 @@ public class Runnable {
                 System.out.println(IPrinter.RED + "Invalid identification" + IPrinter.RESET);
             }
         }
+    }
+
+    private static void setupDemo(ProjectManagementApp projectManagementApp) throws Exception {
+        projectManagementApp.getEmployeeRepository().addEmployee(new Developer("juba"));
+        projectManagementApp.getEmployeeRepository().addEmployee(new Developer("nuba"));
+        projectManagementApp.getEmployeeRepository().addEmployee(new Developer("kuba"));
+        projectManagementApp.getEmployeeRepository().addEmployee(new Developer("puba"));
+        projectManagementApp.getEmployeeRepository().addEmployee(new Developer("duba"));
+
+        projectManagementApp.getActivityFactory().createActivity("Programming", projectManagementApp.getProjectFactory().createProject("Project1"));
+        projectManagementApp.getActivityFactory().createActivity("Testing", projectManagementApp.getProjectRepository().getProjectFromName("Project1"));
+        projectManagementApp.getActivityFactory().createActivity("Refactoring", projectManagementApp.getProjectRepository().getProjectFromName("Project1"));
+        projectManagementApp.getActivityFactory().createActivity("Design", projectManagementApp.getProjectFactory().createProject("Project2"));
+        projectManagementApp.getActivityFactory().createActivity("Testing", projectManagementApp.getProjectRepository().getProjectFromName("Project2"));
+        projectManagementApp.getActivityFactory().createActivity("BusinessLogic", projectManagementApp.getProjectFactory().createProject("Project3"));
+        projectManagementApp.getActivityFactory().createActivity("Meeting", projectManagementApp.getProjectRepository().getProjectFromName("Project3"));
+        projectManagementApp.getActivityFactory().createActivity("Development", projectManagementApp.getProjectFactory().createProject("Project4"));
+        projectManagementApp.getActivityFactory().createActivity("Software Requirements Specification", projectManagementApp.getProjectRepository().getProjectFromName("Project4"));
+        projectManagementApp.getActivityFactory().createActivity("Customer wish", projectManagementApp.getProjectFactory().createProject("Project5"));
+        projectManagementApp.getActivityFactory().createActivity("Planning", projectManagementApp.getProjectRepository().getProjectFromName("Project5"));
     }
 }

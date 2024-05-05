@@ -1,5 +1,6 @@
 package system.program.strategies;
 
+import java.util.List;
 import java.util.Scanner;
 
 import system.program.interfaces.IActivity;
@@ -17,9 +18,10 @@ public class AssignEmployeeToActivityStrategy implements UserActionStrategy {
             System.out.println("Which activity do you want to assign an employee to?: ");
             IActivity activity = projectManagementApp.getActivityRepository().getActivityList().get(Integer.parseInt(inputScanner.nextLine()) - 1);
             Printer.clearScreen();
-            Printer.displayEmployeeOverview(projectManagementApp.findFreeEmployees(activity));
+            List<IEmployee> freeEmployeeList = projectManagementApp.findFreeEmployees(activity);
+            Printer.displayEmployeeOverview(freeEmployeeList);
             System.out.println("Which free employee should be assigned?");
-            IEmployee employee = projectManagementApp.findFreeEmployees(activity).get(Integer.parseInt(inputScanner.nextLine()) - 1);
+            IEmployee employee = freeEmployeeList.get(Integer.parseInt(inputScanner.nextLine()) - 1);
             activity.assignEmployee(employee);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
