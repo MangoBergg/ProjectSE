@@ -1,6 +1,7 @@
 package dtu.example.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import dtu.example.interfaces.IActivity;
@@ -74,18 +75,21 @@ public class Project implements IProject {
         returnString.append("Status Report:\n");
         returnString.append("---------------------------------------------------------\n");
 
+        //int[] startEndWeeksProject = name.getStartEndWeeks();
+
         for (IActivity activity : getActivityList()) {
+            int[] startEndWeeks = activity.getStartEndWeeks();
             double budgetTime = activity.getBudgetedTime();
             double totalConsumedTime = activity.getConsumedTime();
 
             double percentageConsumedTime = (totalConsumedTime / budgetTime) * 100;
 
             returnString.append(String.format("Activity: %s\n", activity.getName()));
+            returnString.append(String.format("Start and end weeks: %s\n", Arrays.toString(startEndWeeks)));
             returnString.append(String.format("Budgeted time: %.2f hours\n", budgetTime));
             returnString.append(String.format("Time consumed: %.2f hours\n", totalConsumedTime));
             returnString.append(String.format("Percentage of time consumption wrt. budgeted time: %.2f%%\n\n", percentageConsumedTime));
         }
-
         return returnString.toString();
     }
 }
