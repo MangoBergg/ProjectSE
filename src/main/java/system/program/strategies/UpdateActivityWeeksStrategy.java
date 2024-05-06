@@ -22,6 +22,7 @@ public class UpdateActivityWeeksStrategy implements UserActionStrategy {
             System.out.println("What should the end week be?");
             int endWeek = Integer.parseInt(inputScanner.nextLine());
             activity.updateStartEndWeeks(startWeek, endWeek);
+            activity.getParentProject().updateStartEndWeeks(startWeek, endWeek);
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
