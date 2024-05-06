@@ -22,6 +22,6 @@ public class FindFreeEmployeeStrategy implements UserActionStrategy {
             inputScanner.nextLine();
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
-        }
+        } 
     }
 }

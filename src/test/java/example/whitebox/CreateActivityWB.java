@@ -35,7 +35,7 @@ public class CreateActivityWB {
     }
 
     @When("that activity {string} already exists in the project")
-    public void thatActivityAlreadyExistsInTheProject(String string) {
+    public void thatActivityAlreadyExistsInTheProject(String string) throws Exception {
         try {
             testActivity = projectManagementApp.getActivityFactory().createActivity(string, testProject);
         } catch (AssertionError e) {

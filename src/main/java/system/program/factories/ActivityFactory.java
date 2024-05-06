@@ -14,7 +14,7 @@ public class ActivityFactory implements IActivityFactory {
     }
 
     @Override
-    public IActivity createActivity(String string, IProject project) {
+    public IActivity createActivity(String string, IProject project) throws Exception {
         //Pre-conditions
         assert(!string.isEmpty()) : "Name cannot be empty";
         assert(!project.containsActivity(string)) : "The activity already exists in this project";
@@ -26,7 +26,6 @@ public class ActivityFactory implements IActivityFactory {
 
         //Post-conditions
         assert(project.getActivityList().contains(activity)) : "The activity does not exist in activityList, which means it is not created";
-
         return activity;
     }
 }

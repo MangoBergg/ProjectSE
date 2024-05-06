@@ -19,6 +19,7 @@ public class DeleteActivityStrategy implements UserActionStrategy {
             IActivity activity = projectManagementApp.getActivityRepository().getActivityList().get(activityInt);
             activity.getParentProject().getActivityList().remove(activity);
             projectManagementApp.getActivityRepository().getActivityList().remove(activityInt);
+            
         } catch (Exception e) {
             errorMessage.setErrorMessage(e.getMessage());
         }
