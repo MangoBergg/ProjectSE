@@ -59,10 +59,15 @@ public class Project implements IProject {
     public void updateStartEndWeeks(int weekStart, int weekEnd) {
         // Precondition
         assert startEndWeeks[0] == 0 || startEndWeeks[0] > weekStart;
-        startEndWeeks[0] = weekStart;
+
+        if (weekStart < startEndWeeks[0]) {
+            startEndWeeks[0] = weekStart;
+        }
 
         assert startEndWeeks[1] < weekEnd;
-        startEndWeeks[1] = weekEnd;
+        if (weekEnd > startEndWeeks[1]) {
+            startEndWeeks[1] = weekEnd;
+        }
 
         // Postcondition
         assert (startEndWeeks[0] == weekStart);
