@@ -60,7 +60,7 @@ public class Project implements IProject {
         // Precondition
         assert startEndWeeks[0] == 0 || startEndWeeks[0] > weekStart;
 
-        if (weekStart < startEndWeeks[0]) {
+        if ( weekStart == 0 || weekStart < startEndWeeks[0]) {
             startEndWeeks[0] = weekStart;
         }
 
