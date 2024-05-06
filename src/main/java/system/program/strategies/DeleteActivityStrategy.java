@@ -22,6 +22,7 @@ public class DeleteActivityStrategy implements UserActionStrategy {
             activity.getParentProject().getActivityList().remove(activity);
 
             for (IEmployee employee : projectManagementApp.getEmployeeRepository().getEmployeeList()) {
+                // ChatGPT was used to optimize a scary nested for loop into safer deletion with the iterator.
                 Iterator<ConsumedTime> iterator = employee.getConsumedTimes().iterator();
             
                 while (iterator.hasNext()) {
