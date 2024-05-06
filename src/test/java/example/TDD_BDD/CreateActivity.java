@@ -7,6 +7,7 @@ import system.program.interfaces.IProject;
 import system.program.interfaces.IProjectManagementApp;
 import system.program.model.ErrorMessageHolder;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreateActivity {
@@ -68,6 +69,9 @@ public class CreateActivity {
         assertTrue(testProject.containsActivity(activityName));
     }
 
-
+    @Then("an assertion error message {string} is thrown")
+    public void anAssertionErrorMessageIsThrown(String string) {
+        assertEquals(string, errorMessage.getErrorMessage());
+    }
 
 }

@@ -10,7 +10,9 @@ Feature: Create an activity in a project
   Scenario: Fail to create an activity with the same name as another activity in the same project
     Given the employee selects a project named "Project" from the list of projects
     When the employee attemps to create an activity "Activity" when the activity already exists
+    Then an assertion error message "The activity already exists in this project" is thrown
 
   Scenario: Fail to create an activity without specifying a name
     Given the employee selects a project named "Project" from the list of projects
     When the employee attemps to create an activity "" without a name
+    Then an assertion error message "Name cannot be empty" is thrown
