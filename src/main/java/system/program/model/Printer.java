@@ -71,7 +71,7 @@ public class Printer implements IPrinter {
         }
 
         if(!contained.isBlank()) {
-            System.out.println(IPrinter.BLUE + "Following activites exist in the system:");
+            System.out.println(IPrinter.BLUE + "Following activities exist in the system:");
             Printer.printLine();
             System.out.println(contained);
             Printer.printLine();
@@ -127,7 +127,7 @@ public class Printer implements IPrinter {
                         "4 - Create Activity. 5 - Change Start and End Weeks. 6 - Change Budgeted Time \n" + 
                         "7 - Assign Employee to Activity. 8 - Find Free Employee \n" + 
                         "9 - Register Consumed Time. 10 - Register Absence \n" + 
-                        "11 - Delete Project. 12 - Delete Activity. 13 - Update Consumed Time\n"
+                        "11 - Delete Project. 12 - Delete Activity. 13 - Change Consumed Time\n"
         );
     }
 }

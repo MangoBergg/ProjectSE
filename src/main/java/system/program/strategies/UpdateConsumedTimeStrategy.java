@@ -13,7 +13,7 @@ public class UpdateConsumedTimeStrategy implements UserActionStrategy {
     public void execute(Scanner inputScanner, ProjectManagementApp projectManagementApp, ErrorMessageHolder errorMessage, IEmployee user) {
         try {
             Printer.clearScreen();
-            System.out.println("Which activity do you want to update the consumed time for?: ");
+            System.out.println("Which activity do you want to change the consumed time for?: ");
             if (user.getConsumedTimes().isEmpty()) {
                 throw new Exception("You don't have any consumed time registered");
             } else {
